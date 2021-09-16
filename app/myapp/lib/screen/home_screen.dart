@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/model/event.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -37,7 +38,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('tomorrow diary'),
+        title: const Text('Tomorrow Diary'),
+        automaticallyImplyLeading: false,
+        actions: [
+          Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+              );
+            },
+          )
+        ],
+      ),
+      endDrawer: Container(
+        color: Colors.black,
+        width: 200,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -52,7 +70,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(width: 10),
                     Text(
                       '내일의 일기 작성을 완료하지 못했어요.',
-                      //style: TextStyle(fontSize: 15),
+                    ),
+                  ],
+                ),
+                onPressed: () {},
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: TextButton(
+                child: Row(
+                  children: [
+                    Icon(Icons.circle_notifications),
+                    SizedBox(width: 10),
+                    Text(
+                      '팁 : 내일의 일기를 활용하는 방법(유튜브)',
                     ),
                   ],
                 ),
@@ -61,10 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-      ),
-      drawer: Container(
-        color: Colors.black,
-        width: 200,
       ),
     );
   }
@@ -87,6 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   TableCalendar<Event> _buildTableCalendar() {
     return TableCalendar(
+      daysOfWeekStyle: DaysOfWeekStyle(
+        weekdayStyle: GoogleFonts.openSans(color: Colors.black),
+        weekendStyle: GoogleFonts.openSans(color: Colors.black),
+      ),
+      headerStyle: HeaderStyle(titleCentered: true),
       calendarBuilders: calendarBuilder(),
       focusedDay: _focusedDay,
       firstDay: DateTime.utc(2020, 10, 19),
@@ -95,7 +128,19 @@ class _HomeScreenState extends State<HomeScreen> {
       eventLoader: _getEventsForDay,
       rangeSelectionMode: RangeSelectionMode.disabled,
       availableCalendarFormats: {CalendarFormat.month: ''},
-      calendarStyle: CalendarStyle(),
+      calendarStyle: CalendarStyle(
+        defaultTextStyle: GoogleFonts.openSans(color: Colors.black),
+        disabledTextStyle: GoogleFonts.openSans(color: Colors.black),
+        holidayTextStyle: GoogleFonts.openSans(color: Colors.black),
+        weekendTextStyle: GoogleFonts.openSans(color: Colors.black),
+        selectedDecoration:
+            BoxDecoration(color: Colors.black38, shape: BoxShape.circle),
+        selectedTextStyle: GoogleFonts.openSans(color: Colors.white),
+        outsideDaysVisible: false,
+        todayDecoration:
+            BoxDecoration(color: Colors.black12, shape: BoxShape.circle),
+        todayTextStyle: GoogleFonts.openSans(color: Colors.white),
+      ),
       locale: 'ko_KR',
       selectedDayPredicate: (day) {
         return isSameDay(day, _selectedDay);
