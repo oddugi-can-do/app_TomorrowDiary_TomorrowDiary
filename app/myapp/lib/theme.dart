@@ -47,5 +47,6 @@ ThemeData theme(BoxConstraints constraints) {
     appBarTheme: appTheme(),
     textTheme: textTheme(),
     textButtonTheme: textButtonThemeData(constraints),
+    primaryColor: Colors.white,
   );
 }
