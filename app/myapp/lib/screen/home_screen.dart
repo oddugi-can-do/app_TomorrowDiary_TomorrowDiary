@@ -75,8 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Icon(Icons.circle_notifications),
                       SizedBox(width: 10),
-                      Text(
-                        '오늘의 일기를 완성해 볼까요?',
+                      Flexible(
+                        child: Text(
+                          '오늘의 일기를 완성해 볼까요?',
+                        ),
                       ),
                     ],
                   ),
@@ -93,8 +95,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Icon(Icons.circle_notifications),
                       SizedBox(width: 10),
-                      Text(
-                        '내일의 일기를 작성해 볼까요?',
+                      Flexible(
+                        child: Text(
+                          '내일의 일기를 작성해 볼까요?',
+                        ),
                       ),
                     ],
                   ),
@@ -109,8 +113,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Icon(Icons.circle_notifications),
                     SizedBox(width: 10),
-                    Text(
-                      '추천 : 내일의 일기 작성을 완료하지 못했어요. \n달력에서 내일을 클릭해서 내일의 일기 작성을 시작하세요!',
+                    Flexible(
+                      child: Text(
+                        '추천 : 내일의 일기 작성을 완료하지 못했어요. \n달력에서 내일을 클릭해서 내일의 일기 작성을 시작하세요!',
+                      ),
                     ),
                   ],
                 ),
@@ -124,8 +130,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Icon(Icons.circle_notifications),
                     SizedBox(width: 10),
-                    Text(
-                      '팁 : 내일의 일기를 활용하는 방법(유튜브)',
+                    Flexible(
+                      child: Text(
+                        '팁 : 내일의 일기를 활용하는 방법(유튜브)',
+                      ),
                     ),
                   ],
                 ),
