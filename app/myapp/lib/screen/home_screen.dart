@@ -19,6 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  bool _isVisibleTodayDiary = false;
+  bool _isVisibleTomorrowDiary = false;
 
   @override
   void initState() {
@@ -26,6 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    _isVisibleTodayDiary = false;
+    _isVisibleTomorrowDiary = false;
   }
 
   @override
@@ -61,15 +65,58 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             _buildTableCalendar(),
+            SizedBox(height: 20),
+            Visibility(
+              visible: _isVisibleTodayDiary,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                child: TextButton(
+                  child: Row(
+                    children: [
+                      Icon(Icons.circle_notifications),
+                      SizedBox(width: 10),
+                      Flexible(
+                        child: Text(
+                          '오늘의 일기를 완성해 볼까요?',
+                        ),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            Visibility(
+              visible: _isVisibleTomorrowDiary,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                child: TextButton(
+                  child: Row(
+                    children: [
+                      Icon(Icons.circle_notifications),
+                      SizedBox(width: 10),
+                      Flexible(
+                        child: Text(
+                          '내일의 일기를 작성해 볼까요?',
+                        ),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
               child: TextButton(
                 child: Row(
                   children: [
                     Icon(Icons.circle_notifications),
                     SizedBox(width: 10),
-                    Text(
-                      '내일의 일기 작성을 완료하지 못했어요.',
+                    Flexible(
+                      child: Text(
+                        '추천 : 내일의 일기 작성을 완료하지 못했어요. \n달력에서 내일을 클릭해서 내일의 일기 작성을 시작하세요!',
+                      ),
                     ),
                   ],
                 ),
@@ -77,14 +124,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
               child: TextButton(
                 child: Row(
                   children: [
                     Icon(Icons.circle_notifications),
                     SizedBox(width: 10),
-                    Text(
-                      '팁 : 내일의 일기를 활용하는 방법(유튜브)',
+                    Flexible(
+                      child: Text(
+                        '팁 : 내일의 일기를 활용하는 방법(유튜브)',
+                      ),
                     ),
                   ],
                 ),
@@ -108,8 +157,26 @@ class _HomeScreenState extends State<HomeScreen> {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
       });
-
       _selectedEvents.value = _getEventsForDay(selectedDay);
+    }
+    if (selectedDay.day == DateTime.now().day) {
+      setState(() {
+        _isVisibleTodayDiary = true;
+      });
+    } else {
+      setState(() {
+        _isVisibleTodayDiary = false;
+      });
+    }
+
+    if (selectedDay.day == DateTime.now().day + 1) {
+      setState(() {
+        _isVisibleTomorrowDiary = true;
+      });
+    } else {
+      setState(() {
+        _isVisibleTomorrowDiary = false;
+      });
     }
   }
 
@@ -145,15 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
       selectedDayPredicate: (day) {
         return isSameDay(day, _selectedDay);
       },
-      onDaySelected: (selectedDay, focusedDay) {
-        if (!isSameDay(_selectedDay, selectedDay)) {
-          // Call `setState()` when updating the selected day
-          setState(() {
-            _selectedDay = selectedDay;
-            _focusedDay = focusedDay;
-          });
-        }
-      },
+      onDaySelected: _onDaySelected,
       onPageChanged: (focusedDay) {
         // No need to call `setState()` here
         _focusedDay = focusedDay;

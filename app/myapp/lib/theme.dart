@@ -33,8 +33,8 @@ TextButtonThemeData textButtonThemeData(BoxConstraints constraints) {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      minimumSize: Size(constraints.maxWidth * 0.8,
-          TDSize.withHeight(constraints).withSize(SizeList.m)),
+      //minimumSize: Size(constraints.maxWidth * 0.8,
+      //    TDSize.withHeight(constraints).withSize(SizeList.m)),
       textStyle: TextStyle(
           fontSize: TDSize.withHeight(constraints).withSize(SizeList.xs)),
     ),
@@ -47,5 +47,6 @@ ThemeData theme(BoxConstraints constraints) {
     appBarTheme: appTheme(),
     textTheme: textTheme(),
     textButtonTheme: textButtonThemeData(constraints),
+    primaryColor: Colors.white,
   );
 }
