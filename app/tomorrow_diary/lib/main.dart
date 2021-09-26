@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/routes.dart';
 import 'views/views.dart';
-
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyDiaryApp());
 }
