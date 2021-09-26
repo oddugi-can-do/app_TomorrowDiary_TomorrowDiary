@@ -5,7 +5,7 @@ import 'package:tomorrow_diary/routes.dart';
 import 'views/views.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyDiaryApp());
 }
@@ -15,7 +15,8 @@ class MyDiaryApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: RootScreen.pageId,
+      // initialRoute: RootScreen.pageId,
+      initialRoute: HomeScreen.pageId,
       getPages: appPages,
     );
   }
