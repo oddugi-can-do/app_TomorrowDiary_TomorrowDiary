@@ -3,6 +3,7 @@ export 'add_button_widget.dart';
 export 'serve_widget.dart';
 export 'submit_button_widget.dart';
 export 'todo_list_widget.dart';
+export 'text_widget.dart';
 export 'forms/emotion_form.dart';
 export 'forms/multi_line_form.dart';
 export 'forms/multi_line_text_form_field.dart';
