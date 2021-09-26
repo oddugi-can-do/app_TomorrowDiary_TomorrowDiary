@@ -27,6 +27,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 text: 'testtext',
               ),
             ),
+          ),
+          SizedBox(
+            height: 100,
+          ),
+          Center(
+            child: ServeWidget(),
           )
         ],
       ),
