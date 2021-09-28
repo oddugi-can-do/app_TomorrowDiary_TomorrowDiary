@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/tdsize.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
@@ -41,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
         color: TdColor.white,
       ),
       backgroundColor: Colors.transparent,
+      shadowColor: null,
       title: const TextWidget.header(text: '2021년 09월'),
     );
   }
@@ -58,34 +60,38 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
             (j) => (i + j * 7) < _shift || (i + j * 7) >= _shift + _lastDay
                 ? -1
                 : _day[i + j * 7 - _shift]));
-    printLog(_dayForWeek);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 17),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ...List.generate(
-              7,
-              (i) => Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(TdSize.m),
-                        child: TextWidget.hint(text: _week[i]),
-                      ),
-                      ...List.generate(
-                          _dayForWeek[i].length,
-                          (j) => _dayForWeek[i][j] == -1
-                              ? Padding(
-                                  padding: const EdgeInsets.all(TdSize.m),
-                                  child: CalendarDayButtonWidget.disabled(),
-                                )
-                              : Padding(
-                                  padding: const EdgeInsets.all(TdSize.m),
-                                  child: CalendarDayButtonWidget(
-                                      text: '${_dayForWeek[i][j]}'),
-                                ))
-                    ],
-                  ))
+            7,
+            (i) => Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: TdSize.m),
+                  child: TextWidget.hint(text: _week[i]),
+                ),
+                ...List.generate(
+                  _dayForWeek[i].length,
+                  (j) => _dayForWeek[i][j] == -1
+                      ? Padding(
+                          padding:
+                              const EdgeInsets.symmetric(vertical: TdSize.m),
+                          child: CalendarDayButtonWidget.disabled(),
+                        )
+                      : Padding(
+                          padding:
+                              const EdgeInsets.symmetric(vertical: TdSize.m),
+                          child: CalendarDayButtonWidget(
+                            day: _dayForWeek[i][j],
+                          ),
+                        ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
