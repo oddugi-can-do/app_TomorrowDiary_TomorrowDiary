@@ -10,10 +10,12 @@ class CalendarDayButtonWidget extends StatefulWidget {
   int day = 0;
   String get text => '$day';
   bool isEnabled;
-  CalendarDayButtonWidget({Key? key, required this.day})
+  CalendarController controller;
+  CalendarDayButtonWidget(
+      {Key? key, required this.day, required this.controller})
       : isEnabled = true,
         super(key: key);
-  CalendarDayButtonWidget.disabled({Key? key})
+  CalendarDayButtonWidget.disabled({Key? key, required this.controller})
       : isEnabled = false,
         super(key: key);
 
@@ -33,7 +35,7 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
   Widget build(BuildContext context) {
     return widget.isEnabled
         ? GetBuilder<CalendarController>(
-            init: CalendarController(),
+            init: widget.controller,
             builder: (controller) {
               return controller.isSelected(widget.day)
                   ? ElevatedButton(

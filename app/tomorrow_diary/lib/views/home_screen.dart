@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/tdsize.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
@@ -16,14 +17,60 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CalendarController());
     return Scaffold(
         backgroundColor: TdColor.black,
         appBar: appBar(),
         body: ListView(
           children: [
-            _buildCalendar(),
+            _buildCalendar(controller),
+            const Padding(
+              padding: EdgeInsets.only(left: 13),
+              child: TextWidget.body(text: '일기 쓰기'),
+            ),
+            Column(
+              children: [
+                GetBuilder<CalendarController>(
+                  builder: (controller) {
+                    if (controller.selectedDay != 0) {
+                      if (controller.selectedDay < 15) {
+                        return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightRed);
+                      } else if (controller.selectedDay == 15) {
+                        return _buildServeWidget(
+                            '오늘의 일기 쓰기', TdColor.lightGray);
+                      }
+                    }
+                    return Container();
+                  },
+                ),
+                GetBuilder<CalendarController>(
+                  builder: (controller) {
+                    return controller.selectedDay == 16
+                        ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray)
+                        : Container();
+                  },
+                ),
+                GetBuilder<CalendarController>(
+                  builder: (controller) {
+                    return controller.selectedDay != 0
+                        ? _buildServeWidget('To-Do List', TdColor.lightGray)
+                        : Container();
+                  },
+                ),
+              ],
+            )
           ],
         ));
+  }
+
+  Padding _buildServeWidget(String text, Color color) {
+    return Padding(
+      padding: EdgeInsets.all(13),
+      child: ServeWidget(
+        text: text,
+        color: color,
+      ),
+    );
   }
 
   AppBar appBar() {
@@ -47,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     );
   }
 
-  Widget _buildCalendar() {
+  Widget _buildCalendar(CalendarController controller) {
     int _shift = 3;
     int _lastDay = 30;
 
@@ -79,13 +126,16 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                       ? Padding(
                           padding:
                               const EdgeInsets.symmetric(vertical: TdSize.m),
-                          child: CalendarDayButtonWidget.disabled(),
+                          child: CalendarDayButtonWidget.disabled(
+                            controller: controller,
+                          ),
                         )
                       : Padding(
                           padding:
                               const EdgeInsets.symmetric(vertical: TdSize.m),
                           child: CalendarDayButtonWidget(
                             day: _dayForWeek[i][j],
+                            controller: controller,
                           ),
                         ),
                 )
