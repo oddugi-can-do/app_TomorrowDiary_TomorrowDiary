@@ -4,6 +4,8 @@ export 'serve_widget.dart';
 export 'submit_button_widget.dart';
 export 'todo_list_widget.dart';
 export 'fade_animation.dart';
+export 'text_widget.dart';
+export 'calendar_day_button_widget.dart';
 export 'forms/emotion_form.dart';
 export 'forms/multi_line_form.dart';
 export 'forms/multi_line_text_form_field.dart';

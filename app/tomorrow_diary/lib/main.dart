@@ -6,9 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/routes.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
-
 import 'views/views.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
