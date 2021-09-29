@@ -5,7 +5,12 @@ import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class ServeWidget extends StatelessWidget with PrintLogMixin {
-  const ServeWidget({Key? key}) : super(key: key);
+  final double height;
+  final String text;
+  final Color color;
+  const ServeWidget({Key? key, required this.text, required this.color})
+      : height = 100,
+        super(key: key);
   // 왼쪽 바는 가로의 0.05%이다.
   @override
   Widget build(BuildContext context) {
@@ -16,8 +21,8 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
       child: Stack(
         children: [
           Container(
-            width: 300,
-            height: 100,
+            // width: size.width,
+            height: height,
             color: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
@@ -35,7 +40,7 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
               color: Colors.transparent,
               child: Container(
                 decoration: BoxDecoration(
-                  color: TdColor.lightGray,
+                  color: color,
                   borderRadius: BorderRadius.circular(TdSize.radiusM),
                 ),
               ),
@@ -47,7 +52,7 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextWidget.body(text: '오늘의 일기 어쩌구저쩌구'),
+                TextWidget.body(text: text),
               ],
             ),
           ),
