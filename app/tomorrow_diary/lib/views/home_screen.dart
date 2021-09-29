@@ -15,6 +15,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
+  int selectedYear = 0;
+  int selectedMonth = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    selectedYear = CalendarUtil().thisYear();
+    selectedMonth = CalendarUtil().thisMonth();
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CalendarController());
@@ -33,28 +44,31 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                 GetBuilder<CalendarController>(
                   builder: (controller) {
                     if (controller.selectedDay != 0) {
-                      if (controller.selectedDay < 15) {
+                      if (controller.selectedDay < CalendarUtil().thisDay()) {
                         return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightRed);
-                      } else if (controller.selectedDay == 15) {
+                      } else if (controller.selectedDay ==
+                          CalendarUtil().thisDay()) {
                         return _buildServeWidget(
                             '오늘의 일기 쓰기', TdColor.lightGray);
+                      } else {
+                        return Container();
                       }
                     }
-                    return Container();
+                    //아무것도 선택 안 했을 때 default
+                    return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray);
                   },
                 ),
                 GetBuilder<CalendarController>(
                   builder: (controller) {
-                    return controller.selectedDay == 16
+                    return controller.selectedDay ==
+                            CalendarUtil().thisDay() + 1
                         ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray)
                         : Container();
                   },
                 ),
                 GetBuilder<CalendarController>(
                   builder: (controller) {
-                    return controller.selectedDay != 0
-                        ? _buildServeWidget('To-Do List', TdColor.lightGray)
-                        : Container();
+                    return _buildServeWidget('To-Do List', TdColor.lightGray);
                   },
                 ),
               ],
@@ -90,23 +104,14 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
       ),
       backgroundColor: Colors.transparent,
       shadowColor: null,
-      title: const TextWidget.header(text: '2021년 09월'),
+      title: TextWidget.header(text: '$selectedYear년 $selectedMonth월'),
     );
   }
 
   Widget _buildCalendar(CalendarController controller) {
-    int _shift = 3;
-    int _lastDay = 30;
-
-    List<String> _week = ['일', '월', '화', '수', '목', '금', '토'];
-    List<int> _day = List.generate(_lastDay, (index) => index + 1);
-    List<List<int>> _dayForWeek = List.generate(
-        7,
-        (i) => List.generate(
-            (_shift + _lastDay + 6) ~/ 7,
-            (j) => (i + j * 7) < _shift || (i + j * 7) >= _shift + _lastDay
-                ? -1
-                : _day[i + j * 7 - _shift]));
+    List<List<int>> _daysForWeek =
+        CalendarUtil().daysForWeek(selectedYear, selectedMonth);
+    printLog(_daysForWeek);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 17),
       child: Row(
@@ -118,26 +123,17 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: TdSize.m),
-                  child: TextWidget.hint(text: _week[i]),
+                  child: TextWidget.hint(text: CalendarUtil().week[i]),
                 ),
                 ...List.generate(
-                  _dayForWeek[i].length,
-                  (j) => _dayForWeek[i][j] == -1
-                      ? Padding(
-                          padding:
-                              const EdgeInsets.symmetric(vertical: TdSize.m),
-                          child: CalendarDayButtonWidget.disabled(
-                            controller: controller,
-                          ),
-                        )
-                      : Padding(
-                          padding:
-                              const EdgeInsets.symmetric(vertical: TdSize.m),
-                          child: CalendarDayButtonWidget(
-                            day: _dayForWeek[i][j],
-                            controller: controller,
-                          ),
-                        ),
+                  _daysForWeek[i].length,
+                  (j) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: TdSize.m),
+                      child: _getCalendarDayButtonWidget(
+                          _daysForWeek[i][j], controller),
+                    );
+                  },
                 )
               ],
             ),
@@ -145,5 +141,24 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
         ],
       ),
     );
+  }
+
+  Widget _getCalendarDayButtonWidget(int day, CalendarController controller) {
+    if (day == -1) {
+      return CalendarDayButtonWidget.disabled(
+        controller: controller,
+      );
+    } else if (CalendarUtil().isIncludeToday(selectedYear, selectedMonth) &&
+        day == CalendarUtil().thisDay()) {
+      return CalendarDayButtonWidget.highlighted(
+        day: day,
+        controller: controller,
+      );
+    } else {
+      return CalendarDayButtonWidget(
+        day: day,
+        controller: controller,
+      );
+    }
   }
 }
