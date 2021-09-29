@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tomorrow_diary/constant/duration.dart';
+import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/views/views.dart';
 
 

@@ -59,9 +59,10 @@ class _SignInFormState extends State<SignInForm> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Provider.of<FirebaseAuthState>(context,listen:false).login(email: _emailController.text, password: _passwordController.text);
-                        
-                      
+                      Provider.of<FirebaseAuthState>(context, listen: false)
+                          .login(
+                              email: _emailController.text,
+                              password: _passwordController.text);
                     }
                   },
                   child: Text("Login", style: TextStyle(fontSize: TdSize.m)),

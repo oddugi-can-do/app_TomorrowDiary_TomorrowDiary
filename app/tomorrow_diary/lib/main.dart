@@ -3,9 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:tomorrow_diary/constant/duration.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/routes.dart';
+import 'package:tomorrow_diary/utils/utils.dart';
 
 import 'views/views.dart';
 
@@ -45,7 +45,6 @@ class MyDiaryApp extends StatelessWidget {
                 _currentScreen = HomeScreen();
                 break;
             }
-
             return AnimatedSwitcher(
               duration: duration,
               child: _currentScreen,

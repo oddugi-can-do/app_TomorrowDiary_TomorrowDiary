@@ -14,32 +14,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(child:  Text("Tomorrow Diary", textAlign: TextAlign.center)),
-      ),
-      endDrawer: Drawer(
-        child: SafeArea(
-          child: ListView(
-            children: [
-              ListTile(
-                leading: Icon(Icons.logout),
-                title: Text("LogOut"),
-                onTap: (){
-                    Provider.of<FirebaseAuthState>(context, listen:false).signOut();
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: TableCalendar(
-                firstDay: DateTime.utc(2010, 10, 16),
-                lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: DateTime.now(), 
-      )
-
-        
-    );
+    return Scaffold();
   }
 }
