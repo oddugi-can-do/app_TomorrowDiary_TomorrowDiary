@@ -7,3 +7,4 @@ export 'root_screen.dart';
 export 'td_diary_screen.dart';
 export 'tmr_diary_screen.dart';
 export 'todo_list_screen.dart';
+export 'auth_screen.dart';
