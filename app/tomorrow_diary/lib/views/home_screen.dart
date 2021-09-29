@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/views/views.dart';
+import 'package:get/get.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
-import 'package:tomorrow_diary/utils/tdsize.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
@@ -26,6 +27,11 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     selectedMonth = CalendarUtil().thisMonth();
   }
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CalendarController());
