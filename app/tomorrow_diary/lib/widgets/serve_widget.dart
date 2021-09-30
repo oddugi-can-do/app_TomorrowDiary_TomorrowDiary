@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/tdsize.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
@@ -18,19 +19,22 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
     return InkWell(
       onTap: () {
         printLog('serve widget tapped');
-        Get.bottomSheet(
-          Container(
-            height: 150,
-            color: Colors.greenAccent,
-            child: Column(
-              children: [
-                Text('Hii 1', textScaleFactor: 2),
-                Text('Hii 2', textScaleFactor: 2),
-                Text('Hii 3', textScaleFactor: 2),
-                Text('Hii 4', textScaleFactor: 2),
-              ],
-            ),
-          ),
+        showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 400,
+                color: TdColor.black,
+                child: Container(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                          icon: Icon(Icons.cancel_sharp ),
+                          color: TdColor.blue,
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                )
+              );
+            }
         );
         printLog('serve get.bottom');
       },

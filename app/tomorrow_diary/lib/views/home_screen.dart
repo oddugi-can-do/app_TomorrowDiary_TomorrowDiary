@@ -19,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   int selectedYear = 0;
   int selectedMonth = 0;
+    GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   void initState() {
@@ -32,22 +33,16 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   State<HomeScreen> createState() => _HomeScreenState();
 
   @override
+  
   Widget build(BuildContext context) {
     final controller = Get.put(CalendarController());
     return Scaffold(
+        key: _key,
+        endDrawer: DrawerSideMenu(),
         backgroundColor: TdColor.black,
         appBar: appBar(),
         body: ListView(
           children: [
-            FlatButton(
-              onPressed: (){
-                showMaterialModalBottomSheet(
-  context: context,
-  builder: (context) => Container(),
-)
-              },
-              child: Text("Modal Test"),
-            ),
             _buildCalendar(controller),
             const Padding(
               padding: EdgeInsets.only(left: 13),
@@ -105,13 +100,16 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     return AppBar(
       actions: [
         IconButton(
+          alignment: Alignment.center,
           onPressed: () {},
           icon: const Icon(Icons.calendar_today_rounded),
         ),
         IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.menu),
-        ),
+            icon: Icon(Icons.menu_rounded),
+            onPressed: (){
+              _key.currentState!.openEndDrawer();
+            },
+          ),
       ],
       actionsIconTheme: const IconThemeData(
         color: TdColor.white,
@@ -176,3 +174,5 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     }
   }
 }
+
+
