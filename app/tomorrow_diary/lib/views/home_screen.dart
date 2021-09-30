@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/utils/tdcolor.dart';
+import 'package:tomorrow_diary/utils/tdsize.dart';
 import 'package:tomorrow_diary/views/views.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
@@ -39,15 +41,6 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
         appBar: appBar(),
         body: ListView(
           children: [
-            FlatButton(
-              onPressed: (){
-                showMaterialModalBottomSheet(
-  context: context,
-  builder: (context) => Container(),
-)
-              },
-              child: Text("Modal Test"),
-            ),
             _buildCalendar(controller),
             const Padding(
               padding: EdgeInsets.only(left: 13),
@@ -59,30 +52,58 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                   builder: (controller) {
                     if (controller.selectedDay != 0) {
                       if (controller.selectedDay < CalendarUtil().thisDay()) {
-                        return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightRed);
+                        return _buildServeWidget(
+                          '오늘의 일기 쓰기',
+                          TdColor.lightRed,
+                          () {
+                            _buildTyDiaryModal(context);
+                          },
+                        );
                       } else if (controller.selectedDay ==
                           CalendarUtil().thisDay()) {
-                        return _buildServeWidget(
-                            '오늘의 일기 쓰기', TdColor.lightGray);
+                        return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
+                            () {
+                          showMaterialModalBottomSheet(
+                            context: context,
+                            builder: (context) => Container(),
+                          );
+                        });
                       } else {
                         return Container();
                       }
                     }
                     //아무것도 선택 안 했을 때 default
-                    return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray);
+                    return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
+                        () {
+                      showMaterialModalBottomSheet(
+                        context: context,
+                        builder: (context) => Container(),
+                      );
+                    });
                   },
                 ),
                 GetBuilder<CalendarController>(
                   builder: (controller) {
                     return controller.selectedDay ==
                             CalendarUtil().thisDay() + 1
-                        ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray)
+                        ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray, () {
+                            showMaterialModalBottomSheet(
+                              context: context,
+                              builder: (context) => Container(),
+                            );
+                          })
                         : Container();
                   },
                 ),
                 GetBuilder<CalendarController>(
                   builder: (controller) {
-                    return _buildServeWidget('To-Do List', TdColor.lightGray);
+                    return _buildServeWidget('To-Do List', TdColor.lightGray,
+                        () {
+                      showMaterialModalBottomSheet(
+                        context: context,
+                        builder: (context) => Container(),
+                      );
+                    });
                   },
                 ),
               ],
@@ -91,12 +112,66 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
         ));
   }
 
-  Padding _buildServeWidget(String text, Color color) {
+  Future<dynamic> _buildTyDiaryModal(BuildContext context) {
+    List<Widget> listItems = [
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.m),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.xxl),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.xxl),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.xxl),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.xxl),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.xxl),
+      SubmitButtonWidget(text: '작성 완료'),
+    ];
+    return showBarModalBottomSheet(
+      context: context,
+      // expand: true,
+      builder: (context) => NestedScrollView(
+        controller: ScrollController(),
+        physics: const ScrollPhysics(parent: PageScrollPhysics()),
+        headerSliverBuilder: (BuildContext context, bool isInnerBoxScrolled) {
+          return <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Container(
+                  height: 50,
+                  child: const Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: TdSize.m),
+                      child: TextWidget.body(text: '오늘의 일기'),
+                    ),
+                  ),
+                )
+              ]),
+            ),
+          ];
+        },
+        body: ListView.builder(
+          padding: const EdgeInsets.symmetric(
+              vertical: TdSize.m, horizontal: TdSize.xl),
+          physics: AlwaysScrollableScrollPhysics(),
+          // 이 physics를 추가 안하면 listview로 화면이 가득 차지 않을 때 버그가 남.
+          controller: PrimaryScrollController.of(context),
+          itemBuilder: (context, index) => listItems[index],
+          itemCount: listItems.length,
+        ),
+      ),
+    );
+  }
+
+  Padding _buildServeWidget(
+      String text, Color color, void Function() onPressed) {
     return Padding(
       padding: EdgeInsets.all(13),
       child: ServeWidget(
         text: text,
         color: color,
+        onPressed: onPressed,
       ),
     );
   }
