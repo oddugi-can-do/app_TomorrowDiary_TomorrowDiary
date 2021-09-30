@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   static const pageId = '/home';
@@ -29,9 +30,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-}
 
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CalendarController());
@@ -40,6 +39,15 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: appBar(),
         body: ListView(
           children: [
+            FlatButton(
+              onPressed: (){
+                showMaterialModalBottomSheet(
+  context: context,
+  builder: (context) => Container(),
+)
+              },
+              child: Text("Modal Test"),
+            ),
             _buildCalendar(controller),
             const Padding(
               padding: EdgeInsets.only(left: 13),
