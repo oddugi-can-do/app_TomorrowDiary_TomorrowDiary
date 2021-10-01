@@ -13,7 +13,7 @@ class SingleLineForm extends StatelessWidget {
     return TextFormField(
       initialValue: text,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(13),
+        contentPadding: const EdgeInsets.all(TdSize.s),
         fillColor: TdColor.darkGray,
         filled: true,
         hintText: hint,

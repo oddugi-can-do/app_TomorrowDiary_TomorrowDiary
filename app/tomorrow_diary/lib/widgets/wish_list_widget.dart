@@ -39,31 +39,22 @@ class _WishListWidgetState extends State<WishListWidget> {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: TdColor.darkGray,
-            borderRadius: BorderRadius.all(Radius.circular(TdSize.radiusM))),
+            color: widget.wishListState == WishListState.unchecked
+                ? TdColor.darkGray
+                : TdColor.purple,
+            borderRadius:
+                const BorderRadius.all(Radius.circular(TdSize.radiusM))),
         padding: const EdgeInsets.all(13),
         child: Row(
           children: [
             widget.wishListState == WishListState.unchecked
-                ? Icon(Icons.circle_outlined, size: TdSize.m)
-                : Icon(Icons.circle, size: TdSize.m),
-            SizedBox(width: TdSize.xs),
+                ? const Icon(Icons.circle_outlined, size: TdSize.m)
+                : const Icon(Icons.circle, size: TdSize.m),
+            const SizedBox(width: TdSize.xs),
             TextWidget.body(text: widget.text),
           ],
         ),
       ),
     );
-    // return ElevatedButton(
-    //   onPressed: () {},
-    //   child: TextWidget.body(text: text),
-    //   style: ElevatedButton.styleFrom(
-    //     shadowColor: Colors.transparent,
-    //     minimumSize: Size(TdSize.xxl * 2, TdSize.xxl * 2),
-    //     shape: RoundedRectangleBorder(
-    //       borderRadius: BorderRadius.circular(TdSize.radiusM),
-    //     ),
-    //     primary: TdColor.blue,
-    //   ),
-    // );
   }
 }

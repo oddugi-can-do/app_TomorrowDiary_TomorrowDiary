@@ -56,14 +56,14 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                           '오늘의 일기 쓰기',
                           TdColor.lightRed,
                           () {
-                            _buildTyDiaryModal(context);
+                            _buildTmrDiaryModal(context);
                           },
                         );
                       } else if (controller.selectedDay ==
                           CalendarUtil().thisDay()) {
                         return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
                             () {
-                          _buildTyDiaryModal(context);
+                          _buildTmrDiaryModal(context);
                         });
                       } else {
                         return Container();
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                     //아무것도 선택 안 했을 때 default
                     return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
                         () {
-                      _buildTyDiaryModal(context);
+                      _buildTmrDiaryModal(context);
                     });
                   },
                 ),
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                     return controller.selectedDay ==
                             CalendarUtil().thisDay() + 1
                         ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray, () {
-                            _buildTyDiaryModal(context);
+                            _buildTmrDiaryModal(context);
                           })
                         : Container();
                   },
@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                   builder: (controller) {
                     return _buildServeWidget('To-Do List', TdColor.lightGray,
                         () {
-                      _buildTyDiaryModal(context);
+                      _buildTmrDiaryModal(context);
                     });
                   },
                 ),
@@ -100,20 +100,26 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
         ));
   }
 
-  Future<dynamic> _buildTyDiaryModal(BuildContext context) {
+  Future<dynamic> _buildTmrDiaryModal(BuildContext context) {
     List<Widget> listItems = [
-      SingleLineForm(hint: 'hint'),
-      SizedBox(height: TdSize.m),
-      TextWidget.body(text: '내일 있어야 할 일'),
-      SizedBox(height: TdSize.s),
-      MultiLineForm(hint: '내일 있어야 할 일을 적어주세요'),
-      SizedBox(height: TdSize.m),
-      TextWidget.body(text: '내일 기대하고 있는 일'),
-      SizedBox(height: TdSize.s),
+      SingleLineForm(hint: '내일의 일기 제목'),
+      const SizedBox(height: TdSize.m),
+      const TextWidget.body(text: '내일 있어야 할 일'),
+      const SizedBox(height: TdSize.s),
+      const MultiLineForm(hint: '내일 있어야 할 일을 적어주세요'),
+      const SizedBox(height: TdSize.m),
+      const TextWidget.body(text: '내일 기대하고 있는 일'),
+      const SizedBox(height: TdSize.s),
       WishListWidget(text: 'example wish1'),
-      SizedBox(height: TdSize.s),
+      const SizedBox(height: TdSize.s),
       WishListWidget(text: 'example wish2'),
-      SizedBox(height: TdSize.m),
+      const SizedBox(height: TdSize.s),
+      const WishListForm(hint: 'wish list gogo'),
+      const SizedBox(height: TdSize.m),
+      const TextWidget.body(text: '내일의 기분'),
+      const SizedBox(height: TdSize.s),
+      SingleLineForm(hint: '내일의 기분을 미리 예측해 보세요.'),
+      const SizedBox(height: TdSize.m),
       SubmitButtonWidget(text: '작성 완료'),
     ];
     return showBarModalBottomSheet(
@@ -158,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   Padding _buildServeWidget(
       String text, Color color, void Function() onPressed) {
     return Padding(
-      padding: EdgeInsets.all(13),
+      padding: const EdgeInsets.all(TdSize.s),
       child: ServeWidget(
         text: text,
         color: color,
