@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 
 class MultiLineForm extends StatelessWidget {
@@ -18,6 +19,8 @@ class MultiLineForm extends StatelessWidget {
         fillColor: TdColor.darkGray,
         filled: true,
         hintText: hint,
+        hintStyle:
+            GoogleFonts.notoSans(color: TdColor.gray, fontSize: TdSize.s),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(TdSize.radiusM),
           borderSide: BorderSide.none,
