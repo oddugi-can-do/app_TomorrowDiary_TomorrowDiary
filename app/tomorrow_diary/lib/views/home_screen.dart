@@ -63,10 +63,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                           CalendarUtil().thisDay()) {
                         return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
                             () {
-                          showMaterialModalBottomSheet(
-                            context: context,
-                            builder: (context) => Container(),
-                          );
+                          _buildTyDiaryModal(context);
                         });
                       } else {
                         return Container();
@@ -75,10 +72,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                     //아무것도 선택 안 했을 때 default
                     return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
                         () {
-                      showMaterialModalBottomSheet(
-                        context: context,
-                        builder: (context) => Container(),
-                      );
+                      _buildTyDiaryModal(context);
                     });
                   },
                 ),
@@ -87,10 +81,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                     return controller.selectedDay ==
                             CalendarUtil().thisDay() + 1
                         ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray, () {
-                            showMaterialModalBottomSheet(
-                              context: context,
-                              builder: (context) => Container(),
-                            );
+                            _buildTyDiaryModal(context);
                           })
                         : Container();
                   },
@@ -99,10 +90,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                   builder: (controller) {
                     return _buildServeWidget('To-Do List', TdColor.lightGray,
                         () {
-                      showMaterialModalBottomSheet(
-                        context: context,
-                        builder: (context) => Container(),
-                      );
+                      _buildTyDiaryModal(context);
                     });
                   },
                 ),
@@ -126,39 +114,54 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
       SizedBox(height: TdSize.xxl),
       SingleLineForm(hint: 'hint'),
       SizedBox(height: TdSize.xxl),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.m),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.xxl),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.xxl),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.xxl),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.xxl),
+      SingleLineForm(hint: 'hint'),
+      SizedBox(height: TdSize.xxl),
       SubmitButtonWidget(text: '작성 완료'),
     ];
     return showBarModalBottomSheet(
       context: context,
       // expand: true,
-      builder: (context) => NestedScrollView(
-        controller: ScrollController(),
-        physics: const ScrollPhysics(parent: PageScrollPhysics()),
-        headerSliverBuilder: (BuildContext context, bool isInnerBoxScrolled) {
-          return <Widget>[
-            SliverList(
-              delegate: SliverChildListDelegate([
-                Container(
-                  height: 50,
-                  child: const Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: TdSize.m),
-                      child: TextWidget.body(text: '오늘의 일기'),
+      builder: (context) => Ink(
+        color: TdColor.deepGray,
+        child: NestedScrollView(
+          controller: ScrollController(),
+          physics: const ScrollPhysics(parent: PageScrollPhysics()),
+          headerSliverBuilder: (BuildContext context, bool isInnerBoxScrolled) {
+            return <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  Container(
+                    height: 50,
+                    child: const Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: TdSize.m),
+                        child: TextWidget.body(text: '오늘의 일기'),
+                      ),
                     ),
-                  ),
-                )
-              ]),
-            ),
-          ];
-        },
-        body: ListView.builder(
-          padding: const EdgeInsets.symmetric(
-              vertical: TdSize.m, horizontal: TdSize.xl),
-          physics: AlwaysScrollableScrollPhysics(),
-          // 이 physics를 추가 안하면 listview로 화면이 가득 차지 않을 때 버그가 남.
-          controller: PrimaryScrollController.of(context),
-          itemBuilder: (context, index) => listItems[index],
-          itemCount: listItems.length,
+                  )
+                ]),
+              ),
+            ];
+          },
+          body: ListView.builder(
+            padding: const EdgeInsets.symmetric(
+                vertical: TdSize.m, horizontal: TdSize.xl),
+            physics: AlwaysScrollableScrollPhysics(),
+            // 이 physics를 추가 안하면 listview로 화면이 가득 차지 않을 때 버그가 남.
+            controller: PrimaryScrollController.of(context),
+            itemBuilder: (context, index) => listItems[index],
+            itemCount: listItems.length,
+          ),
         ),
       ),
     );
