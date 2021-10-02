@@ -22,10 +22,10 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   int selectedYear = 0;
   int selectedMonth = 0;
 
-  List<String> todoListData = [
+  List<TempTodoModel> todoListData = [
     // 나중에 todo list 모델로 변환!
-    "투두리스트 1",
-    "투두리스트 2",
+    TempTodoModel(todo: '투두리스트 시간없는거'),
+    TempTodoModel.withString("09:30", "10:30", todo: '투두리스트 시간있는거'),
   ];
 
   List<String> wishListData = [
@@ -51,180 +51,72 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     return Scaffold(
         backgroundColor: TdColor.black,
         appBar: appBar(),
-        body: ListView(
+        body: _buildHomeScreen(controller, context));
+  }
+
+  ListView _buildHomeScreen(
+      CalendarController controller, BuildContext context) {
+    return ListView(
+      children: [
+        _buildCalendar(controller),
+        const Padding(
+          padding: EdgeInsets.only(left: 13),
+          child: TextWidget.body(text: '일기 쓰기'),
+        ),
+        Column(
           children: [
-            _buildCalendar(controller),
-            const Padding(
-              padding: EdgeInsets.only(left: 13),
-              child: TextWidget.body(text: '일기 쓰기'),
-            ),
-            Column(
-              children: [
-                GetBuilder<CalendarController>(
-                  builder: (controller) {
-                    if (controller.selectedDay != 0) {
-                      if (controller.selectedDay < CalendarUtil().thisDay()) {
-                        return _buildServeWidget(
-                          '오늘의 일기 쓰기',
-                          TdColor.lightRed,
-                          () {
-                            _buildTyDiaryModal(context);
-                          },
-                        );
-                      } else if (controller.selectedDay ==
-                          CalendarUtil().thisDay()) {
-                        return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
-                            () {
-                          _buildTyDiaryModal(context);
-                        });
-                      } else {
-                        return Container();
-                      }
-                    }
-                    //아무것도 선택 안 했을 때 default
+            GetBuilder<CalendarController>(
+              builder: (controller) {
+                if (controller.selectedDay != 0) {
+                  if (controller.selectedDay < CalendarUtil().thisDay()) {
+                    return _buildServeWidget(
+                      '오늘의 일기 쓰기',
+                      TdColor.lightRed,
+                      () {
+                        TyDiaryScreen(wishListData: wishListData)
+                            .buildTyDiaryModal(context);
+                      },
+                    );
+                  } else if (controller.selectedDay ==
+                      CalendarUtil().thisDay()) {
                     return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
                         () {
-                      _buildTyDiaryModal(context);
+                      TyDiaryScreen(wishListData: wishListData)
+                          .buildTyDiaryModal(context);
                     });
-                  },
-                ),
-                GetBuilder<CalendarController>(
-                  builder: (controller) {
-                    return controller.selectedDay ==
-                            CalendarUtil().thisDay() + 1
-                        ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray, () {
-                            _buildTmrDiaryModal(context);
-                          })
-                        : Container();
-                  },
-                ),
-                GetBuilder<CalendarController>(
-                  builder: (controller) {
-                    return _buildServeWidget('To-Do List', TdColor.lightGray,
-                        () {
-                      _buildTodoListModal(context);
-                    });
-                  },
-                ),
-              ],
-            )
+                  } else {
+                    return Container();
+                  }
+                }
+                //아무것도 선택 안 했을 때 default
+                return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray, () {
+                  TyDiaryScreen(wishListData: wishListData)
+                      .buildTyDiaryModal(context);
+                });
+              },
+            ),
+            GetBuilder<CalendarController>(
+              builder: (controller) {
+                return controller.selectedDay == CalendarUtil().thisDay() + 1
+                    ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray, () {
+                        // _buildTmrDiaryModal(context, wishListData);
+                        TmrDiaryScreen(wishListData: wishListData)
+                            .buildTmrDiaryModal(context);
+                      })
+                    : Container();
+              },
+            ),
+            GetBuilder<CalendarController>(
+              builder: (controller) {
+                return _buildServeWidget('To-Do List', TdColor.lightGray, () {
+                  TodoListScreen(todoListData: todoListData)
+                      .buildTodoListModal(context);
+                });
+              },
+            ),
           ],
-        ));
-  }
-
-  Future<dynamic> _buildTmrDiaryModal(BuildContext context) {
-    List<Widget> listItems = [
-      SingleLineForm(hint: '내일의 일기 제목'),
-      const SizedBox(height: TdSize.m),
-      const TextWidget.body(text: '내일 있어야 할 일'),
-      const SizedBox(height: TdSize.s),
-      const MultiLineForm(hint: '내일 있어야 할 일을 적어주세요'),
-      const SizedBox(height: TdSize.m),
-      const TextWidget.body(text: '내일 기대하고 있는 일'),
-      ..._widgetFromStringList(wishListData),
-      const SizedBox(height: TdSize.s),
-      const WishListForm(hint: 'wish list gogo'),
-      const SizedBox(height: TdSize.m),
-      const TextWidget.body(text: '내일의 기분'),
-      const SizedBox(height: TdSize.s),
-      SingleLineForm(hint: '내일의 기분을 미리 예측해 보세요.'),
-      const SizedBox(height: TdSize.m),
-      SubmitButtonWidget(text: '작성 완료'),
-    ];
-    return _barModalWithListItems(context, listItems, '내일의 일기');
-  }
-
-  List<Widget> _widgetFromStringList(List<String> _listData) {
-    List<Widget> _list = [];
-    for (var element in _listData) {
-      _list.add(const SizedBox(height: TdSize.s));
-      _list.add(WishListWidget(text: element));
-    }
-    return _list;
-  }
-
-  Future<dynamic> _buildTyDiaryModal(BuildContext context) {
-    List<Widget> _listItems = [
-      SingleLineForm(hint: '오늘의 일기 제목'),
-      const SizedBox(height: TdSize.l),
-      const TextWidget.body(text: '오늘 있었던 일'),
-      const SizedBox(height: TdSize.s),
-      const MultiLineForm(hint: '오늘 있었던 일을 최대한 객관적으로 적어주세요'),
-      const SizedBox(height: TdSize.l),
-      const TextWidget.body(text: '위시리스트'),
-      ..._widgetFromStringList(wishListData),
-      // const SizedBox(height: TdSize.s),
-      // WishListWidget(text: 'example wish1'),
-      // const SizedBox(height: TdSize.s),
-      // WishListWidget(text: 'example wish2'),
-      const SizedBox(height: TdSize.l),
-      const TextWidget.body(text: '오늘 깜짝! 놀랐던 일'),
-      const SizedBox(height: TdSize.s),
-      const MultiLineForm(hint: '예상치 못한 일이 있었나요?'),
-      const SizedBox(height: TdSize.l),
-      const TextWidget.body(text: '오늘의 진짜 기분'),
-      const SizedBox(height: TdSize.s),
-      SingleLineForm(hint: '내일의 기분을 미리 예측해 보세요.'),
-      const SizedBox(height: TdSize.l),
-      SubmitButtonWidget(text: '작성 완료'),
-    ];
-    return _barModalWithListItems(context, _listItems, '오늘의 일기');
-  }
-
-  Future<dynamic> _buildTodoListModal(BuildContext context) {
-    List<Widget> listItems = [
-      const SizedBox(height: TdSize.l),
-      TodoListWidget(todo: 'todo example 1'),
-      const SizedBox(height: TdSize.s),
-      TodoListWidget(
-          todo: 'todo example 2', timeStart: '09:30', timeEnd: '10:30'),
-      const SizedBox(height: TdSize.s),
-      TodoListForm(
-        hint: '해야 할 일',
-        onSubmitted: () {},
-      ),
-    ];
-    return _barModalWithListItems(context, listItems, 'To-do List');
-  }
-
-  Future<dynamic> _barModalWithListItems(
-      BuildContext context, List<Widget> listItems, String title) {
-    return showBarModalBottomSheet(
-      context: context,
-      expand: true,
-      builder: (context) => Ink(
-        color: TdColor.deepGray,
-        child: NestedScrollView(
-          controller: ScrollController(),
-          physics: const ScrollPhysics(parent: PageScrollPhysics()),
-          headerSliverBuilder: (BuildContext context, bool isInnerBoxScrolled) {
-            return <Widget>[
-              SliverList(
-                delegate: SliverChildListDelegate([
-                  Container(
-                    height: 50,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: TdSize.m),
-                        child: TextWidget.body(text: title),
-                      ),
-                    ),
-                  )
-                ]),
-              ),
-            ];
-          },
-          body: ListView.builder(
-            padding: const EdgeInsets.symmetric(
-                vertical: TdSize.m, horizontal: TdSize.xl),
-            physics: AlwaysScrollableScrollPhysics(),
-            // 이 physics를 추가 안하면 listview로 화면이 가득 차지 않을 때 버그가 남.
-            controller: PrimaryScrollController.of(context),
-            itemBuilder: (context, index) => listItems[index],
-            itemCount: listItems.length,
-          ),
-        ),
-      ),
+        )
+      ],
     );
   }
 
