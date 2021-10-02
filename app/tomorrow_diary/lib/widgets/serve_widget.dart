@@ -9,31 +9,19 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
   final double height;
   final String text;
   final Color color;
-  const ServeWidget({Key? key, required this.text, required this.color})
+  final void Function() onPressed;
+  const ServeWidget(
+      {Key? key,
+      required this.text,
+      required this.color,
+      required this.onPressed})
       : height = 100,
         super(key: key);
   // 왼쪽 바는 가로의 0.05%이다.
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        printLog('serve widget tapped');
-        Get.bottomSheet(
-          Container(
-            height: 150,
-            color: Colors.greenAccent,
-            child: Column(
-              children: [
-                Text('Hii 1', textScaleFactor: 2),
-                Text('Hii 2', textScaleFactor: 2),
-                Text('Hii 3', textScaleFactor: 2),
-                Text('Hii 4', textScaleFactor: 2),
-              ],
-            ),
-          ),
-        );
-        printLog('serve get.bottom');
-      },
+      onTap: onPressed,
       child: Stack(
         children: [
           Container(

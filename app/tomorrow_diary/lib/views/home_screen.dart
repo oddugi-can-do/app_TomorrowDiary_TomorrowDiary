@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/utils/tdcolor.dart';
+import 'package:tomorrow_diary/utils/tdsize.dart';
 import 'package:tomorrow_diary/views/views.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
@@ -20,6 +22,18 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   int selectedYear = 0;
   int selectedMonth = 0;
 
+  List<TempTodoModel> todoListData = [
+    // 나중에 todo list 모델로 변환!
+    TempTodoModel(todo: '투두리스트 시간없는거'),
+    TempTodoModel.withString("09:30", "10:30", todo: '투두리스트 시간있는거'),
+  ];
+
+  List<String> wishListData = [
+    // 나중에 wish list 모델로 변환!
+    "위시리스트 1",
+    "위시리스트 2",
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -37,66 +51,83 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     return Scaffold(
         backgroundColor: TdColor.black,
         appBar: appBar(),
-        body: ListView(
-          children: [
-            FlatButton(
-              onPressed: (){
-                showMaterialModalBottomSheet(
-  context: context,
-  builder: (context) => Container(),
-)
-              },
-              child: Text("Modal Test"),
-            ),
-            _buildCalendar(controller),
-            const Padding(
-              padding: EdgeInsets.only(left: 13),
-              child: TextWidget.body(text: '일기 쓰기'),
-            ),
-            Column(
-              children: [
-                GetBuilder<CalendarController>(
-                  builder: (controller) {
-                    if (controller.selectedDay != 0) {
-                      if (controller.selectedDay < CalendarUtil().thisDay()) {
-                        return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightRed);
-                      } else if (controller.selectedDay ==
-                          CalendarUtil().thisDay()) {
-                        return _buildServeWidget(
-                            '오늘의 일기 쓰기', TdColor.lightGray);
-                      } else {
-                        return Container();
-                      }
-                    }
-                    //아무것도 선택 안 했을 때 default
-                    return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray);
-                  },
-                ),
-                GetBuilder<CalendarController>(
-                  builder: (controller) {
-                    return controller.selectedDay ==
-                            CalendarUtil().thisDay() + 1
-                        ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray)
-                        : Container();
-                  },
-                ),
-                GetBuilder<CalendarController>(
-                  builder: (controller) {
-                    return _buildServeWidget('To-Do List', TdColor.lightGray);
-                  },
-                ),
-              ],
-            )
-          ],
-        ));
+        body: _buildHomeScreen(controller, context));
   }
 
-  Padding _buildServeWidget(String text, Color color) {
+  ListView _buildHomeScreen(
+      CalendarController controller, BuildContext context) {
+    return ListView(
+      children: [
+        _buildCalendar(controller),
+        const Padding(
+          padding: EdgeInsets.only(left: 13),
+          child: TextWidget.body(text: '일기 쓰기'),
+        ),
+        Column(
+          children: [
+            GetBuilder<CalendarController>(
+              builder: (controller) {
+                if (controller.selectedDay != 0) {
+                  if (controller.selectedDay < CalendarUtil().thisDay()) {
+                    return _buildServeWidget(
+                      '오늘의 일기 쓰기',
+                      TdColor.lightRed,
+                      () {
+                        TyDiaryScreen(wishListData: wishListData)
+                            .buildTyDiaryModal(context);
+                      },
+                    );
+                  } else if (controller.selectedDay ==
+                      CalendarUtil().thisDay()) {
+                    return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
+                        () {
+                      TyDiaryScreen(wishListData: wishListData)
+                          .buildTyDiaryModal(context);
+                    });
+                  } else {
+                    return Container();
+                  }
+                }
+                //아무것도 선택 안 했을 때 default
+                return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray, () {
+                  TyDiaryScreen(wishListData: wishListData)
+                      .buildTyDiaryModal(context);
+                });
+              },
+            ),
+            GetBuilder<CalendarController>(
+              builder: (controller) {
+                return controller.selectedDay == CalendarUtil().thisDay() + 1
+                    ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray, () {
+                        // _buildTmrDiaryModal(context, wishListData);
+                        TmrDiaryScreen(wishListData: wishListData)
+                            .buildTmrDiaryModal(context);
+                      })
+                    : Container();
+              },
+            ),
+            GetBuilder<CalendarController>(
+              builder: (controller) {
+                return _buildServeWidget('To-Do List', TdColor.lightGray, () {
+                  TodoListScreen(todoListData: todoListData)
+                      .buildTodoListModal(context);
+                });
+              },
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Padding _buildServeWidget(
+      String text, Color color, void Function() onPressed) {
     return Padding(
-      padding: EdgeInsets.all(13),
+      padding: const EdgeInsets.all(TdSize.s),
       child: ServeWidget(
         text: text,
         color: color,
+        onPressed: onPressed,
       ),
     );
   }
