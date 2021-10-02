@@ -14,8 +14,7 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  GlobalKey<FormState> _formKey =
-      GlobalKey<FormState>(); // Form에 대한 상태를 알기 위해 필요한 키이다.
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -61,8 +60,10 @@ class _SignInFormState extends State<SignInForm> {
                     if (_formKey.currentState!.validate()) {
                       Provider.of<FirebaseAuthState>(context, listen: false)
                           .login(
+                              context,
                               email: _emailController.text,
-                              password: _passwordController.text);
+                              password: _passwordController.text
+                              );
                     }
                   },
                   child: Text("Login", style: TextStyle(fontSize: TdSize.m)),

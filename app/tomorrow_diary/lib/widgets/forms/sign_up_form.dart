@@ -98,12 +98,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Provider.of<FirebaseAuthState>(context, listen:false).registerUser(email: _emailController.text, password: _passwordController.text);
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (context) => HomeScreen(),
-                      //   ),
-                      // );
+                      Provider.of<FirebaseAuthState>(context, listen:false).registerUser(context,email: _emailController.text, password: _passwordController.text,username: _usernameController.text);
                     }
                   },
                   child: Text("Join", style: TextStyle(fontSize: TdSize.m)),

@@ -6,6 +6,7 @@ export 'todo_list_widget.dart';
 export 'fade_animation.dart';
 export 'text_widget.dart';
 export 'calendar_day_button_widget.dart';
+export 'drawer_side_menu.dart';
 export 'wish_list_widget.dart';
 export 'time_select_widget.dart';
 export 'forms/emotion_form.dart';

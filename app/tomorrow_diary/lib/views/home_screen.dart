@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
-import 'package:tomorrow_diary/utils/tdcolor.dart';
-import 'package:tomorrow_diary/utils/tdsize.dart';
+import 'package:tomorrow_diary/controllers/user_network_controller.dart';
+import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/views/views.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
@@ -21,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   int selectedYear = 0;
   int selectedMonth = 0;
+    GlobalKey<ScaffoldState> _key = GlobalKey();
 
   List<TempTodoModel> todoListData = [
     // 나중에 todo list 모델로 변환!
@@ -46,9 +47,12 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   State<HomeScreen> createState() => _HomeScreenState();
 
   @override
+  
   Widget build(BuildContext context) {
     final controller = Get.put(CalendarController());
     return Scaffold(
+        key: _key,
+        endDrawer: DrawerSideMenu(),
         backgroundColor: TdColor.black,
         appBar: appBar(),
         body: _buildHomeScreen(controller, context));
@@ -135,14 +139,19 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   AppBar appBar() {
     return AppBar(
       actions: [
+        
         IconButton(
-          onPressed: () {},
+          alignment: Alignment.center,
+          onPressed: () {
+          },
           icon: const Icon(Icons.calendar_today_rounded),
         ),
         IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.menu),
-        ),
+            icon: Icon(Icons.menu_rounded),
+            onPressed: (){
+              _key.currentState!.openEndDrawer();
+            },
+          ),
       ],
       actionsIconTheme: const IconThemeData(
         color: TdColor.white,
@@ -207,3 +216,5 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     }
   }
 }
+
+
