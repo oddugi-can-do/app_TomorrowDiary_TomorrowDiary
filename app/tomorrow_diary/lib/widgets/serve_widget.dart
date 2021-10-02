@@ -14,7 +14,12 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
   final double height;
   final String text;
   final Color color;
-  const ServeWidget({Key? key, required this.text, required this.color})
+  final void Function() onPressed;
+  const ServeWidget(
+      {Key? key,
+      required this.text,
+      required this.color,
+      required this.onPressed})
       : height = 100,
         super(key: key);
   // 왼쪽 바는 가로의 0.05%이다.
@@ -29,68 +34,7 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
     TextEditingController wishController = TextEditingController();
     TextEditingController surpriseController = TextEditingController();
     return InkWell(
-      onTap: () {
-        printLog('serve widget tapped');
-        showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return Container(
-                  height: 400,
-                  color: TdColor.black,
-                  child: Column(
-                    children: [
-                      Text(
-                          UserDataModel.getDiaryTitle(context, '2021-10-02'),
-                        ),
-                        Text(
-                          UserDataModel.getDiaryTy(context, '2021-10-02'),
-                        ),
-                        Text(
-                          UserDataModel.getDiaryTmr(context, '2021-10-02'),
-                        ),
-                        Text(
-                          UserDataModel.getDiarySurp(context, '2021-10-02'),
-                        ),
-                      ...wishList.map((e) => Text(e)),
-                        /*
-                        List<Widget>.generate(items.length, (idx) {
-          return Container(
-            color: Colors.amber,
-            padding: const EdgeInsets.all(40),
-            margin: const EdgeInsets.all(8),
-            child: Text(
-                items[idx],
-                style: TextStyle(fontSize: 40),
-                textAlign: TextAlign.center,
-            ),
-          );
-        }).toList()
-                        */
-                      // ...wishList.map((e) => Text(e)),
-                      Container(
-                        alignment: Alignment.topRight,
-                        child: IconButton(
-                          icon: Icon(Icons.cancel_sharp),
-                          color: TdColor.blue,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ),
-                      
-                      CustomTextFormField(
-                        controller: titleController,hint: "Title",
-                      ),
-                      CustomTextFormField(controller: tmrController , hint: "tomorrow do" , validation: null,),
-                      CustomTextFormField(controller: tyController , hint : "today do", validation: null),
-                      // CustomTextFormField(controller: wishController),
-                      CustomTextFormField(controller: surpriseController, hint : "surprise", validation: null),
-                      ElevatedButton(onPressed: () {
-                        _sendData(uid:currentUid,title:titleController.text,tmr : tmrController.text, ty: tyController.text, surprise: surpriseController.text, wish: ['휴가가기', '휴가받기']);
-                      }, child: Text("SendData")),
-                    ]
-                  ),
-                  );
-            });
-      },
+      onTap: onPressed,
       child: Stack(
         children: [
           Container(

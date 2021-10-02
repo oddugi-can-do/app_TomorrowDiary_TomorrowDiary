@@ -11,4 +11,5 @@ class TdColor {
   static const lightGreen = Color(0xff8DCC87);
   static const lightRed = Color(0xffE48888);
   static const purple = Color(0xff4A3B69);
+  static const deepGray = Color(0xff464646);
 }
