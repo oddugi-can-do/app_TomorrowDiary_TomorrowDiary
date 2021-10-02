@@ -22,6 +22,18 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   int selectedYear = 0;
   int selectedMonth = 0;
 
+  List<String> todoListData = [
+    // 나중에 todo list 모델로 변환!
+    "투두리스트 1",
+    "투두리스트 2",
+  ];
+
+  List<String> wishListData = [
+    // 나중에 wish list 모델로 변환!
+    "위시리스트 1",
+    "위시리스트 2",
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -109,10 +121,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
       const MultiLineForm(hint: '내일 있어야 할 일을 적어주세요'),
       const SizedBox(height: TdSize.m),
       const TextWidget.body(text: '내일 기대하고 있는 일'),
-      const SizedBox(height: TdSize.s),
-      SingleLineForm(text: 'example wish1'),
-      const SizedBox(height: TdSize.s),
-      SingleLineForm(text: 'example wish2'),
+      ..._widgetFromStringList(wishListData),
       const SizedBox(height: TdSize.s),
       const WishListForm(hint: 'wish list gogo'),
       const SizedBox(height: TdSize.m),
@@ -125,8 +134,17 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     return _barModalWithListItems(context, listItems, '내일의 일기');
   }
 
+  List<Widget> _widgetFromStringList(List<String> _listData) {
+    List<Widget> _list = [];
+    for (var element in _listData) {
+      _list.add(const SizedBox(height: TdSize.s));
+      _list.add(WishListWidget(text: element));
+    }
+    return _list;
+  }
+
   Future<dynamic> _buildTyDiaryModal(BuildContext context) {
-    List<Widget> listItems = [
+    List<Widget> _listItems = [
       SingleLineForm(hint: '오늘의 일기 제목'),
       const SizedBox(height: TdSize.l),
       const TextWidget.body(text: '오늘 있었던 일'),
@@ -134,10 +152,11 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
       const MultiLineForm(hint: '오늘 있었던 일을 최대한 객관적으로 적어주세요'),
       const SizedBox(height: TdSize.l),
       const TextWidget.body(text: '위시리스트'),
-      const SizedBox(height: TdSize.s),
-      WishListWidget(text: 'example wish1'),
-      const SizedBox(height: TdSize.s),
-      WishListWidget(text: 'example wish2'),
+      ..._widgetFromStringList(wishListData),
+      // const SizedBox(height: TdSize.s),
+      // WishListWidget(text: 'example wish1'),
+      // const SizedBox(height: TdSize.s),
+      // WishListWidget(text: 'example wish2'),
       const SizedBox(height: TdSize.l),
       const TextWidget.body(text: '오늘 깜짝! 놀랐던 일'),
       const SizedBox(height: TdSize.s),
@@ -149,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
       const SizedBox(height: TdSize.l),
       SubmitButtonWidget(text: '작성 완료'),
     ];
-    return _barModalWithListItems(context, listItems, '오늘의 일기');
+    return _barModalWithListItems(context, _listItems, '오늘의 일기');
   }
 
   Future<dynamic> _buildTodoListModal(BuildContext context) {
