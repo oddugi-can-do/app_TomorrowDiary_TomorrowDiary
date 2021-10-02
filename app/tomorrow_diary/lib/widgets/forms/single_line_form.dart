@@ -4,10 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 
 class SingleLineForm extends StatelessWidget {
-  final String hint;
+  String hint;
   String text; // TODO: StreamBuilder로 바꾸기 (Rx)
-  SingleLineForm({Key? key, required this.hint, this.text = ''})
-      : super(key: key);
+  SingleLineForm({Key? key, this.hint = '', this.text = ''}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

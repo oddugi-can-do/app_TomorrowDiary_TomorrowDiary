@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                   builder: (controller) {
                     return _buildServeWidget('To-Do List', TdColor.lightGray,
                         () {
-                      _buildTmrDiaryModal(context);
+                      _buildTodoListModal(context);
                     });
                   },
                 ),
@@ -110,9 +110,9 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
       const SizedBox(height: TdSize.m),
       const TextWidget.body(text: '내일 기대하고 있는 일'),
       const SizedBox(height: TdSize.s),
-      WishListWidget(text: 'example wish1'),
+      SingleLineForm(text: 'example wish1'),
       const SizedBox(height: TdSize.s),
-      WishListWidget(text: 'example wish2'),
+      SingleLineForm(text: 'example wish2'),
       const SizedBox(height: TdSize.s),
       const WishListForm(hint: 'wish list gogo'),
       const SizedBox(height: TdSize.m),
@@ -150,6 +150,22 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
       SubmitButtonWidget(text: '작성 완료'),
     ];
     return _barModalWithListItems(context, listItems, '오늘의 일기');
+  }
+
+  Future<dynamic> _buildTodoListModal(BuildContext context) {
+    List<Widget> listItems = [
+      const SizedBox(height: TdSize.l),
+      TodoListWidget(todo: 'todo example 1'),
+      const SizedBox(height: TdSize.s),
+      TodoListWidget(
+          todo: 'todo example 2', timeStart: '09:30', timeEnd: '10:30'),
+      const SizedBox(height: TdSize.s),
+      TodoListForm(
+        hint: '해야 할 일',
+        onSubmitted: () {},
+      ),
+    ];
+    return _barModalWithListItems(context, listItems, 'To-do List');
   }
 
   Future<dynamic> _barModalWithListItems(

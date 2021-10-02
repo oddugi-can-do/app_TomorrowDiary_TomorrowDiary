@@ -7,6 +7,7 @@ export 'fade_animation.dart';
 export 'text_widget.dart';
 export 'calendar_day_button_widget.dart';
 export 'wish_list_widget.dart';
+export 'time_select_widget.dart';
 export 'forms/emotion_form.dart';
 export 'forms/multi_line_form.dart';
 export 'forms/single_line_form.dart';
