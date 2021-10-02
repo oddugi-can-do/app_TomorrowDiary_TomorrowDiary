@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/controllers/user_network_controller.dart';
+import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/views/views.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
@@ -67,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                     return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray);
                   },
                 ),
+              
                 GetBuilder<CalendarController>(
                   builder: (controller) {
                     return controller.selectedDay ==
@@ -99,9 +102,11 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   AppBar appBar() {
     return AppBar(
       actions: [
+        
         IconButton(
           alignment: Alignment.center,
-          onPressed: () {},
+          onPressed: () {
+          },
           icon: const Icon(Icons.calendar_today_rounded),
         ),
         IconButton(
