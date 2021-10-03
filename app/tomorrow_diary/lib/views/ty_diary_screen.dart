@@ -5,13 +5,6 @@ import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class TyDiaryScreen extends StatelessWidget {
   static const pageId = '/write/tydiary';
-  // 1----
-  // List<String> wishListData;
-  // TyDiaryScreen({required this.wishListData});
-  // 2----
-  // TodayDiary todayDiary;
-  // TyDiaryScreen({required this.todayDiary});
-  // 3----
   TyDiary? tyDiary;
   TyDiaryScreen({required this.tyDiary});
   Future<dynamic> buildTyDiaryModal(BuildContext context) {
@@ -19,7 +12,7 @@ class TyDiaryScreen extends StatelessWidget {
     if (tyDiary != null) {
       _listItems = _addListItemsFromTyDiary(tyDiary!);
     } else {
-      _listItems = _addDefaultListItems();
+      _listItems = _addDefaultTyListItems();
     }
     return ModalUtil.barModalWithListItems(context, _listItems, '오늘의 일기');
   }
@@ -56,7 +49,7 @@ class TyDiaryScreen extends StatelessWidget {
     _listItems.add(const TextWidget.body(text: '오늘의 진짜 기분'));
     _listItems.add(_smallGap);
     _listItems.add(tyDiary.title == null
-        ? SingleLineForm(hint: '내일의 기분을 미리 예측해 보세요.')
+        ? SingleLineForm(hint: '오늘의 진짜 기분은 어땠나요?')
         : SingleLineForm(text: tyDiary.tyEmotion!));
     _listItems.add(_largeGap);
     // ---작성 완료 버튼---
@@ -64,7 +57,7 @@ class TyDiaryScreen extends StatelessWidget {
     return _listItems;
   }
 
-  List<Widget> _addDefaultListItems() {
+  List<Widget> _addDefaultTyListItems() {
     List<Widget> _listItems = [];
     // ---제목---
     _listItems.add(SingleLineForm(hint: '오늘의 일기 제목'));

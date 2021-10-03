@@ -10,7 +10,7 @@ class DataModel {
   });
 
   TmrDiary? tmrDiary;
-  List<TodoList>? todoList;
+  List<Todo>? todoList;
   TyDiary? tyDiary;
 
   factory DataModel.fromJson(String str) => DataModel.fromMap(json.decode(str));
@@ -23,8 +23,8 @@ class DataModel {
             : TmrDiary.fromMap(json["tmr_diary"]),
         todoList: json["todo_list"] == null
             ? null
-            : List<TodoList>.from(
-                json["todo_list"].map((x) => TodoList.fromMap(x))),
+            : List<Todo>.from(
+                json["todo_list"].map((x) => Todo.fromMap(x))),
         tyDiary:
             json["ty_diary"] == null ? null : TyDiary.fromMap(json["ty_diary"]),
       );

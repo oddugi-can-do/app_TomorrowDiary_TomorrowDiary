@@ -21,18 +21,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   GlobalKey<ScaffoldState> _key = GlobalKey();
 
-  List<TempTodoModel> todoListData = [
-    // 나중에 todo list 모델로 변환!
-    TempTodoModel(todo: '투두리스트 시간없는거'),
-    TempTodoModel.withString("09:30", "10:30", todo: '투두리스트 시간있는거'),
-  ];
-
-  List<String> wishListData = [
-    // 나중에 wish list 모델로 변환!
-    "위시리스트 1",
-    "위시리스트 2",
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -82,33 +70,19 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
             "end": "13:30",
             "start": "12:30",
             "todo": "todo list 1",
-            "checked": true
+            "checked": true,
+            "time_enabled": true
         },
         {
             "end": null,
             "start": null,
             "todo": "todo list 1",
-            "checked": false
+            "checked": false,
+            "time_enabled": false
         }
-    ],
-    "ty_diary": {
-        "title": "오늘일기 제목 1",
-        "ty_emotion": "😊",
-        "ty_happen": "오늘 있었던 일1",
-        "ty_surprise": "오늘 깜짝 놀랐던 일",
-        "ty_wish": [
-            {
-                "wish": "ty wish 1",
-                "checked": true
-            },
-            {
-                "wish": "ty wish 2",
-                "checked": false
-            }
-        ]
-    }
+    ]
 }''';
-            d.setDataByDate(c.selectedDate, DataModel.fromJson(tempData));
+            d.setDataByDate("2021-10-04", DataModel.fromJson(tempData));
           },
           child: Text('asdf'),
         ),
@@ -124,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                 if (controller.selectedDay != 0) {
                   if (controller.selectedDay < CalendarUtil.thisDay()) {
                     return _buildServeWidget(
-                      '오늘의 일기 쓰기',
+                      '오늘의 일기 보기',
                       TdColor.lightRed,
                       () {
                         TyDiaryScreen(tyDiary: d.allData.value.tyDiary)
@@ -152,9 +126,8 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
               builder: (controller) {
                 return controller.selectedDay == CalendarUtil.thisDay() + 1
                     ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray, () {
-                        // _buildTmrDiaryModal(context, wishListData);
-                        // TmrDiaryScreen(wishListData: wishListData)
-                        //     .buildTmrDiaryModal(context);
+                        TmrDiaryScreen(tmrDiary: d.allData.value.tmrDiary)
+                            .buildTmrDiaryModal(context);
                       })
                     : Container();
               },
@@ -162,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
             GetBuilder<CalendarController>(
               builder: (controller) {
                 return _buildServeWidget('To-Do List', TdColor.lightGray, () {
-                  TodoListScreen(todoListData: todoListData)
+                  TodoListScreen(todoListData: d.allData.value.todoList)
                       .buildTodoListModal(context);
                 });
               },

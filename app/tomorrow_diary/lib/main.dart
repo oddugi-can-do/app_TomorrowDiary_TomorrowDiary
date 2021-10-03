@@ -21,7 +21,6 @@ void main() async {
 class MyDiaryApp extends StatelessWidget with PrintLogMixin {
   @override
   Widget build(BuildContext context) {
-    printLog("mydiaryapp");
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: AppBinding(),

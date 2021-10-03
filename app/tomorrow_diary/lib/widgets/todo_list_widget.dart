@@ -5,12 +5,12 @@ import 'package:tomorrow_diary/widgets/widgets.dart';
 
 enum TodoListState { checked, unchecked }
 
-class TodoListWidget extends StatefulWidget {
+class TodoWidget extends StatefulWidget {
   TodoListState todoListState;
   String todo;
   String? timeStart;
   String? timeEnd;
-  TodoListWidget(
+  TodoWidget(
       {Key? key,
       this.todoListState = TodoListState.unchecked,
       this.todo = '',
@@ -19,10 +19,10 @@ class TodoListWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  _TodoListWidgetState createState() => _TodoListWidgetState();
+  _TodoWidgetState createState() => _TodoWidgetState();
 }
 
-class _TodoListWidgetState extends State<TodoListWidget> {
+class _TodoWidgetState extends State<TodoWidget> {
   @override
   void initState() {
     super.initState();
