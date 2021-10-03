@@ -1,24 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:tomorrow_diary/controllers/diary_controller.dart';
 import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
 import 'utils.dart';
 
 class ModalUtil {
-  static List<Widget> widgetFromStringList(List<Wish>? _listData) {
+  static List<Widget> tyWishWidgetFromStringList(List<Wish>? _listData) {
+    DiaryController d = Get.find();
+
     List<Widget> _list = [];
     if (_listData != null) {
-      for (var element in _listData) {
+      for (var i = 0; i < _listData.length; i++) {
         _list.add(const SizedBox(height: TdSize.s));
-        _list.add(WishListWidget(
-          text: element.wish ?? '',
-          wishListState: element.checked ?? false
+        _list.add(WishWidget(
+          text: _listData[i].wish ?? '',
+          wishListState: _listData[i].checked ?? false
               ? WishListState.checked
               : WishListState.unchecked,
+          onTap: (checked) {
+            d.allData.value.tyDiary?.tyWish![i].checked = checked;
+          },
         ));
       }
     }
+    return _list;
+  }
+
+  static List<Widget> tmrWishWidgetFromStringList(List<Wish>? _listData) {
+    DiaryController d = Get.find();
+
+    List<Widget> _list = [];
+
+    if (_listData != null) {
+      for (var i = 0; i < _listData.length; i++) {
+        _list.add(const SizedBox(height: TdSize.s));
+        _list.add(WishWidget(
+          text: _listData[i].wish ?? '',
+          wishListState: _listData[i].checked ?? false
+              ? WishListState.checked
+              : WishListState.unchecked,
+          onTap: (checked) {
+            d.allData.value.tmrDiary?.tmrWish![i].checked = checked;
+          },
+        ));
+      }
+    }
+    _list.add(const SizedBox(height: TdSize.s));
+    _list.add(WishListForm(hint: '내일 무엇을 하면 좋을까요?'));
     return _list;
   }
 

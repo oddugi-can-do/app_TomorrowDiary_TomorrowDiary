@@ -8,13 +8,14 @@ import 'package:tomorrow_diary/utils/utils.dart';
 import 'widgets.dart';
 
 class TimeSelectWidget extends StatefulWidget {
-  TimeSelectWidget({Key? key, required this.text})
+  TimeSelectWidget({Key? key, required this.text, required this.onChanged})
       : isEnabled = true,
         super(key: key);
   TimeSelectWidget.disable({required this.text}) : isEnabled = false;
   String text;
   String? timeText;
   bool isEnabled;
+  void Function(String) onChanged = (String p1) {};
   @override
   State<TimeSelectWidget> createState() => _TimeSelectWidgetState();
 }
@@ -32,6 +33,7 @@ class _TimeSelectWidgetState extends State<TimeSelectWidget> {
       widget.timeText =
           '${_time.period == DayPeriod.am ? '오전' : '오후'} ${_time.hourOfPeriod}:${_time.minute}';
     });
+    widget.onChanged(widget.timeText ?? '');
   }
 
   @override

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:tomorrow_diary/controllers/diary_controller.dart';
+import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class TodoListForm extends StatefulWidget {
   final String hint;
-  void Function() onSubmitted;
-  TodoListForm({Key? key, required this.hint, required this.onSubmitted})
-      : super(key: key);
+  TodoListForm({Key? key, required this.hint}) : super(key: key);
 
   @override
   State<TodoListForm> createState() => _TodoListFormState();
@@ -15,6 +16,9 @@ class TodoListForm extends StatefulWidget {
 
 class _TodoListFormState extends State<TodoListForm> {
   bool isEnabled = true;
+  String? text = '';
+  String? start;
+  String? end;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,7 +28,12 @@ class _TodoListFormState extends State<TodoListForm> {
             children: [
               Container(
                 height: 50,
-                child: SingleLineForm(hint: 'todolist hint'),
+                child: SingleLineForm(
+                  hint: 'todolist hint',
+                  onChanged: (value) {
+                    text = value;
+                  },
+                ),
               ),
               SizedBox(height: 10),
               Container(
@@ -52,7 +61,11 @@ class _TodoListFormState extends State<TodoListForm> {
                     SizedBox(width: 20),
                     Expanded(
                       child: isEnabled
-                          ? TimeSelectWidget(text: 'start')
+                          ? TimeSelectWidget(
+                              text: 'start',
+                              onChanged: (value) {
+                                start = value;
+                              })
                           : TimeSelectWidget.disable(text: '-'),
                     ),
                     SizedBox(width: 20),
@@ -60,7 +73,11 @@ class _TodoListFormState extends State<TodoListForm> {
                     SizedBox(width: 20),
                     Expanded(
                       child: isEnabled
-                          ? TimeSelectWidget(text: 'end')
+                          ? TimeSelectWidget(
+                              text: 'end',
+                              onChanged: (value) {
+                                end = value;
+                              })
                           : TimeSelectWidget.disable(text: '-'),
                     ),
                   ],
@@ -70,7 +87,18 @@ class _TodoListFormState extends State<TodoListForm> {
           ),
         ),
         ElevatedButton(
-          onPressed: widget.onSubmitted,
+          onPressed: () {
+            DiaryController d = Get.find();
+            d.allData.value.todoList?.add(
+              Todo(
+                todo: text,
+                start: start,
+                end: end,
+                checked: false,
+                timeEnabled: isEnabled,
+              ),
+            );
+          },
           child: Container(
             height: TdSize.xxl,
             decoration: const BoxDecoration(shape: BoxShape.circle),

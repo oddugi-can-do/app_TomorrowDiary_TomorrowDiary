@@ -27,4 +27,12 @@ class DiaryController extends GetxController {
       allData.value = foundData;
     }
   }
+
+  Future<void> setPresentDataByDate(String date) async {
+    int result = await _diaryRepository.setDataByDate(date, allData.value);
+    if (result == 1) {
+      DataModel foundData = await _diaryRepository.findDataByDate(date);
+      allData.value = foundData;
+    }
+  }
 }

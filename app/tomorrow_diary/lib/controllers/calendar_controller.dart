@@ -11,7 +11,6 @@ class CalendarController extends GetxController with PrintLogMixin {
   get selectedYear => _selectedYear;
   get selectedMonth => _selectedMonth;
   get selectedDay => _selectedDay;
-  get writeList => _selectedDay; // TODO: writeList를 선택한 날의 writeList로 바꾸기
 
   DiaryController d = Get.find();
 

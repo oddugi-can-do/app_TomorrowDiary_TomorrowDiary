@@ -29,9 +29,6 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   }
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         key: _key,
@@ -47,45 +44,6 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     CalendarController c = Get.find();
     return ListView(
       children: [
-        ElevatedButton(
-          onPressed: () {
-            String tempData = '''{
-    "tmr_diary": {
-        "title": "내일일기 제목 1",
-        "tmr_emotion": "😂",
-        "tmr_happen": "내일 있어야 할 일",
-        "tmr_wish": [
-            {
-                "wish": "tmr wish 1",
-                "checked": true
-            },
-            {
-                "wish": "tmr wish 2",
-                "checked": false
-            }
-        ]
-    },
-    "todo_list": [
-        {
-            "end": "13:30",
-            "start": "12:30",
-            "todo": "todo list 1",
-            "checked": true,
-            "time_enabled": true
-        },
-        {
-            "end": null,
-            "start": null,
-            "todo": "todo list 1",
-            "checked": false,
-            "time_enabled": false
-        }
-    ]
-}''';
-            d.setDataByDate("2021-10-04", DataModel.fromJson(tempData));
-          },
-          child: Text('asdf'),
-        ),
         _buildCalendar(),
         const Padding(
           padding: EdgeInsets.only(left: 13),
@@ -189,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
         CalendarUtil.daysForWeek(c.selectedYear, c.selectedMonth);
     printLog(_daysForWeek);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 17),
+      padding: const EdgeInsets.symmetric(vertical: TdSize.s),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -197,15 +155,12 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
             7,
             (i) => Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: TdSize.m),
-                  child: TextWidget.hint(text: CalendarUtil().week[i]),
-                ),
+                TextWidget.hint(text: CalendarUtil().week[i]),
                 ...List.generate(
                   _daysForWeek[i].length,
                   (j) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: TdSize.m),
+                      padding: const EdgeInsets.symmetric(vertical: TdSize.s),
                       child: _getCalendarDayButtonWidget(_daysForWeek[i][j]),
                     );
                   },

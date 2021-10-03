@@ -37,10 +37,7 @@ class TodoListScreen extends StatelessWidget {
     List<Widget> listItems = [
       const SizedBox(height: TdSize.l),
       ..._widgetFromTodoList(todoListData ?? []),
-      TodoListForm(
-        hint: '해야 할 일',
-        onSubmitted: () {},
-      ),
+      TodoListForm(hint: '해야 할 일'),
     ];
     return ModalUtil.barModalWithListItems(context, listItems, 'To-do List');
   }
