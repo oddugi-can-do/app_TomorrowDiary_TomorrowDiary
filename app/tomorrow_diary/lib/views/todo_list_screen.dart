@@ -10,16 +10,16 @@ class TempTodoModel {
 
   TempTodoModel({this.todo, this.start, this.end, this.isTimeEnabled = false});
   TempTodoModel.withString(String startString, String endString, {this.todo})
-      : start = Converter.stringToTimeOfDay(startString),
-        end = Converter.stringToTimeOfDay(endString),
+      : start = TimeConverter.stringToTimeOfDay(startString),
+        end = TimeConverter.stringToTimeOfDay(endString),
         isTimeEnabled = true;
 
   Widget makeTodoWidget() {
     if (isTimeEnabled) {
       return TodoListWidget(
           todo: todo ?? '',
-          timeStart: Converter.timeOfDayToString(start!),
-          timeEnd: Converter.timeOfDayToString(end!));
+          timeStart: TimeConverter.timeOfDayToString(start!),
+          timeEnd: TimeConverter.timeOfDayToString(end!));
     } else {
       return TodoListWidget(todo: todo ?? '');
     }

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tomorrow_diary/models/firestore/user_model.dart';
+import 'package:tomorrow_diary/models/user_model.dart';
 
 class Transformer {
   final toUser = StreamTransformer<DocumentSnapshot<Map<String,dynamic>>,UserDataModel>.fromHandlers(

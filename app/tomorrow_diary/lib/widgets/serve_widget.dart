@@ -25,14 +25,15 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
   // 왼쪽 바는 가로의 0.05%이다.
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    String currentUid = FirebaseAuth.instance.currentUser!.uid;
-    List<dynamic> wishList =  UserDataModel.getDiaryWish(context, '2021-10-02');
-    TextEditingController titleController = TextEditingController();
-    TextEditingController tmrController = TextEditingController();
-    TextEditingController tyController = TextEditingController();
-    TextEditingController wishController = TextEditingController();
-    TextEditingController surpriseController = TextEditingController();
+    // GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    // String currentUid = FirebaseAuth.instance.currentUser!.uid;
+    // List<dynamic> wishList =  UserDataModel.getDiaryWish(context, '2021-10-02');
+    // TextEditingController titleController = TextEditingController();
+    // TextEditingController tmrController = TextEditingController();
+    // TextEditingController tyController = TextEditingController();
+    // TextEditingController wishController = TextEditingController();
+    // TextEditingController surpriseController = TextEditingController();
+
     return InkWell(
       onTap: onPressed,
       child: Stack(
@@ -78,8 +79,14 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
     );
   }
 
-
-  void _sendData( {String? uid,String? title, String? ty, String? tmr, String? surprise, List<String>? wish}) async{
-    return await UserNetworkRepo().createDiary(userKey: uid, title: title, ty: ty,tmr : tmr, surprise: surprise, wish: wish);
+  void _sendData(
+      {String? uid,
+      String? title,
+      String? ty,
+      String? tmr,
+      String? surprise,
+      List<String>? wish}) async {
+    return await UserNetworkRepo().createDiary(
+        userKey: uid, title: title, ty: ty, surprise: surprise, wish: wish);
   }
 }

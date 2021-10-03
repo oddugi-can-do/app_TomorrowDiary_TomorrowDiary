@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
 import 'utils.dart';
 
 class ModalUtil {
-  static List<Widget> widgetFromStringList(List<String> _listData) {
+  static List<Widget> widgetFromStringList(List<Wish>? _listData) {
     List<Widget> _list = [];
-    for (var element in _listData) {
-      _list.add(const SizedBox(height: TdSize.s));
-      _list.add(WishListWidget(text: element));
+    if (_listData != null) {
+      for (var element in _listData) {
+        _list.add(const SizedBox(height: TdSize.s));
+        _list.add(WishListWidget(
+          text: element.wish ?? '',
+          wishListState: element.checked ?? false
+              ? WishListState.checked
+              : WishListState.unchecked,
+        ));
+      }
     }
     return _list;
   }

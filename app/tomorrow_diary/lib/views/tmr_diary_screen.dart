@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class TmrDiaryScreen extends StatelessWidget {
   static const pageId = '/write/tmrdiary';
 
-  List<String> wishListData;
+  List<Wish> wishListData = [];
 
   TmrDiaryScreen({required this.wishListData});
 

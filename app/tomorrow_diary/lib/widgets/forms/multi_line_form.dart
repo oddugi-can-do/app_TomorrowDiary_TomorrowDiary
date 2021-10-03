@@ -5,8 +5,10 @@ import 'package:tomorrow_diary/utils/utils.dart';
 
 class MultiLineForm extends StatelessWidget {
   final String hint;
+  final String? text;
   final int minLines;
-  const MultiLineForm({Key? key, required this.hint, this.minLines = 3})
+  const MultiLineForm(
+      {Key? key, this.hint = '', this.minLines = 3, this.text})
       : super(key: key);
 
   @override
@@ -14,6 +16,7 @@ class MultiLineForm extends StatelessWidget {
     return TextFormField(
       maxLines: null,
       minLines: minLines,
+      initialValue: text,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(TdSize.s),
         fillColor: TdColor.darkGray,

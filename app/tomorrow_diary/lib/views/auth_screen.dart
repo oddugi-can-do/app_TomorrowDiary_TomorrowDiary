@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tomorrow_diary/utils/tdcolor.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class AuthScreen extends StatefulWidget {

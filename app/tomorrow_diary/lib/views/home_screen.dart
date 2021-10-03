@@ -19,9 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
-  int selectedYear = 0;
-  int selectedMonth = 0;
-    GlobalKey<ScaffoldState> _key = GlobalKey();
+  GlobalKey<ScaffoldState> _key = GlobalKey();
 
   List<TempTodoModel> todoListData = [
     // 나중에 todo list 모델로 변환!
@@ -38,31 +36,83 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   @override
   void initState() {
     super.initState();
-
-    selectedYear = CalendarUtil().thisYear();
-    selectedMonth = CalendarUtil().thisMonth();
+    Get.put(DiaryController());
+    Get.put(CalendarController());
   }
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 
   @override
-  
   Widget build(BuildContext context) {
-    final controller = Get.put(CalendarController());
     return Scaffold(
         key: _key,
         endDrawer: DrawerSideMenu(),
         backgroundColor: TdColor.black,
         appBar: appBar(),
-        body: _buildHomeScreen(controller, context));
+        body: _buildHomeScreen(context));
   }
 
-  ListView _buildHomeScreen(
-      CalendarController controller, BuildContext context) {
+  ListView _buildHomeScreen(BuildContext context) {
+    UserController u = Get.find();
+    DiaryController d = Get.find();
+    CalendarController c = Get.find();
     return ListView(
       children: [
-        _buildCalendar(controller),
+        ElevatedButton(
+          onPressed: () {
+            String tempData = '''{
+    "tmr_diary": {
+        "title": "내일일기 제목 1",
+        "tmr_emotion": "😂",
+        "tmr_happen": "내일 있어야 할 일",
+        "tmr_wish": [
+            {
+                "wish": "tmr wish 1",
+                "checked": true
+            },
+            {
+                "wish": "tmr wish 2",
+                "checked": false
+            }
+        ]
+    },
+    "todo_list": [
+        {
+            "end": "13:30",
+            "start": "12:30",
+            "todo": "todo list 1",
+            "checked": true
+        },
+        {
+            "end": null,
+            "start": null,
+            "todo": "todo list 1",
+            "checked": false
+        }
+    ],
+    "ty_diary": {
+        "title": "오늘일기 제목 1",
+        "ty_emotion": "😊",
+        "ty_happen": "오늘 있었던 일1",
+        "ty_surprise": "오늘 깜짝 놀랐던 일",
+        "ty_wish": [
+            {
+                "wish": "ty wish 1",
+                "checked": true
+            },
+            {
+                "wish": "ty wish 2",
+                "checked": false
+            }
+        ]
+    }
+}''';
+            d.setDataByDate(c.selectedDate, DataModel.fromJson(tempData));
+          },
+          child: Text('asdf'),
+        ),
+        _buildCalendar(),
         const Padding(
           padding: EdgeInsets.only(left: 13),
           child: TextWidget.body(text: '일기 쓰기'),
@@ -72,20 +122,19 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
             GetBuilder<CalendarController>(
               builder: (controller) {
                 if (controller.selectedDay != 0) {
-                  if (controller.selectedDay < CalendarUtil().thisDay()) {
+                  if (controller.selectedDay < CalendarUtil.thisDay()) {
                     return _buildServeWidget(
                       '오늘의 일기 쓰기',
                       TdColor.lightRed,
                       () {
-                        TyDiaryScreen(wishListData: wishListData)
+                        TyDiaryScreen(tyDiary: d.allData.value.tyDiary)
                             .buildTyDiaryModal(context);
                       },
                     );
-                  } else if (controller.selectedDay ==
-                      CalendarUtil().thisDay()) {
+                  } else if (controller.selectedDay == CalendarUtil.thisDay()) {
                     return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
                         () {
-                      TyDiaryScreen(wishListData: wishListData)
+                      TyDiaryScreen(tyDiary: d.allData.value.tyDiary)
                           .buildTyDiaryModal(context);
                     });
                   } else {
@@ -94,18 +143,18 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                 }
                 //아무것도 선택 안 했을 때 default
                 return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray, () {
-                  TyDiaryScreen(wishListData: wishListData)
+                  TyDiaryScreen(tyDiary: d.allData.value.tyDiary)
                       .buildTyDiaryModal(context);
                 });
               },
             ),
             GetBuilder<CalendarController>(
               builder: (controller) {
-                return controller.selectedDay == CalendarUtil().thisDay() + 1
+                return controller.selectedDay == CalendarUtil.thisDay() + 1
                     ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray, () {
                         // _buildTmrDiaryModal(context, wishListData);
-                        TmrDiaryScreen(wishListData: wishListData)
-                            .buildTmrDiaryModal(context);
+                        // TmrDiaryScreen(wishListData: wishListData)
+                        //     .buildTmrDiaryModal(context);
                       })
                     : Container();
               },
@@ -137,34 +186,34 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   }
 
   AppBar appBar() {
+    CalendarController c = Get.find();
     return AppBar(
       actions: [
-        
         IconButton(
           alignment: Alignment.center,
-          onPressed: () {
-          },
+          onPressed: () {},
           icon: const Icon(Icons.calendar_today_rounded),
         ),
         IconButton(
-            icon: Icon(Icons.menu_rounded),
-            onPressed: (){
-              _key.currentState!.openEndDrawer();
-            },
-          ),
+          icon: Icon(Icons.menu_rounded),
+          onPressed: () {
+            _key.currentState!.openEndDrawer();
+          },
+        ),
       ],
       actionsIconTheme: const IconThemeData(
         color: TdColor.white,
       ),
       backgroundColor: Colors.transparent,
       shadowColor: null,
-      title: TextWidget.header(text: '$selectedYear년 $selectedMonth월'),
+      title: TextWidget.header(text: '${c.selectedYear}년 ${c.selectedMonth}월'),
     );
   }
 
-  Widget _buildCalendar(CalendarController controller) {
+  Widget _buildCalendar() {
+    CalendarController c = Get.find();
     List<List<int>> _daysForWeek =
-        CalendarUtil().daysForWeek(selectedYear, selectedMonth);
+        CalendarUtil.daysForWeek(c.selectedYear, c.selectedMonth);
     printLog(_daysForWeek);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 17),
@@ -184,8 +233,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                   (j) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: TdSize.m),
-                      child: _getCalendarDayButtonWidget(
-                          _daysForWeek[i][j], controller),
+                      child: _getCalendarDayButtonWidget(_daysForWeek[i][j]),
                     );
                   },
                 )
@@ -197,24 +245,15 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     );
   }
 
-  Widget _getCalendarDayButtonWidget(int day, CalendarController controller) {
+  Widget _getCalendarDayButtonWidget(int day) {
+    CalendarController c = Get.find();
     if (day == -1) {
-      return CalendarDayButtonWidget.disabled(
-        controller: controller,
-      );
-    } else if (CalendarUtil().isIncludeToday(selectedYear, selectedMonth) &&
-        day == CalendarUtil().thisDay()) {
-      return CalendarDayButtonWidget.highlighted(
-        day: day,
-        controller: controller,
-      );
+      return CalendarDayButtonWidget.disabled();
+    } else if (CalendarUtil.isIncludeToday(c.selectedYear, c.selectedMonth) &&
+        day == CalendarUtil.thisDay()) {
+      return CalendarDayButtonWidget.highlighted(day: day);
     } else {
-      return CalendarDayButtonWidget(
-        day: day,
-        controller: controller,
-      );
+      return CalendarDayButtonWidget(day: day);
     }
   }
 }
-
-

@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:tomorrow_diary/models/diary_model.dart';
 import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/firestore_key.dart';
 
@@ -25,7 +26,8 @@ class UserDataModel {
       : this.fromMap(snapshot.data()! as Map<String, dynamic>, snapshot.id,
             reference: snapshot.reference);
 
-  static Map<String, dynamic> getCreateUser(String? email, String? username) {
+  // 데이터를 Map형태로 바꿔주기 위한 작업
+  static Map<String, dynamic> userToMap(String? email, String? username) {
     Map<String, dynamic> map = Map();
     map[USER_EMAIL] = email;
     map[USER_USERNAME] = username;
@@ -33,53 +35,59 @@ class UserDataModel {
     return map;
   }
 
-  static Map<String, dynamic> getCreateDiary(String? title, String? ty, String? tmr, String? surprise, String? date, List<String> wish) {
-    Map<String, dynamic> map = Map();
-    map[USER_ALL_DATA] = {
-      DIARY:{
-      date: {
-        DIARY_TITLE : title,
-        DIARY_TMR : tmr,
-        DIARY_TY : ty,
-        DIARY_SURP: surprise,
-        DIARY_WISH: wish,
-      }
-      }
-    };
-    return map;
-  }
+  /*데이터 받아오는 메소드 */
 
   // 다이어리 가져오기
-  static Map<String,dynamic> getDiary(BuildContext context) {
+  static Map<String, dynamic> getDiary(BuildContext context) {
     return Provider.of<UserModelState>(context).userModel.all_data[DIARY];
   }
 
   // 다이어리 타이틀 가져오기
-  static String getDiaryTitle(BuildContext context,String? date) {
-    Map<String,dynamic> diary = getDiary(context);
+  static String getDiaryTitle(BuildContext context, String? date) {
+    Map<String, dynamic> diary = getDiary(context);
     return diary[date][DIARY_TITLE];
   }
 
-  static String getDiaryTmr(BuildContext context,String? date) {
-    Map<String,dynamic> diary = getDiary(context);
+  static String getDiaryTmr(BuildContext context, String? date) {
+    Map<String, dynamic> diary = getDiary(context);
     return diary[date][DIARY_TMR];
   }
 
-  static String getDiaryTy(BuildContext context,String? date) {
-    Map<String,dynamic> diary = getDiary(context);
+  static String getDiaryTy(BuildContext context, String? date) {
+    Map<String, dynamic> diary = getDiary(context);
     return diary[date][DIARY_TY];
   }
 
-  static String getDiarySurp(BuildContext context,String? date) {
-    Map<String,dynamic> diary = getDiary(context);
+  static String getDiarySurp(BuildContext context, String? date) {
+    Map<String, dynamic> diary = getDiary(context);
     return diary[date][DIARY_SURP];
   }
 
-  static List<dynamic> getDiaryWish(BuildContext context,String? date) {
-    Map<String,dynamic> diary = getDiary(context);
+  //에러나오는 것 때문에 물어봐야함
+  static List<dynamic> getDiaryWish(BuildContext context, String? date) {
+    Map<String, dynamic> diary = getDiary(context);
     return diary[date][DIARY_WISH];
   }
+}
 
-  // static Map<String, dynamic> getCreateTodo(
-  //     String? date, List<dynamic> todoList) {}
+class UserModel {
+  final String? uid; // provider_firebaseUid
+  final String? username; // 유저네임 (보여지는 이름)
+  final String? email;
+
+  UserModel({
+    this.uid,
+    this.username,
+    this.email,
+  });
+
+  // 통신을 위해서 json 처럼 생긴 문자열 {"id":1} => Dart 오브젝트
+
+  UserModel.fromJson(Map<String, dynamic> json)
+      : uid = json["uid"],
+        username = json["username"],
+        email = json["email"];
+
+  Map<String, dynamic> toJson() =>
+      {"uid": uid, "username": username, "email": email};
 }

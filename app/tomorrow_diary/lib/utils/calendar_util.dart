@@ -1,15 +1,13 @@
 import 'package:tomorrow_diary/mixins/mixins.dart';
 
-class CalendarUtil with PrintLogMixin {
+class CalendarUtil {
   final List<String> week = ['일', '월', '화', '수', '목', '금', '토'];
 
   CalendarUtil();
 
-  List<List<int>> daysForWeek(int year, int month) {
+  static List<List<int>> daysForWeek(int year, int month) {
     int shift = DateTime.utc(year, month, 1).weekday % 7;
-    printLog('shift : $shift');
     int daysInMonth = _daysInMonth(year, month);
-    printLog('shift : $shift, daysInMonth : $daysInMonth');
     List<int> _day = List.generate(daysInMonth, (index) => index + 1);
     return List.generate(
       7,
@@ -22,7 +20,7 @@ class CalendarUtil with PrintLogMixin {
   }
 
   // int today(int, int) : 오늘이 속한 달일 때 오늘이 며칠인지 알려줌.
-  bool isIncludeToday(int year, int month) {
+  static bool isIncludeToday(int year, int month) {
     DateTime now = DateTime.now();
     if (now.year == year && now.month == month) {
       return true;
@@ -30,19 +28,19 @@ class CalendarUtil with PrintLogMixin {
     return false;
   }
 
-  int thisYear() {
+  static int thisYear() {
     return DateTime.now().year;
   }
 
-  int thisMonth() {
+  static int thisMonth() {
     return DateTime.now().month;
   }
 
-  int thisDay() {
+  static int thisDay() {
     return DateTime.now().day;
   }
 
-  int _daysInMonth(int year, int month) {
+  static int _daysInMonth(int year, int month) {
     List<int> monthLength = [31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     if (_leapYear(year) == true) {
       monthLength[1] = 29;
@@ -53,7 +51,7 @@ class CalendarUtil with PrintLogMixin {
     return monthLength[month - 1];
   }
 
-  bool _leapYear(int year) {
+  static bool _leapYear(int year) {
     bool leapYear = false;
     bool leap = ((year % 100 == 0) && (year % 400 != 0));
     if (leap == true) {
