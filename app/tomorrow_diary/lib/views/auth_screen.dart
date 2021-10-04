@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tomorrow_diary/bindings/home_screen_bindings.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/views/home_screen.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
@@ -64,7 +65,9 @@ class _AuthScreenState extends State<AuthScreen> {
                             style: TextStyle(
                                 color:
                                     isRegister ? Colors.white24 : Colors.white,
-                                fontWeight: isRegister ? FontWeight.w200 : FontWeight.bold))),
+                                fontWeight: isRegister
+                                    ? FontWeight.w200
+                                    : FontWeight.bold))),
                     TextButton(
                         onPressed: () {
                           setState(() {
@@ -111,7 +114,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   SizedBox(height: 30),
                   _socialLoginButton('google', () async {
                     print("google");
-                    Get.to(HomeScreen());
+                    Get.to(HomeScreen(), binding: HomeScreenBindings());
                   }),
                   SizedBox(height: 5),
                   _socialLoginButton('facebook', () {
