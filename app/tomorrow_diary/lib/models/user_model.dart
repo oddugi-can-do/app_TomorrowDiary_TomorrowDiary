@@ -71,23 +71,25 @@ class UserDataModel {
 }
 
 class UserModel {
-  final String? uid; // provider_firebaseUid
-  final String? username; // 유저네임 (보여지는 이름)
+  final String? uid;
   final String? email;
 
   UserModel({
     this.uid,
-    this.username,
     this.email,
   });
 
-  // 통신을 위해서 json 처럼 생긴 문자열 {"id":1} => Dart 오브젝트
 
+
+  /* 데이터를 Dart형태로 바꾸는 작업 , 시리얼라이징은 데이터를 String 형태(Encode) 
+  디시리얼라이징은 String을 dart의 데이터 구조로 바꾸는 작업(Decode)*/
   UserModel.fromJson(Map<String, dynamic> json)
       : uid = json["uid"],
-        username = json["username"],
         email = json["email"];
 
-  Map<String, dynamic> toJson() =>
-      {"uid": uid, "username": username, "email": email};
+  /*데이터를 보내기위해 데이터를 가공*/
+  Map<String, dynamic> toJson() => {
+        "uid": uid,
+        "email": email,
+      };
 }

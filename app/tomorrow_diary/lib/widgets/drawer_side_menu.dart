@@ -16,10 +16,7 @@ class DrawerSideMenu extends StatelessWidget {
             child: ListTile(
               leading: Icon(Icons.logout),
               title: Text('Logout'),
-              onTap: () {
-                Provider.of<FirebaseAuthState>(context, listen: false)
-                      .signOut();
-              },
+              onTap: () {},
             ),
           )
         ]),

@@ -8,3 +8,5 @@ class AppBinding extends Bindings {
     // 의존성 주입 하는곳
     await Get.putAsync(() => FirebaseService().init());
     Get.put(() => UserController());
+  }
+}
