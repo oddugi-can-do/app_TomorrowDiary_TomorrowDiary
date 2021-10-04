@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/controllers/user_network_controller.dart';
 import 'package:tomorrow_diary/models/models.dart';
+import 'package:tomorrow_diary/views/select_year_and_month_screen.dart';
 import 'package:tomorrow_diary/views/views.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
@@ -21,13 +22,30 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   GlobalKey<ScaffoldState> _key = GlobalKey();
-  DiaryController d = Get.find();
-  CalendarController c = Get.find();
+  int selectedYear = 0;
+  int selectedMonth = 0;
+
+  void _yearAndMonthChanged(int _year, int _month) {
+    CalendarController c = Get.find();
+    WidgetsBinding.instance!.addPostFrameCallback(
+      (_) => setState(
+        () {
+          selectedYear = _year;
+          selectedMonth = _month;
+          c.selectYearAndMonth(selectedYear, selectedMonth);
+        },
+      ),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
+    DiaryController d = Get.find();
+    CalendarController c = Get.find();
     d.findDataByDate(c.selectedDate);
+    selectedYear = c.selectedYear;
+    selectedMonth = c.selectedMonth;
   }
 
   @override
@@ -41,119 +59,161 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   }
 
   ListView _buildHomeScreen(BuildContext context) {
+    CalendarController c = Get.find();
+
     return ListView(
+      key: GlobalKey(),
       children: [
-        _buildCalendarWithGridView(),
+        CalendarWidget(year: selectedYear, month: selectedMonth),
         const Padding(
           padding: EdgeInsets.only(left: 13),
           child: TextWidget.body(text: '일기 쓰기'),
         ),
-        Column(
-          children: [
-            GetBuilder<CalendarController>(
-              builder: (controller) {
-                if (controller.selectedDay != 0) {
-                  if (controller.selectedDay < CalendarUtil.thisDay()) {
-                    return _buildServeWidget(
-                      '오늘의 일기 보기',
-                      TdColor.lightRed,
-                      () {
-                        ModalUtil.barModalWithTyDiaryScreen(context);
-                      },
-                    );
-                  } else if (controller.selectedDay == CalendarUtil.thisDay()) {
-                    return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
-                        () {
-                      ModalUtil.barModalWithTyDiaryScreen(context);
-                    });
-                  } else {
-                    return Container();
-                  }
-                }
-                //아무것도 선택 안 했을 때 default
-                return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray, () {
-                  ModalUtil.barModalWithTyDiaryScreen(context);
-                });
-              },
-            ),
-            GetBuilder<CalendarController>(
-              builder: (controller) {
-                return controller.selectedDay == CalendarUtil.thisDay() + 1
-                    ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray, () {
-                        ModalUtil.barModalWithTmrDiaryScreen(context);
-                      })
-                    : Container();
-              },
-            ),
-            GetBuilder<CalendarController>(
-              builder: (controller) {
-                return _buildServeWidget('To-Do List', TdColor.lightGray, () {
-                  ModalUtil.barModalWithTodoListScreen(context);
-                });
-              },
-            ),
-          ],
-        )
+        GetBuilder<CalendarController>(builder: (controller) {
+          TimePoint timePoint =
+              CalendarUtil.decidePastPresentFutureWithDate(c.selectedDate);
+          return Column(
+            children: [
+              _buildTyServeWidget(timePoint),
+              _buildTmrServeWidget(timePoint),
+              _buildTodoServeWidget(timePoint),
+            ],
+          );
+        })
       ],
     );
   }
 
-  Widget _buildCalendarWithGridView() {
-    CalendarController c = Get.find();
-    List<int> _dayListForMonth =
-        CalendarUtil.dayListForMonth(c.selectedYear, c.selectedMonth);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: TdSize.s),
-      child: GridView.builder(
-        itemCount: 7 + _dayListForMonth.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 7, //1 개의 행에 보여줄 item 개수
-          childAspectRatio: 1 / 1, //item 의 가로 1, 세로 1 의 비율
-          mainAxisSpacing: 10, //수평 Padding
-          crossAxisSpacing: 10, //수직 Padding
-        ),
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          if (index < 7) {
-            return Center(
-              child: TextWidget.hint(text: CalendarUtil.week[index]),
-            );
-          }
-          if (_dayListForMonth[index - 7] == -1) {
-            return CalendarDayButtonWidget.disabled();
-          } else if (CalendarUtil.isIncludeToday(
-                  c.selectedYear, c.selectedMonth) &&
-              _dayListForMonth[index - 7] == CalendarUtil.thisDay()) {
-            return CalendarDayButtonWidget.highlighted(
-                day: _dayListForMonth[index - 7]);
-          } else {
-            return CalendarDayButtonWidget(day: _dayListForMonth[index - 7]);
-          }
-        },
-      ),
-    );
+  Widget _buildTyServeWidget(TimePoint timePoint) {
+    switch (timePoint) {
+      case TimePoint.past:
+        return Padding(
+          padding: const EdgeInsets.all(TdSize.s),
+          child: ServeWidget(
+            text: '오늘의 일기 보기',
+            color: TdColor.lightRed,
+            //TODO: ServeWidget 안에서 color 판단하기!
+            onPressed: () {
+              ModalUtil.barModalWithTyDiaryScreen(context);
+            },
+          ),
+        );
+      case TimePoint.present:
+        return Padding(
+          padding: const EdgeInsets.all(TdSize.s),
+          child: ServeWidget(
+            text: '오늘의 일기 쓰기',
+            color: TdColor.lightGray,
+            onPressed: () {
+              ModalUtil.barModalWithTyDiaryScreen(context);
+            },
+          ),
+        );
+      case TimePoint.future:
+        return Container();
+      case TimePoint.tomorrow:
+        return Container();
+    }
   }
 
-  Padding _buildServeWidget(
-      String text, Color color, void Function() onPressed) {
-    return Padding(
-      padding: const EdgeInsets.all(TdSize.s),
-      child: ServeWidget(
-        text: text,
-        color: color,
-        onPressed: onPressed,
-      ),
-    );
+  Widget _buildTmrServeWidget(TimePoint timePoint) {
+    switch (timePoint) {
+      case TimePoint.past:
+        return Padding(
+          padding: const EdgeInsets.all(TdSize.s),
+          child: ServeWidget(
+            text: '내일의 일기 보기',
+            color: TdColor.lightBlue,
+            onPressed: () {
+              ModalUtil.barModalWithTmrDiaryScreen(context);
+            },
+          ),
+        );
+      case TimePoint.present:
+        return Container();
+      case TimePoint.tomorrow:
+        return Padding(
+          padding: const EdgeInsets.all(TdSize.s),
+          child: ServeWidget(
+            text: '내일의 일기 쓰기',
+            color: TdColor.lightGray,
+            onPressed: () {
+              ModalUtil.barModalWithTmrDiaryScreen(context);
+            },
+          ),
+        );
+      case TimePoint.future:
+        return Container();
+    }
+  }
+
+  Widget _buildTodoServeWidget(TimePoint timePoint) {
+    switch (timePoint) {
+      case TimePoint.past:
+        return Padding(
+          padding: const EdgeInsets.all(TdSize.s),
+          child: ServeWidget(
+            text: 'To-do List 보기',
+            color: TdColor.lightGreen,
+            onPressed: () {
+              ModalUtil.barModalWithTodoListScreen(context);
+            },
+          ),
+        );
+      case TimePoint.present:
+        return Padding(
+          padding: const EdgeInsets.all(TdSize.s),
+          child: ServeWidget(
+            text: 'To-do List 보기',
+            color: TdColor.lightGray,
+            onPressed: () {
+              ModalUtil.barModalWithTodoListScreen(context);
+            },
+          ),
+        );
+      case TimePoint.tomorrow:
+        return Padding(
+          padding: const EdgeInsets.all(TdSize.s),
+          child: ServeWidget(
+            text: 'To-do List 보기',
+            color: TdColor.lightGray,
+            onPressed: () {
+              ModalUtil.barModalWithTodoListScreen(context);
+            },
+          ),
+        );
+      case TimePoint.future:
+        return Padding(
+          padding: const EdgeInsets.all(TdSize.s),
+          child: ServeWidget(
+            text: 'To-do List 보기',
+            color: TdColor.lightGray,
+            onPressed: () {
+              ModalUtil.barModalWithTodoListScreen(context);
+            },
+          ),
+        );
+    }
   }
 
   AppBar appBar() {
-    CalendarController c = Get.find();
     return AppBar(
       actions: [
         IconButton(
           alignment: Alignment.center,
-          onPressed: () {},
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) => Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: SelectYearAndMonthScreen(
+                    initialYear: selectedYear,
+                    initialMonth: selectedMonth,
+                    onChanged: _yearAndMonthChanged),
+              ),
+            );
+          },
           icon: const Icon(Icons.calendar_today_rounded),
         ),
         IconButton(
@@ -168,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
       ),
       backgroundColor: Colors.transparent,
       shadowColor: null,
-      title: TextWidget.header(text: '${c.selectedYear}년 ${c.selectedMonth}월'),
+      title: TextWidget.header(text: '$selectedYear년 $selectedMonth월'),
     );
   }
 }

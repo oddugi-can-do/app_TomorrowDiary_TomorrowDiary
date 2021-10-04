@@ -11,17 +11,23 @@ class CalendarController extends GetxController with PrintLogMixin {
   get selectedYear => _selectedYear;
   get selectedMonth => _selectedMonth;
   get selectedDay => _selectedDay;
-
-  DiaryController d = Get.find();
-
   String get selectedDate =>
       DateConverter.dateToString(_selectedYear, _selectedMonth, _selectedDay);
 
+  DiaryController _d = Get.find();
+
   void selectDay(int day) {
     _selectedDay = day;
-    d.findDataByDate(selectedDate);
+    _d.findDataByDate(selectedDate);
     printLog('selectedDay : $_selectedDay');
     update();
+  }
+
+  void selectYearAndMonth(int year, int month) {
+    _selectedDay = 1;
+    _selectedYear = year;
+    _selectedMonth = month;
+    _d.findDataByDate(selectedDate);
   }
 
   bool isSelected(int day) {
