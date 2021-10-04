@@ -24,7 +24,7 @@ class MyDiaryApp extends StatelessWidget with PrintLogMixin {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: AppBinding(),
-      home: LoginScreen(),
+      home: AuthScreen(),
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.black,
@@ -41,78 +41,3 @@ class MyDiaryApp extends StatelessWidget with PrintLogMixin {
     );
   }
 }
-/*
-class MyDiaryApp extends StatelessWidget {
-  FirebaseAuthState _firebaseAuthState = FirebaseAuthState();
-  Widget? _currentScreen;
-
-  @override
-  Widget build(BuildContext context) {
-    _firebaseAuthState.watchAuthChange();
-
-    return MultiProvider(
-      providers: [
-        // 로그인 상태 관리 
-        ChangeNotifierProvider<FirebaseAuthState>.value(
-          value: _firebaseAuthState, //원래 기존에 있던 것을 사용
-        ),
-
-        // 유저데이터가 변경될 떄마다 상태관리하기 위한 프로바이더
-        ChangeNotifierProvider<UserModelState>(create: (_) => UserModelState()),
-      ],
-      child: MaterialApp(
-
-        //테마
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: Colors.black,
-          accentColor: Colors.white,
-          snackBarTheme: SnackBarThemeData(
-            backgroundColor: TdColor.black,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10))),
-            contentTextStyle: TextStyle(fontSize: 16, color: Colors.white),
-          ),
-        ),
-
-
-        //Home
-        home: Consumer<FirebaseAuthState>(
-          builder: (context, firebaseAuthState, child) {
-            switch (firebaseAuthState.firebaseAuthStatus) {
-              case FirebaseAuthStatus.signout:
-                _clearUserModel(context);
-                _currentScreen = AuthScreen();
-                break;
-              case FirebaseAuthStatus.signin:
-                _initUserModel(context);
-                _currentScreen = HomeScreen();
-                break;
-            }
-            return AnimatedSwitcher(
-              duration: duration,
-              child: _currentScreen,
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  void _initUserModel(BuildContext context) {
-    UserModelState userModelState = Provider.of<UserModelState>(context, listen: false);
-    userModelState.currentSubscription =UserNetworkRepo()
-        .getUserAllData(_firebaseAuthState.firebaseUser.uid)
-        .listen((userModel) {
-          userModelState.userModel=userModel;
-    });
-  }
-
-  void _clearUserModel(BuildContext context) {
-    UserModelState userModelState = Provider.of<UserModelState>(context, listen: false);
-    userModelState.clear();
-  }
-}
-
-*/

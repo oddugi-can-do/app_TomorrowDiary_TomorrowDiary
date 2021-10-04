@@ -9,10 +9,6 @@ final List<GetPage> appPages = [
     binding: RootScreenBindings(),
   ),
   GetPage(
-    name: LoginScreen.pageId,
-    page: () => LoginScreen(),
-  ),
-  GetPage(
     name: RegisterScreen.pageId,
     page: () => RegisterScreen(),
   ),
