@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
         endDrawer: DrawerSideMenu(),
         backgroundColor: TdColor.black,
         appBar: appBar(),
-        body: _buildHomeScreen(context));
+        body: SafeArea(child: _buildHomeScreen(context)));
   }
 
   ListView _buildHomeScreen(BuildContext context) {
