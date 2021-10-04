@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/tdcolor.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
 enum WishListState { checked, unchecked }
 
-class WishListWidget extends StatefulWidget {
+class WishWidget extends StatefulWidget {
   WishListState wishListState;
   String text;
-  WishListWidget(
-      {Key? key, this.wishListState = WishListState.unchecked, this.text = ''})
+  void Function(bool) onTap;
+  WishWidget(
+      {Key? key,
+      this.wishListState = WishListState.unchecked,
+      this.text = '',
+      required this.onTap})
       : super(key: key);
 
   @override
-  _WishListWidgetState createState() => _WishListWidgetState();
+  _WishWidgetState createState() => _WishWidgetState();
 }
 
-class _WishListWidgetState extends State<WishListWidget> {
+class _WishWidgetState extends State<WishWidget> {
   @override
   void initState() {
     super.initState();
@@ -30,9 +35,12 @@ class _WishListWidgetState extends State<WishListWidget> {
           switch (widget.wishListState) {
             case WishListState.checked:
               widget.wishListState = WishListState.unchecked;
+              widget.onTap(false);
               break;
             case WishListState.unchecked:
               widget.wishListState = WishListState.checked;
+              widget.onTap;
+              widget.onTap(true);
               break;
           }
         });

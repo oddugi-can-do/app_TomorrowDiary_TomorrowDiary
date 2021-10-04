@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'models.dart';
 
+// 유저 상태가 변할 때 새로 유저를 갱신 시켜준다.
 class UserModelState extends ChangeNotifier{
 
   UserDataModel? _userModel;

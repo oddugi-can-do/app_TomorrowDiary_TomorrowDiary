@@ -5,12 +5,16 @@ import 'package:tomorrow_diary/utils/utils.dart';
 
 class SingleLineForm extends StatelessWidget {
   String hint;
-  String text; // TODO: StreamBuilder로 바꾸기 (Rx)
-  SingleLineForm({Key? key, this.hint = '', this.text = ''}) : super(key: key);
+  String text;
+  void Function(String) onChanged;
+  SingleLineForm(
+      {Key? key, this.hint = '', this.text = '', required this.onChanged})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       initialValue: text,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(TdSize.s),

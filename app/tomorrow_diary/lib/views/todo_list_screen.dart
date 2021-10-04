@@ -1,60 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
-class TempTodoModel {
-  String? todo;
-  bool isTimeEnabled;
-  TimeOfDay? start;
-  TimeOfDay? end;
+class TodoListScreen extends StatefulWidget {
+  static const pageId = '/wrtie/todolist';
 
-  TempTodoModel({this.todo, this.start, this.end, this.isTimeEnabled = false});
-  TempTodoModel.withString(String startString, String endString, {this.todo})
-      : start = Converter.stringToTimeOfDay(startString),
-        end = Converter.stringToTimeOfDay(endString),
-        isTimeEnabled = true;
-
-  Widget makeTodoWidget() {
-    if (isTimeEnabled) {
-      return TodoListWidget(
-          todo: todo ?? '',
-          timeStart: Converter.timeOfDayToString(start!),
-          timeEnd: Converter.timeOfDayToString(end!));
-    } else {
-      return TodoListWidget(todo: todo ?? '');
-    }
-  }
+  @override
+  State<TodoListScreen> createState() => _TodoListScreenState();
 }
 
-class TodoListScreen extends StatelessWidget {
-  static const pageId = '/wrtie/todolist';
-  List<TempTodoModel> todoListData;
+class _TodoListScreenState extends State<TodoListScreen> {
+  final Widget _smallGap = const SizedBox(height: TdSize.s);
+  final Widget _largeGap = const SizedBox(height: TdSize.l);
+  DiaryController d = Get.find();
+  CalendarController c = Get.find();
 
-  TodoListScreen({required this.todoListData});
+  List<Todo> todoList = [];
 
-  Future<dynamic> buildTodoListModal(BuildContext context) {
-    List<Widget> listItems = [
-      const SizedBox(height: TdSize.l),
-      ...widgetFromTodoModelList(todoListData),
-      TodoListForm(
-        hint: '해야 할 일',
-        onSubmitted: () {},
-      ),
-    ];
-    return ModalUtil.barModalWithListItems(context, listItems, 'To-do List');
+  void _onTodoSubmitted(Todo value) {
+    setState(() {
+      todoList.add(value);
+      d.allData.value.todoList = todoList;
+      d.setPresentData();
+    });
   }
 
-  List<Widget> widgetFromTodoModelList(List<TempTodoModel> list) {
-    List<Widget> _list = [];
-    for (var element in list) {
-      _list.add(element.makeTodoWidget());
-      _list.add(const SizedBox(height: TdSize.s));
-    }
-    return _list;
+  void _onTodoRefreshed(List<Todo> value) {
+    setState(() {
+      todoList = value;
+      d.allData.value.todoList = todoList;
+      d.setPresentData();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    todoList = d.allData.value.todoList!;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Ink(
+      color: TdColor.deepGray,
+      child: NestedScrollView(
+        controller: ScrollController(),
+        physics: const ScrollPhysics(parent: PageScrollPhysics()),
+        headerSliverBuilder: (BuildContext context, bool isInnerBoxScrolled) {
+          return <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate([
+                SizedBox(
+                  height: 50,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: TdSize.m),
+                      child: TextWidget.body(
+                          text: 'To-do List : ${c.selectedDate}'),
+                    ),
+                  ),
+                )
+              ]),
+            ),
+          ];
+        },
+        body: ListView(
+          padding: const EdgeInsets.symmetric(
+              vertical: TdSize.m, horizontal: TdSize.xl),
+          physics: const AlwaysScrollableScrollPhysics(),
+          // 이 physics를 추가 안하면 listview로 화면이 가득 차지 않을 때 버그가 남.
+          controller: PrimaryScrollController.of(context),
+          children: [
+            for (int i = 0; i < todoList.length; ++i)
+              Column(
+                children: [
+                  _smallGap,
+                  TodoWidget(
+                    todo: todoList[i],
+                    onTap: (checked) {
+                      todoList[i].checked = checked;
+                      _onTodoRefreshed(todoList);
+                    },
+                  ),
+                ],
+              ),
+            _smallGap,
+            TodoListForm(hint: '할 일', onSubmitted: _onTodoSubmitted),
+          ],
+        ),
+      ),
+    );
   }
 }

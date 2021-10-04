@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:tomorrow_diary/controllers/diary_controller.dart';
+import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class TodoListForm extends StatefulWidget {
   final String hint;
-  void Function() onSubmitted;
+  void Function(Todo) onSubmitted;
   TodoListForm({Key? key, required this.hint, required this.onSubmitted})
       : super(key: key);
 
@@ -14,7 +17,7 @@ class TodoListForm extends StatefulWidget {
 }
 
 class _TodoListFormState extends State<TodoListForm> {
-  bool isEnabled = true;
+  Todo _todo = Todo();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,9 +27,14 @@ class _TodoListFormState extends State<TodoListForm> {
             children: [
               Container(
                 height: 50,
-                child: SingleLineForm(hint: 'todolist hint'),
+                child: SingleLineForm(
+                  hint: 'todolist hint',
+                  onChanged: (value) {
+                    _todo.todo = value;
+                  },
+                ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
                 height: 40,
                 child: Row(
@@ -36,31 +44,39 @@ class _TodoListFormState extends State<TodoListForm> {
                     ElevatedButton.icon(
                         onPressed: () {
                           setState(() {
-                            isEnabled = !isEnabled;
+                            _todo.timeEnabled = !(_todo.timeEnabled ?? false);
                           });
                         },
-                        icon: isEnabled
-                            ? Icon(Icons.check_box_rounded)
-                            : Icon(Icons.check_box_outline_blank_rounded),
-                        label: TextWidget.hint(text: '시간'),
+                        icon: _todo.timeEnabled ?? false
+                            ? const Icon(Icons.check_box_rounded)
+                            : const Icon(Icons.check_box_outline_blank_rounded),
+                        label: const TextWidget.hint(text: '시간'),
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(TdSize.radiusM),
                           ),
                           primary: TdColor.blue,
                         )),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Expanded(
-                      child: isEnabled
-                          ? TimeSelectWidget(text: 'start')
+                      child: _todo.timeEnabled ?? false
+                          ? TimeSelectWidget(
+                              text: 'start',
+                              onChanged: (value) {
+                                _todo.start = value;
+                              })
                           : TimeSelectWidget.disable(text: '-'),
                     ),
-                    SizedBox(width: 20),
-                    Center(child: TextWidget.body(text: '~')),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
+                    const Center(child: TextWidget.body(text: '~')),
+                    const SizedBox(width: 20),
                     Expanded(
-                      child: isEnabled
-                          ? TimeSelectWidget(text: 'end')
+                      child: _todo.timeEnabled ?? false
+                          ? TimeSelectWidget(
+                              text: 'end',
+                              onChanged: (value) {
+                                _todo.end = value;
+                              })
                           : TimeSelectWidget.disable(text: '-'),
                     ),
                   ],
@@ -70,7 +86,9 @@ class _TodoListFormState extends State<TodoListForm> {
           ),
         ),
         ElevatedButton(
-          onPressed: widget.onSubmitted,
+          onPressed: () {
+            widget.onSubmitted(_todo);
+          },
           child: Container(
             height: TdSize.xxl,
             decoration: const BoxDecoration(shape: BoxShape.circle),
@@ -86,54 +104,5 @@ class _TodoListFormState extends State<TodoListForm> {
         ),
       ],
     );
-/*
-    return Container(
-      height: 500,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            color: TdColor.lightGreen,
-            child: Column(
-              children: [
-                Container(
-                  height: TdSize.l,
-                  width: 500,
-                  child: SingleLineForm(hint: hint),
-                ),
-                Container(
-                  color: TdColor.lightBlue,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: Icon(Icons.check_box_outline_blank_rounded),
-                        label: Container(),
-                      ),
-                      Expanded(child: TimeSelectWidget(text: '시작시간')),
-                      Expanded(child: TimeSelectWidget(text: '종료시간')),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            color: TdColor.lightRed,
-            child: ElevatedButton(
-              onPressed: onSubmitted,
-              child: const Icon(Icons.add),
-              style: ElevatedButton.styleFrom(
-                shadowColor: Colors.transparent,
-                shape: const CircleBorder(),
-                primary: TdColor.blue,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );*/
   }
 }

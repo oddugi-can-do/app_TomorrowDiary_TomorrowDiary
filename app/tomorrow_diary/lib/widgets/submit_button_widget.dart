@@ -5,11 +5,15 @@ import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class SubmitButtonWidget extends StatelessWidget {
   final String text;
-  SubmitButtonWidget({required this.text});
+  void Function() onSubmitted;
+  SubmitButtonWidget({required this.text, required this.onSubmitted});
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        onSubmitted();
+        Navigator.of(context).pop();
+      },
       child: TextWidget.body(text: text),
       style: ElevatedButton.styleFrom(
         shadowColor: Colors.transparent,

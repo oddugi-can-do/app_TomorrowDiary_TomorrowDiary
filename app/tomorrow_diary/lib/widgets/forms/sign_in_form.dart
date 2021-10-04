@@ -60,10 +60,12 @@ class _SignInFormState extends State<SignInForm> {
                     if (_formKey.currentState!.validate()) {
                       Provider.of<FirebaseAuthState>(context, listen: false)
                           .login(
-                              context,
-                              email: _emailController.text,
-                              password: _passwordController.text
-                              );
+                        context,
+                        // email: _emailController.text,
+                        // password: _passwordController.text
+                        email: "user2@gmail.com",
+                        password: "601cert)*",
+                      );
                     }
                   },
                   child: Text("Login", style: TextStyle(fontSize: TdSize.m)),

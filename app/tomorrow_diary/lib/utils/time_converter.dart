@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Converter {
+class TimeConverter {
   static int hourParser(String string) {
     return int.parse(string.split(":")[0]);
   }
