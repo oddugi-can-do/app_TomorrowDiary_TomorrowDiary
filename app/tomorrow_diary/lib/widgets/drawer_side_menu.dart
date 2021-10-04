@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/views/views.dart';
 
 class DrawerSideMenu extends StatelessWidget {
-  const DrawerSideMenu({
-    Key? key,
-  }) : super(key: key);
+  UserController uc = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +16,18 @@ class DrawerSideMenu extends StatelessWidget {
               leading: Icon(Icons.logout),
               title: Text('Logout'),
               onTap: () {
-                Provider.of<FirebaseAuthState>(context, listen: false)
-                      .signOut();
+                uc.logout();
               },
+            ),
+          ),
+          Card(
+            child: ListTile(
+              leading: IconButton(
+                icon: Icon(Icons.camera),
+                onPressed: () {
+                  // Get.to(CameraScreen());
+                },
+              ),
             ),
           )
         ]),
