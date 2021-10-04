@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-enum TextCategory { title, header, body, hint }
+enum TextCategory { title, header, body, hint, calendar }
 
 class TextWidget extends StatelessWidget {
   final String text;
@@ -19,6 +18,8 @@ class TextWidget extends StatelessWidget {
       : textCategory = TextCategory.body;
   const TextWidget.hint({required this.text})
       : textCategory = TextCategory.hint;
+  const TextWidget.calendar({required this.text})
+      : textCategory = TextCategory.calendar;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,9 @@ class TextWidget extends StatelessWidget {
       case TextCategory.hint:
         _color = TdColor.lightGray;
         _size = TdSize.s;
+        break;
+      case TextCategory.calendar:
+        _size = TdSize.calendarText;
         break;
       default:
     }

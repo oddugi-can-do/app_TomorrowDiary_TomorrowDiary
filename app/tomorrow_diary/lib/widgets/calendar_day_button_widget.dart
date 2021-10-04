@@ -54,14 +54,20 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
                 onPressed: () {
                   controller.selectDay(widget.day);
                 },
-                child: TextWidget.body(text: widget.text),
+                child: FittedBox(
+                    fit: BoxFit.fill,
+                    child:
+                        Center(child: TextWidget.calendar(text: widget.text))),
                 style: selectedButtonStyle(),
               )
             : ElevatedButton(
                 onPressed: () {
                   controller.selectDay(widget.day);
                 },
-                child: TextWidget.body(text: widget.text),
+                child: FittedBox(
+                    fit: BoxFit.fill,
+                    child:
+                        Center(child: TextWidget.calendar(text: widget.text))),
                 style: unselectedButtonStyle(),
               );
       },
@@ -77,14 +83,20 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
                 onPressed: () {
                   controller.selectDay(widget.day);
                 },
-                child: TextWidget.body(text: widget.text),
+                child: FittedBox(
+                    fit: BoxFit.fill,
+                    child:
+                        Center(child: TextWidget.calendar(text: widget.text))),
                 style: selectedButtonStyle(),
               )
             : ElevatedButton(
                 onPressed: () {
                   controller.selectDay(widget.day);
                 },
-                child: TextWidget.body(text: widget.text),
+                child: FittedBox(
+                    fit: BoxFit.fill,
+                    child:
+                        Center(child: TextWidget.calendar(text: widget.text))),
                 style: highlightedButtonStyle(),
               );
       },
@@ -93,15 +105,15 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
 
   Widget _disabledContainerBuilder() {
     return Container(
-      width: TdSize.xxl,
-      height: TdSize.xxl,
-    );
+        // width: TdSize.xxl,
+        // height: TdSize.xxl,
+        );
   }
 
   ButtonStyle selectedButtonStyle() {
     return ElevatedButton.styleFrom(
       shadowColor: Colors.transparent,
-      fixedSize: Size(TdSize.xxl, TdSize.xxl),
+      // fixedSize: Size(TdSize.xxl, TdSize.xxl),
       shape: CircleBorder(),
       primary: TdColor.blue,
     );
@@ -110,7 +122,7 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
   ButtonStyle unselectedButtonStyle() {
     return ElevatedButton.styleFrom(
       shadowColor: Colors.transparent,
-      fixedSize: Size(TdSize.xxl, TdSize.xxl),
+      // fixedSize: Size(TdSize.xxl, TdSize.xxl),
       shape: CircleBorder(),
       primary: Colors.transparent,
     );
@@ -119,7 +131,7 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
   ButtonStyle highlightedButtonStyle() {
     return ElevatedButton.styleFrom(
       shadowColor: Colors.transparent,
-      fixedSize: Size(TdSize.xxl, TdSize.xxl),
+      // fixedSize: Size(TdSize.xxl, TdSize.xxl),
       shape: CircleBorder(),
       primary: TdColor.darkGray,
     );

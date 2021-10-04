@@ -1,7 +1,7 @@
 import 'package:tomorrow_diary/mixins/mixins.dart';
 
 class CalendarUtil {
-  final List<String> week = ['일', '월', '화', '수', '목', '금', '토'];
+  static final List<String> week = ['일', '월', '화', '수', '목', '금', '토'];
 
   CalendarUtil();
 
@@ -17,6 +17,15 @@ class CalendarUtil {
               ? -1
               : i + j * 7 - shift + 1),
     );
+  }
+
+  static List<int> dayListForMonth(int year, int month) {
+    int shift = DateTime.utc(year, month, 1).weekday % 7;
+    int daysInMonth = _daysInMonth(year, month);
+    List<int> ret = List.generate(shift, (index) => -1);
+    List<int> _day = List.generate(daysInMonth, (index) => index + 1);
+    ret.addAll(_day);
+    return ret;
   }
 
   // int today(int, int) : 오늘이 속한 달일 때 오늘이 며칠인지 알려줌.
