@@ -18,4 +18,3 @@ export 'forms/wish_list_form.dart';
 export 'forms/sign_in_form.dart';
 export 'forms/sign_up_form.dart';
 export 'forms/custom_text_form.dart';
-export 'forms/auth_form_field.dart';

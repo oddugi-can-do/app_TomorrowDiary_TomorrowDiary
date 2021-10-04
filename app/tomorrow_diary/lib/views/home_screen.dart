@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/controllers/user_network_controller.dart';
+import 'package:tomorrow_diary/models/models.dart';
+import 'package:tomorrow_diary/views/views.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
-import 'package:tomorrow_diary/views/views.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   static const pageId = '/home';
@@ -19,8 +22,6 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   int selectedYear = 0;
   int selectedMonth = 0;
     GlobalKey<ScaffoldState> _key = GlobalKey();
-  UserController uc =  Get.put(UserController());
-
 
   List<TempTodoModel> todoListData = [
     // 나중에 todo list 모델로 변환!
