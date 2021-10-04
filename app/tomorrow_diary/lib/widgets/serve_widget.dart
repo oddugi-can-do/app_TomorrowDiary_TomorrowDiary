@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/tdsize.dart';
@@ -25,7 +24,6 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
       child: Stack(
         children: [
           Container(
-            // width: size.width,
             height: height,
             color: Colors.transparent,
             child: Container(

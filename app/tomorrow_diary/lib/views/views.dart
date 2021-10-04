@@ -8,4 +8,3 @@ export 'ty_diary_screen.dart';
 export 'tmr_diary_screen.dart';
 export 'todo_list_screen.dart';
 export 'auth_screen.dart';
-export 'camera_screen.dart';
