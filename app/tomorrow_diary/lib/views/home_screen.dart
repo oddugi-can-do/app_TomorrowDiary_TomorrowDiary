@@ -20,12 +20,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   GlobalKey<ScaffoldState> _key = GlobalKey();
+  DiaryController d = Get.find();
+  CalendarController c = Get.find();
 
   @override
   void initState() {
     super.initState();
-    Get.put(DiaryController());
-    Get.put(CalendarController());
+    d.findDataByDate(c.selectedDate);
   }
 
   @override
@@ -39,12 +40,9 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   }
 
   ListView _buildHomeScreen(BuildContext context) {
-    UserController u = Get.find();
-    DiaryController d = Get.find();
-    CalendarController c = Get.find();
     return ListView(
       children: [
-        _buildCalendar(),
+         _buildCalendar(),
         const Padding(
           padding: EdgeInsets.only(left: 13),
           child: TextWidget.body(text: '일기 쓰기'),
@@ -89,8 +87,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
             GetBuilder<CalendarController>(
               builder: (controller) {
                 return _buildServeWidget('To-Do List', TdColor.lightGray, () {
-                  // TodoListScreen(todoListData: d.allData.value.todoList)
-                  //     .buildTodoListModal(context);
+                  ModalUtil.barModalWithTodoListScreen(context);
                 });
               },
             ),

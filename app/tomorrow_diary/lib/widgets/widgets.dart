@@ -2,7 +2,7 @@ export 'achievement_widget.dart';
 export 'add_button_widget.dart';
 export 'serve_widget.dart';
 export 'submit_button_widget.dart';
-export 'todo_list_widget.dart';
+export 'todo_widget.dart';
 export 'fade_animation.dart';
 export 'text_widget.dart';
 export 'calendar_day_button_widget.dart';

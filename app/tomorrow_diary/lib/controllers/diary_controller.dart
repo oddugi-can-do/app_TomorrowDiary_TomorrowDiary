@@ -2,15 +2,15 @@ import 'package:get/get.dart';
 import 'package:tomorrow_diary/domain/diary/diary_repository.dart';
 import 'package:tomorrow_diary/models/models.dart';
 
+import 'controllers.dart';
+
 class DiaryController extends GetxController {
   final DiaryRepository _diaryRepository = DiaryRepository();
   final allData = DataModel().obs;
-  final initialDate = "2021-10-03"; // TODO: initialDate가 꼭 필요한가?
 
   @override
   void onInit() {
     super.onInit();
-    findDataByDate(initialDate);
   }
 
   Future<DataModel> findDataByDate(String date) async {
@@ -42,11 +42,12 @@ class DiaryController extends GetxController {
     }
   }
 
-  Future<void> setPresentDataByDate(String date) async {
-    // TODO: date도 안받아도 될듯?
-    int result = await _diaryRepository.setDataByDate(date, allData.value);
+  Future<void> setPresentData() async {
+    CalendarController c = Get.find();
+    String _date = c.selectedDate;
+    int result = await _diaryRepository.setDataByDate(_date, allData.value);
     if (result == 1) {
-      DataModel foundData = await _diaryRepository.findDataByDate(date);
+      DataModel foundData = await _diaryRepository.findDataByDate(_date);
       allData.value = foundData;
     }
   }

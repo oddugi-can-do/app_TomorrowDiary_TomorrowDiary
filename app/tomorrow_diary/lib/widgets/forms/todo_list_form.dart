@@ -8,17 +8,16 @@ import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class TodoListForm extends StatefulWidget {
   final String hint;
-  TodoListForm({Key? key, required this.hint}) : super(key: key);
+  void Function(Todo) onSubmitted;
+  TodoListForm({Key? key, required this.hint, required this.onSubmitted})
+      : super(key: key);
 
   @override
   State<TodoListForm> createState() => _TodoListFormState();
 }
 
 class _TodoListFormState extends State<TodoListForm> {
-  bool isEnabled = true;
-  String? text = '';
-  String? start;
-  String? end;
+  Todo _todo = Todo();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -31,11 +30,11 @@ class _TodoListFormState extends State<TodoListForm> {
                 child: SingleLineForm(
                   hint: 'todolist hint',
                   onChanged: (value) {
-                    text = value;
+                    _todo.todo = value;
                   },
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
                 height: 40,
                 child: Row(
@@ -45,38 +44,38 @@ class _TodoListFormState extends State<TodoListForm> {
                     ElevatedButton.icon(
                         onPressed: () {
                           setState(() {
-                            isEnabled = !isEnabled;
+                            _todo.timeEnabled = !(_todo.timeEnabled ?? false);
                           });
                         },
-                        icon: isEnabled
-                            ? Icon(Icons.check_box_rounded)
-                            : Icon(Icons.check_box_outline_blank_rounded),
-                        label: TextWidget.hint(text: '시간'),
+                        icon: _todo.timeEnabled ?? false
+                            ? const Icon(Icons.check_box_rounded)
+                            : const Icon(Icons.check_box_outline_blank_rounded),
+                        label: const TextWidget.hint(text: '시간'),
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(TdSize.radiusM),
                           ),
                           primary: TdColor.blue,
                         )),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Expanded(
-                      child: isEnabled
+                      child: _todo.timeEnabled ?? false
                           ? TimeSelectWidget(
                               text: 'start',
                               onChanged: (value) {
-                                start = value;
+                                _todo.start = value;
                               })
                           : TimeSelectWidget.disable(text: '-'),
                     ),
-                    SizedBox(width: 20),
-                    Center(child: TextWidget.body(text: '~')),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
+                    const Center(child: TextWidget.body(text: '~')),
+                    const SizedBox(width: 20),
                     Expanded(
-                      child: isEnabled
+                      child: _todo.timeEnabled ?? false
                           ? TimeSelectWidget(
                               text: 'end',
                               onChanged: (value) {
-                                end = value;
+                                _todo.end = value;
                               })
                           : TimeSelectWidget.disable(text: '-'),
                     ),
@@ -88,16 +87,7 @@ class _TodoListFormState extends State<TodoListForm> {
         ),
         ElevatedButton(
           onPressed: () {
-            DiaryController d = Get.find();
-            d.allData.value.todoList?.add(
-              Todo(
-                todo: text,
-                start: start,
-                end: end,
-                checked: false,
-                timeEnabled: isEnabled,
-              ),
-            );
+            widget.onSubmitted(_todo);
           },
           child: Container(
             height: TdSize.xxl,
@@ -114,54 +104,5 @@ class _TodoListFormState extends State<TodoListForm> {
         ),
       ],
     );
-/*
-    return Container(
-      height: 500,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            color: TdColor.lightGreen,
-            child: Column(
-              children: [
-                Container(
-                  height: TdSize.l,
-                  width: 500,
-                  child: SingleLineForm(hint: hint),
-                ),
-                Container(
-                  color: TdColor.lightBlue,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: Icon(Icons.check_box_outline_blank_rounded),
-                        label: Container(),
-                      ),
-                      Expanded(child: TimeSelectWidget(text: '시작시간')),
-                      Expanded(child: TimeSelectWidget(text: '종료시간')),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            color: TdColor.lightRed,
-            child: ElevatedButton(
-              onPressed: onSubmitted,
-              child: const Icon(Icons.add),
-              style: ElevatedButton.styleFrom(
-                shadowColor: Colors.transparent,
-                shape: const CircleBorder(),
-                primary: TdColor.blue,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );*/
   }
 }

@@ -37,7 +37,7 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
   }
 
   void _onTyDiarySubmitted() {
-    d.setPresentDataByDate(c.selectedDate);
+    d.setPresentData();
   }
 
   @override
@@ -51,12 +51,13 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
           return <Widget>[
             SliverList(
               delegate: SliverChildListDelegate([
-                const SizedBox(
+                SizedBox(
                   height: 50,
                   child: Center(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: TdSize.m),
-                      child: TextWidget.body(text: '오늘의 일기'),
+                      padding: const EdgeInsets.symmetric(vertical: TdSize.m),
+                      child:
+                          TextWidget.body(text: '오늘의 일기 : ${c.selectedDate}'),
                     ),
                   ),
                 )

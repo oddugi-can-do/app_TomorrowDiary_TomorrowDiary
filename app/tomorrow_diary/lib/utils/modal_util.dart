@@ -8,7 +8,6 @@ import 'package:tomorrow_diary/widgets/widgets.dart';
 import 'utils.dart';
 
 class ModalUtil {
-
   static Future<dynamic> barModalWithTyDiaryScreen(BuildContext context) {
     return showBarModalBottomSheet(
       context: context,
@@ -27,6 +26,17 @@ class ModalUtil {
       builder: (context) => Ink(
         color: TdColor.deepGray,
         child: TmrDiaryScreen(),
+      ),
+    );
+  }
+
+  static Future<dynamic> barModalWithTodoListScreen(BuildContext context) {
+    return showBarModalBottomSheet(
+      context: context,
+      expand: true,
+      builder: (context) => Ink(
+        color: TdColor.deepGray,
+        child: TodoListScreen(),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tomorrow_diary/bindings/home_screen_bindings.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/views/views.dart';
 
@@ -16,7 +17,7 @@ class LoginScreen extends StatelessWidget {
         onPressed: () async {
           int result = await u.login("test2@test.com", "123123");
           if (result == 1) {
-            Get.to(() => HomeScreen());
+            Get.to(() => HomeScreen(), binding: HomeScreenBindings());
           } else {
             Get.snackbar("로그인 시도", "로그인 실패");
           }

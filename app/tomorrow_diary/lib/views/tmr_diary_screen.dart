@@ -14,7 +14,6 @@ class TmrDiaryScreen extends StatefulWidget {
 
 class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
   final Widget _smallGap = const SizedBox(height: TdSize.s);
-
   final Widget _largeGap = const SizedBox(height: TdSize.l);
 
   DiaryController d = Get.find();
@@ -43,7 +42,7 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
   }
 
   void _onTmrDiarySubmitted() {
-    d.setPresentDataByDate(c.selectedDate);
+    d.setPresentData();
   }
 
   @override
@@ -63,12 +62,13 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
           return <Widget>[
             SliverList(
               delegate: SliverChildListDelegate([
-                const SizedBox(
+                SizedBox(
                   height: 50,
                   child: Center(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: TdSize.m),
-                      child: TextWidget.body(text: '내일의 일기'),
+                      padding: const EdgeInsets.symmetric(vertical: TdSize.m),
+                      child:
+                          TextWidget.body(text: '내일의 일기 : ${c.selectedDate}'),
                     ),
                   ),
                 )
