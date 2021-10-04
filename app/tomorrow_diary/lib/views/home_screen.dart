@@ -59,15 +59,13 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                       '오늘의 일기 보기',
                       TdColor.lightRed,
                       () {
-                        TyDiaryScreen(tyDiary: d.allData.value.tyDiary)
-                            .buildTyDiaryModal(context);
+                        ModalUtil.barModalWithTyDiaryScreen(context);
                       },
                     );
                   } else if (controller.selectedDay == CalendarUtil.thisDay()) {
                     return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray,
                         () {
-                      TyDiaryScreen(tyDiary: d.allData.value.tyDiary)
-                          .buildTyDiaryModal(context);
+                      ModalUtil.barModalWithTyDiaryScreen(context);
                     });
                   } else {
                     return Container();
@@ -75,8 +73,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                 }
                 //아무것도 선택 안 했을 때 default
                 return _buildServeWidget('오늘의 일기 쓰기', TdColor.lightGray, () {
-                  TyDiaryScreen(tyDiary: d.allData.value.tyDiary)
-                      .buildTyDiaryModal(context);
+                  ModalUtil.barModalWithTyDiaryScreen(context);
                 });
               },
             ),
@@ -84,8 +81,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
               builder: (controller) {
                 return controller.selectedDay == CalendarUtil.thisDay() + 1
                     ? _buildServeWidget('내일의 일기 쓰기', TdColor.lightGray, () {
-                        TmrDiaryScreen(tmrDiary: d.allData.value.tmrDiary)
-                            .buildTmrDiaryModal(context);
+                        ModalUtil.barModalWithTmrDiaryScreen(context);
                       })
                     : Container();
               },
@@ -93,8 +89,8 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
             GetBuilder<CalendarController>(
               builder: (controller) {
                 return _buildServeWidget('To-Do List', TdColor.lightGray, () {
-                  TodoListScreen(todoListData: d.allData.value.todoList)
-                      .buildTodoListModal(context);
+                  // TodoListScreen(todoListData: d.allData.value.todoList)
+                  //     .buildTodoListModal(context);
                 });
               },
             ),

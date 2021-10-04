@@ -5,7 +5,7 @@ import 'package:tomorrow_diary/utils/utils.dart';
 
 class SingleLineForm extends StatelessWidget {
   String hint;
-  String text; // TODO: StreamBuilder로 바꾸기 (Rx)
+  String text;
   void Function(String) onChanged;
   SingleLineForm(
       {Key? key, this.hint = '', this.text = '', required this.onChanged})

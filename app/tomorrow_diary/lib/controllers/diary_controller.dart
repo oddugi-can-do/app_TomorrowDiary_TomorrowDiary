@@ -5,7 +5,7 @@ import 'package:tomorrow_diary/models/models.dart';
 class DiaryController extends GetxController {
   final DiaryRepository _diaryRepository = DiaryRepository();
   final allData = DataModel().obs;
-  final initialDate = "2021-10-03";
+  final initialDate = "2021-10-03"; // TODO: initialDate가 꼭 필요한가?
 
   @override
   void onInit() {
@@ -16,7 +16,21 @@ class DiaryController extends GetxController {
   Future<DataModel> findDataByDate(String date) async {
     DataModel foundData = await _diaryRepository.findDataByDate(date);
     allData.value = foundData;
-    return foundData;
+    allData.value.tmrDiary ??= TmrDiary(
+      title: '',
+      tmrWish: <Wish>[],
+      tmrEmotion: '',
+      tmrHappen: '',
+    );
+    allData.value.tyDiary ??= TyDiary(
+      title: '',
+      tyWish: <Wish>[],
+      tyEmotion: '',
+      tySurprise: '',
+      tyHappen: '',
+    );
+    allData.value.todoList ??= <Todo>[];
+    return allData.value;
   }
 
   Future<void> setDataByDate(String date, DataModel data) async {
@@ -29,6 +43,7 @@ class DiaryController extends GetxController {
   }
 
   Future<void> setPresentDataByDate(String date) async {
+    // TODO: date도 안받아도 될듯?
     int result = await _diaryRepository.setDataByDate(date, allData.value);
     if (result == 1) {
       DataModel foundData = await _diaryRepository.findDataByDate(date);

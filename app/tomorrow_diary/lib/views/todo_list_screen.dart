@@ -32,7 +32,7 @@ class TodoListScreen extends StatelessWidget {
   List<Todo>? todoListData;
 
   TodoListScreen({required this.todoListData});
-
+/*
   Future<dynamic> buildTodoListModal(BuildContext context) {
     List<Widget> listItems = [
       const SizedBox(height: TdSize.l),
@@ -41,7 +41,7 @@ class TodoListScreen extends StatelessWidget {
     ];
     return ModalUtil.barModalWithListItems(context, listItems, 'To-do List');
   }
-
+*/
   List<Widget> _widgetFromTodoList(List<Todo> list) {
     List<Widget> _list = [];
     for (var element in list) {

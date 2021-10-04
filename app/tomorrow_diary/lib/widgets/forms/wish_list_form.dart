@@ -9,11 +9,15 @@ import 'package:tomorrow_diary/widgets/widgets.dart';
 class WishListForm extends StatelessWidget {
   final String hint;
   String text = '';
-  WishListForm({Key? key, required this.hint}) : super(key: key);
+  void Function(String) onSubmitted;
+  WishListForm({
+    Key? key,
+    required this.hint,
+    required this.onSubmitted,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    DiaryController d = Get.find();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -28,8 +32,7 @@ class WishListForm extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            d.allData.value.tmrDiary?.tmrWish
-                ?.add(Wish(wish: text, checked: false));
+            onSubmitted(text);
           },
           child: const Icon(Icons.add),
           style: ElevatedButton.styleFrom(

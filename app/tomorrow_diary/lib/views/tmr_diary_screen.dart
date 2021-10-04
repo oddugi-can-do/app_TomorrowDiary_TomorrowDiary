@@ -5,26 +5,23 @@ import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
-class TmrDiaryScreen extends StatelessWidget {
+class TmrDiaryScreen extends StatefulWidget {
   static const pageId = '/write/tmrdiary';
 
-  TmrDiary? tmrDiary;
-  TmrDiaryScreen({required this.tmrDiary});
+  @override
+  State<TmrDiaryScreen> createState() => _TmrDiaryScreenState();
+}
 
-  Future<dynamic> buildTmrDiaryModal(BuildContext context) {
-    List<Widget> _listItems = [];
-    if (tmrDiary != null) {
-      _listItems = _addListItemsFromTmrDiary(tmrDiary!);
-    } else {
-      _listItems = _addDefaultTmrListItems();
-    }
-    return ModalUtil.barModalWithListItems(context, _listItems, '내일의 일기');
-  }
-
+class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
   final Widget _smallGap = const SizedBox(height: TdSize.s);
+
   final Widget _largeGap = const SizedBox(height: TdSize.l);
+
   DiaryController d = Get.find();
+
   CalendarController c = Get.find();
+
+  List<Wish> wishList = [];
 
   void _onTitleChanged(String value) {
     d.allData.value.tmrDiary?.title = value;
@@ -34,9 +31,12 @@ class TmrDiaryScreen extends StatelessWidget {
     d.allData.value.tmrDiary?.tmrHappen = value;
   }
 
-  // void _onTmrWishChanged(List<Wish> value) {
-  //   d.allData.value.tmrDiary?.tyWish = value;
-  // }
+  void _onTmrWishSubmitted(String value) {
+    setState(() {
+      wishList.add(Wish(wish: value, checked: false));
+      d.allData.value.tmrDiary?.tmrWish = wishList;
+    });
+  }
 
   void _onTmrEmotionChanged(String value) {
     d.allData.value.tmrDiary?.tmrEmotion = value;
@@ -46,109 +46,100 @@ class TmrDiaryScreen extends StatelessWidget {
     d.setPresentDataByDate(c.selectedDate);
   }
 
-  List<Widget> _addListItemsFromTmrDiary(TmrDiary tmrDiary) {
-    List<Widget> _listItems = [];
-    // ---제목---
-    _listItems.add(
-      tmrDiary.title == null
-          ? SingleLineForm(
-              hint: '내일의 일기 제목',
-              onChanged: _onTitleChanged,
-            )
-          : SingleLineForm(
-              text: tmrDiary.title!,
-              onChanged: _onTitleChanged,
-            ),
-    );
-    _listItems.add(_largeGap);
-    // ---내일 있어야 할 일---
-    _listItems.add(const TextWidget.body(text: '내일 있어야 할 일'));
-    _listItems.add(_smallGap);
-    _listItems.add(
-      tmrDiary.tmrHappen == null
-          ? MultiLineForm(
-              hint: '내일 있어야 할 일을 최대한 객관적으로 적어주세요',
-              onChanged: _onTmrHappenChanged,
-            )
-          : MultiLineForm(
-              text: tmrDiary.tmrHappen!,
-              onChanged: _onTmrHappenChanged,
-            ),
-    );
-    _listItems.add(_largeGap);
-    // ---위시 리스트---
-    _listItems.add(const TextWidget.body(text: '내일 기대하고 있는 일'));
-    _listItems.addAll(ModalUtil.tmrWishWidgetFromStringList(tmrDiary.tmrWish));
-    _listItems.add(_largeGap);
-    // ---내일의 기분 예측---
-    _listItems.add(const TextWidget.body(text: '내일의 기분'));
-    _listItems.add(_smallGap);
-    _listItems.add(
-      tmrDiary.title == null
-          ? SingleLineForm(
-              hint: '내일의 기분을 미리 예측해 보세요.',
-              onChanged: _onTmrEmotionChanged,
-            )
-          : SingleLineForm(
-              text: tmrDiary.tmrEmotion!,
-              onChanged: _onTmrEmotionChanged,
-            ),
-    );
-    _listItems.add(_largeGap);
-    // ---작성 완료 버튼---
-    _listItems.add(
-      SubmitButtonWidget(
-        text: '작성 완료',
-        onSubmitted: _onTmrDiarySubmitted,
-      ),
-    );
-    return _listItems;
-  }
-
-  List<Widget> _addDefaultTmrListItems() {
-    List<Widget> _listItems = [];
-    // ---제목---
-    _listItems.add(SingleLineForm(
-      hint: '내일의 일기 제목',
-      onChanged: _onTitleChanged,
-    ));
-    _listItems.add(_largeGap);
-    // ---내일 있어야 할 일---
-    _listItems.add(const TextWidget.body(text: '내일 있어야 할 일'));
-    _listItems.add(_smallGap);
-    _listItems.add(
-      MultiLineForm(
-        hint: '내일 있어야 할 일을 최대한 객관적으로 적어주세요',
-        onChanged: _onTmrHappenChanged,
-      ),
-    );
-    _listItems.add(_largeGap);
-    // ---위시 리스트---
-    _listItems.add(const TextWidget.body(text: '내일 기대하고 있는 일'));
-    _listItems.addAll(ModalUtil.tmrWishWidgetFromStringList([]));
-    _listItems.add(_largeGap);
-    // ---내일의 기분 예측---
-    _listItems.add(const TextWidget.body(text: '내일의 기분'));
-    _listItems.add(_smallGap);
-    _listItems.add(
-      SingleLineForm(
-        hint: '내일의 기분을 미리 예측해 보세요.',
-        onChanged: _onTmrEmotionChanged,
-      ),
-    );
-    _listItems.add(_largeGap);
-    // ---작성 완료 버튼---
-    _listItems.add(
-      SubmitButtonWidget(
-        text: '작성 완료',
-        onSubmitted: _onTmrDiarySubmitted,
-      ),
-    );
-    return _listItems;
+  @override
+  void initState() {
+    super.initState();
+    wishList = d.allData.value.tmrDiary!.tmrWish!;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Ink(
+      color: TdColor.deepGray,
+      child: NestedScrollView(
+        controller: ScrollController(),
+        physics: const ScrollPhysics(parent: PageScrollPhysics()),
+        headerSliverBuilder: (BuildContext context, bool isInnerBoxScrolled) {
+          return <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate([
+                const SizedBox(
+                  height: 50,
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: TdSize.m),
+                      child: TextWidget.body(text: '내일의 일기'),
+                    ),
+                  ),
+                )
+              ]),
+            ),
+          ];
+        },
+        body: Obx(
+          () => ListView(
+            padding: const EdgeInsets.symmetric(
+                vertical: TdSize.m, horizontal: TdSize.xl),
+            physics: const AlwaysScrollableScrollPhysics(),
+            // 이 physics를 추가 안하면 listview로 화면이 가득 차지 않을 때 버그가 남.
+            controller: PrimaryScrollController.of(context),
+            children: [
+              // ---제목---
+              SingleLineForm(
+                hint: '내일의 일기 제목',
+                text: d.allData.value.tmrDiary!.title!,
+                onChanged: _onTitleChanged,
+              ),
+              _largeGap,
+              // ---내일 있어야 할 일---
+              const TextWidget.body(text: '내일 있어야 할 일'),
+              _smallGap,
+              MultiLineForm(
+                  hint: '내일 있어야 할 일을 최대한 객관적으로 적어주세요',
+                  text: d.allData.value.tmrDiary!.tmrHappen,
+                  onChanged: _onTmrHappenChanged),
+              _largeGap,
+              // ---위시 리스트---
+              const TextWidget.body(text: '위시리스트'),
+              for (int i = 0; i < wishList.length; ++i)
+                Column(
+                  children: [
+                    _smallGap,
+                    WishWidget(
+                      text: wishList[i].wish ?? '',
+                      wishListState: wishList[i].checked ?? false
+                          ? WishListState.checked
+                          : WishListState.unchecked,
+                      onTap: (checked) {
+                        wishList[i].checked = checked;
+                      },
+                    ),
+                  ],
+                ),
+              _smallGap,
+              WishListForm(
+                hint: '내일 하고 싶은 일은 무엇인가요?',
+                onSubmitted: _onTmrWishSubmitted,
+              ),
+              _largeGap,
+              // ---내일의 기분---
+              const TextWidget.body(text: '내일의 기분'),
+              _smallGap,
+              SingleLineForm(
+                hint: '내일의 기분은 어떨 것 같나요?',
+                text: d.allData.value.tyDiary!.tyEmotion!,
+                onChanged: _onTmrEmotionChanged,
+              ),
+              _largeGap,
+              // ---작성 완료 버튼---
+              SubmitButtonWidget(
+                text: '작성 완료',
+                onSubmitted: _onTmrDiarySubmitted,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
