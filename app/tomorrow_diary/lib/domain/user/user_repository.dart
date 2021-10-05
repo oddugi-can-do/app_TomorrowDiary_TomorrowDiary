@@ -79,7 +79,7 @@ class UserRepo {
     if (user != null) {
       UserModel principal =
           UserModel(email: '${user.user!.email}', uid: '${user.user!.uid}');
-      await _userProvider.sendUserDataFb(principal);
+      await _userProvider.sendUserDataFb(principal,user.user!.uid);
       return principal;
     } else {
       return UserModel();

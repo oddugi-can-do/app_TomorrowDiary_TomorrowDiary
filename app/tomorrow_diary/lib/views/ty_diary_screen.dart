@@ -74,16 +74,19 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
           children: [
             // ---제목---
             SingleLineForm(
-              hint: '오늘의 일기 제목',
+              hint: "Title",
+              //hint: '오늘의 일기 제목',
               text: d.allData.value.tyDiary!.title!,
               onChanged: _onTitleChanged,
             ),
             _largeGap,
             // ---오늘 있었던 일---
             const TextWidget.body(text: '오늘 있었던 일'),
+            SizedBox(height:10),
             _smallGap,
             MultiLineForm(
-                hint: '오늘 있었던 일을 최대한 객관적으로 적어주세요',
+                hint: "what happened today?",
+                //hint: '오늘 있었던 일을 최대한 객관적으로 적어주세요',
                 text: d.allData.value.tyDiary!.tyHappen,
                 onChanged: _onTyHappenChanged),
             _largeGap,
@@ -114,18 +117,21 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
             _largeGap,
             // ---오늘 깜짝! 놀랐던 일---
             const TextWidget.body(text: '오늘 깜짝! 놀랐던 일'),
+            SizedBox(height:10),
             _smallGap,
             MultiLineForm(
-              hint: '예상치 못한 일이 있었나요?',
+              hint: 'Did you have any surprises?',
               text: d.allData.value.tyDiary!.tySurprise!,
               onChanged: _onTySurpriseChanged,
             ),
             _largeGap,
             // ---오늘의 진짜 기분---
             const TextWidget.body(text: '오늘의 진짜 기분'),
+            SizedBox(height:10),
             _smallGap,
             SingleLineForm(
-              hint: '오늘의 진짜 기분은 어땠나요?',
+              hint: "How are u today?",
+              //hint: '오늘의 진짜 기분은 어땠나요?',
               text: d.allData.value.tyDiary!.tyEmotion!,
               onChanged: _onTyEmotionChanged,
             ),
