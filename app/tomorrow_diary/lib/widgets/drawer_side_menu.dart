@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:tomorrow_diary/bindings/bindings.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/views/views.dart';
 
 class DrawerSideMenu extends StatelessWidget {
   UserController uc = Get.find();
@@ -18,6 +20,15 @@ class DrawerSideMenu extends StatelessWidget {
               title: Text('Logout'),
               onTap: () {
                 uc.logout();
+              },
+            ),
+          ),
+          Card(
+            child: ListTile(
+              leading: Icon(Icons.person),
+              title: Text('MyPage'),
+              onTap: () {
+                Get.to(() => MyPageScreen(), binding: MypageScreenBindings());
               },
             ),
           )
