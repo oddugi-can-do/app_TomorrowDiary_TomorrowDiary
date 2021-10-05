@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:tomorrow_diary/bindings/bindings.dart';
 import 'package:tomorrow_diary/domain/user/user_repository.dart';
 import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/views/views.dart';
@@ -23,7 +24,7 @@ class UserController extends GetxController {
       this.isLogin.value = true;
       this.principal.value = principal;
       print(principal);
-      Get.to(HomeScreen());
+      Get.to(HomeScreen(), binding: HomeScreenBindings());
       return true;
     } else {
       return false;
@@ -36,7 +37,7 @@ class UserController extends GetxController {
     if (principal.uid != null) {
       this.isLogin.value = true;
       this.principal.value = principal;
-      Get.to(HomeScreen());
+      Get.to(HomeScreen(), binding: HomeScreenBindings());
       return true;
     } else {
       return false;

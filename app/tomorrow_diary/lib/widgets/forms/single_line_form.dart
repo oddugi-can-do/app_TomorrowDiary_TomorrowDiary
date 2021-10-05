@@ -20,9 +20,11 @@ class SingleLineForm extends StatelessWidget {
         contentPadding: const EdgeInsets.all(TdSize.s),
         fillColor: TdColor.darkGray,
         filled: true,
-        hintText: hint,
-        hintStyle:
-            GoogleFonts.notoSans(color: TdColor.gray, fontSize: TdSize.s),
+        //hintText: hint,
+        label: Text("$hint"),
+        labelStyle: TextStyle(color: Colors.white38),
+        //hintStyle:
+            //GoogleFonts.notoSans(color: TdColor.gray, fontSize: TdSize.s),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(TdSize.radiusM),
           borderSide: BorderSide.none,

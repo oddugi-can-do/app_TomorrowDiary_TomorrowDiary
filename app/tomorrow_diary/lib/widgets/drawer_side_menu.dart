@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 
 class DrawerSideMenu extends StatelessWidget {
-  const DrawerSideMenu({
-    Key? key,
-  }) : super(key: key);
+  UserController uc = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,9 @@ class DrawerSideMenu extends StatelessWidget {
             child: ListTile(
               leading: Icon(Icons.logout),
               title: Text('Logout'),
-              onTap: () {},
+              onTap: () {
+                uc.logout();
+              },
             ),
           )
         ]),

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tomorrow_diary/bindings/home_screen_bindings.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/utils/snackbar_util.dart';
 import 'package:tomorrow_diary/views/home_screen.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -30,7 +31,7 @@ class _AuthScreenState extends State<AuthScreen> {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/book.gif'), fit: BoxFit.cover),
+              image: AssetImage('assets/tomorrow2.gif'), fit: BoxFit.cover),
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -42,6 +43,8 @@ class _AuthScreenState extends State<AuthScreen> {
                 padding: EdgeInsets.all(16),
                 children: [
                   SizedBox(height: 16),
+
+                  //Title
                   Text(
                     "Tmorrow Diary",
                     style: TextStyle(
@@ -51,6 +54,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 40),
+
+                  //Register and Login
                   ButtonBar(children: [
                     TextButton(
                         onPressed: () {
@@ -82,12 +87,17 @@ class _AuthScreenState extends State<AuthScreen> {
                                     ? FontWeight.bold
                                     : FontWeight.w200))),
                   ]),
-                  AuthFormField(hint: 'Email', controller: _emailController),
+                  // Email 
+                  AuthFormField(hint: 'Email', controller: _emailController), 
                   SizedBox(height: 16),
+
+                  // Password
                   AuthFormField(
                       hint: 'Password', controller: _passwordController),
                   SizedBox(height: 16),
-                  AnimatedContainer(
+
+                  // Confirm password 
+                  AnimatedContainer( 
                     duration: _duration,
                     curve: Curves.fastOutSlowIn,
                     height: isRegister ? 60 : 0,
@@ -99,8 +109,12 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                   ),
+
+                  // 공백 애니메이션
                   AnimatedContainer(
                       duration: _duration, height: isRegister ? 12 : 0),
+
+                  // Submit Button
                   Container(
                     height: 60,
                     child: _submitButton(),
@@ -111,6 +125,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     thickness: 3,
                     color: Colors.white30,
                   ),
+
+                  // Social Login
                   SizedBox(height: 30),
                   _socialLoginButton('google', () async {
                     print("google");
@@ -134,14 +150,10 @@ class _AuthScreenState extends State<AuthScreen> {
     return ElevatedButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
-          isRegister
-              ? _cfPasswordController.text == _passwordController.text
-                  ? uc.join(_emailController.text.trim(),
-                      _passwordController.text.trim())
-                  : Get.snackbar("Error", "패스워드가 맞지 않습니다.",
-                      snackPosition: SnackPosition.BOTTOM)
-              : uc.login(_emailController.text.trim(),
-                  _passwordController.text.trim());
+          isRegister ? (_cfPasswordController.text == _passwordController.text)
+                  ? uc.join(_emailController.text.trim(), _passwordController.text.trim()) 
+                  : snackBar(msg: "패스워드가 맞지 않습니다.")
+                  : uc.login(_emailController.text.trim(),_passwordController.text.trim());
         }
       },
       style: ElevatedButton.styleFrom(

@@ -86,7 +86,8 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
             children: [
               // ---제목---
               SingleLineForm(
-                hint: '내일의 일기 제목',
+                hint: 'Title',
+                // hint: '내일의 일기 제목',
                 text: d.allData.value.tmrDiary!.title!,
                 onChanged: _onTitleChanged,
               ),
@@ -95,7 +96,8 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
               const TextWidget.body(text: '내일 있어야 할 일'),
               _smallGap,
               MultiLineForm(
-                  hint: '내일 있어야 할 일을 최대한 객관적으로 적어주세요',
+                  hint : 'what to do tomorrow?',
+                  // hint: '내일 있어야 할 일을 최대한 객관적으로 적어주세요',
                   text: d.allData.value.tmrDiary!.tmrHappen,
                   onChanged: _onTmrHappenChanged),
               _largeGap,
@@ -118,7 +120,8 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
                 ),
               _smallGap,
               WishListForm(
-                hint: '내일 하고 싶은 일은 무엇인가요?',
+                hint : 'What you want to do tomorrow?',
+                // hint: '내일 하고 싶은 일은 무엇인가요?',
                 onSubmitted: _onTmrWishSubmitted,
               ),
               _largeGap,
@@ -126,7 +129,8 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
               const TextWidget.body(text: '내일의 기분'),
               _smallGap,
               SingleLineForm(
-                hint: '내일의 기분은 어떨 것 같나요?',
+                hint : 'How will you feel tomorrow?',
+                // hint: '내일의 기분은 어떨 것 같나요?',
                 text: d.allData.value.tyDiary!.tyEmotion!,
                 onChanged: _onTmrEmotionChanged,
               ),
