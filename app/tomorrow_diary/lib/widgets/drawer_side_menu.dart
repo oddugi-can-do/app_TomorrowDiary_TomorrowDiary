@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,16 @@ class DrawerSideMenu extends StatelessWidget {
                 Get.to(() => MyPageScreen());
               },
             ),
-          )
+          ),
+          Card(
+            child: ListTile(
+              leading: Icon(CupertinoIcons.book),
+              title: Text('Open Source'),
+              onTap: () {
+                Get.to(() => OpenSourceScreen());
+              },
+            ),
+          ),
         ]),
       ),
     );
