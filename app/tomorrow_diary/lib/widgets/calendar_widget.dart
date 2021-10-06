@@ -31,6 +31,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: TdSize.s),
       child: GridView.builder(
+        physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
         key: GlobalKey(),
         itemCount: 7 + _dayListForMonth.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

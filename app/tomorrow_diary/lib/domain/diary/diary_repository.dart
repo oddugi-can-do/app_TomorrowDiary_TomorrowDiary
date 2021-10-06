@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/domain/diary/diary_provider.dart';
@@ -26,7 +27,7 @@ class DiaryRepository {
     DataModel foundData = await findDataByDate(date);
     return foundData.tyDiary == data.tyDiary &&
             foundData.tmrDiary == data.tmrDiary &&
-            foundData.todoList == data.todoList
+            listEquals(foundData.todoList, data.todoList)
         ? 1
         : -1;
   }

@@ -12,4 +12,7 @@ class TdColor {
   static const lightRed = Color(0xffE48888);
   static const purple = Color(0xff4A3B69);
   static const deepGray = Color(0xff464646);
+  static const gold = Color(0xffFFD700);
+  static const silver = Color(0xffC0C0C0);
+  static const bronze = Color(0xffC49C48);
 }
