@@ -96,7 +96,7 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
               const TextWidget.body(text: '내일 있어야 할 일'),
               _smallGap,
               MultiLineForm(
-                  hint : 'what to do tomorrow?',
+                  hint: 'what to do tomorrow?',
                   // hint: '내일 있어야 할 일을 최대한 객관적으로 적어주세요',
                   text: d.allData.value.tmrDiary!.tmrHappen,
                   onChanged: _onTmrHappenChanged),
@@ -115,12 +115,20 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
                       onTap: (checked) {
                         wishList[i].checked = checked;
                       },
+                      onLongPressed: (deleted) {
+                        if (deleted == true) {
+                          setState(() {
+                            wishList.removeAt(i);
+                            d.allData.value.tmrDiary!.tmrWish = wishList;
+                          });
+                        }
+                      },
                     ),
                   ],
                 ),
               _smallGap,
               WishListForm(
-                hint : 'What you want to do tomorrow?',
+                hint: 'What you want to do tomorrow?',
                 // hint: '내일 하고 싶은 일은 무엇인가요?',
                 onSubmitted: _onTmrWishSubmitted,
               ),
@@ -129,7 +137,7 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
               const TextWidget.body(text: '내일의 기분'),
               _smallGap,
               SingleLineForm(
-                hint : 'How will you feel tomorrow?',
+                hint: 'How will you feel tomorrow?',
                 // hint: '내일의 기분은 어떨 것 같나요?',
                 text: d.allData.value.tyDiary!.tyEmotion!,
                 onChanged: _onTmrEmotionChanged,

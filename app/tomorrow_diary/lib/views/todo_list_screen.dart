@@ -45,7 +45,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   @override
   Widget build(BuildContext context) {
     return Ink(
-      color:Colors.black87,
+      color: Colors.black87,
       child: NestedScrollView(
         controller: ScrollController(),
         physics: const ScrollPhysics(parent: PageScrollPhysics()),
@@ -79,12 +79,17 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 children: [
                   _smallGap,
                   TodoWidget(
-                    todo: todoList[i],
-                    onTap: (checked) {
-                      todoList[i].checked = checked;
-                      _onTodoRefreshed(todoList);
-                    },
-                  ),
+                      todo: todoList[i],
+                      onTap: (checked) {
+                        todoList[i].checked = checked;
+                        _onTodoRefreshed(todoList);
+                      },
+                      onLongPressed: (deleted) {
+                        if (deleted == true) {
+                          todoList.removeAt(i);
+                          _onTodoRefreshed(todoList);
+                        }
+                      }),
                 ],
               ),
             _smallGap,
