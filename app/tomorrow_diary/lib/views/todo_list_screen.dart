@@ -45,7 +45,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   @override
   Widget build(BuildContext context) {
     return Ink(
-      color: TdColor.deepGray,
+      color:Colors.black87,
       child: NestedScrollView(
         controller: ScrollController(),
         physics: const ScrollPhysics(parent: PageScrollPhysics()),

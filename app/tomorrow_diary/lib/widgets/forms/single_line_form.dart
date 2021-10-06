@@ -16,9 +16,12 @@ class SingleLineForm extends StatelessWidget {
     return TextFormField(
       onChanged: onChanged,
       initialValue: text,
+      cursorColor: Colors.white,
+      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(TdSize.s),
-        fillColor: TdColor.darkGray,
+        // fillColor: TdColor.darkGray,
+        fillColor: Colors.white10,
         filled: true,
         //hintText: hint,
         label: Text("$hint"),

@@ -20,12 +20,14 @@ class MultiLineForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: onChanged,
+      cursorColor: Colors.white,
       maxLines: null,
       minLines: minLines,
       initialValue: text,
+       style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(TdSize.s),
-        fillColor: TdColor.darkGray,
+        fillColor: Colors.white10,
         filled: true,
         label: Text("$hint"),
         labelStyle: TextStyle(color: Colors.white38),

@@ -25,19 +25,19 @@ class MyDiaryApp extends StatelessWidget with PrintLogMixin {
       debugShowCheckedModeBanner: false,
       initialBinding: AppBinding(),
       home: AuthScreen(),
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.black,
-        // colorScheme: ColorScheme.light(),
-        accentColor: Colors.white,
-        snackBarTheme: const SnackBarThemeData(
-          backgroundColor: TdColor.black,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-          contentTextStyle: TextStyle(fontSize: 16, color: Colors.white),
-        ),
-      ),
+      // theme: ThemeData(
+      //   brightness: Brightness.dark,
+      //   primaryColor: Colors.black,
+      //   // colorScheme: ColorScheme.light(),
+      //   accentColor: Colors.white,
+      //   snackBarTheme: const SnackBarThemeData(
+      //     backgroundColor: TdColor.black,
+      //     behavior: SnackBarBehavior.floating,
+      //     shape: RoundedRectangleBorder(
+      //         borderRadius: BorderRadius.all(Radius.circular(10))),
+      //     contentTextStyle: TextStyle(fontSize: 16, color: Colors.white),
+      //   ),
+      // ),
     );
   }
 }
