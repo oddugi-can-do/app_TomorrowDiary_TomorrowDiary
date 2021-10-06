@@ -51,17 +51,24 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true,
         key: _key,
-        endDrawer: DrawerSideMenu(),
+        endDrawer: ClipPath(child: DrawerSideMenu()
+        ),
         backgroundColor: TdColor.black,
         appBar: appBar(),
         body: SafeArea(child: _buildHomeScreen(context)));
   }
 
-  ListView _buildHomeScreen(BuildContext context) {
+  Widget _buildHomeScreen(BuildContext context) { //ListView
     CalendarController c = Get.find();
 
-    return ListView(
+    return  Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/tomorrow2.gif'), fit: BoxFit.cover),
+        ),
+        child:ListView(
       key: GlobalKey(),
       children: [
         CalendarWidget(year: selectedYear, month: selectedMonth),
@@ -81,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
           );
         })
       ],
+        )
     );
   }
 
@@ -197,21 +205,23 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   }
 
   AppBar appBar() {
+    DateTime _selectedTime;
     return AppBar(
       actions: [
         IconButton(
           alignment: Alignment.center,
           onPressed: () {
             showModalBottomSheet(
+              backgroundColor: Colors.black87,
               context: context,
               builder: (BuildContext context) => Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.5,
+                height: MediaQuery.of(context).size.height * 0.4,
                 child: SelectYearAndMonthScreen(
                     initialYear: selectedYear,
                     initialMonth: selectedMonth,
                     onChanged: _yearAndMonthChanged),
-              ),
+                  ),
             );
           },
           icon: const Icon(Icons.calendar_today_rounded),

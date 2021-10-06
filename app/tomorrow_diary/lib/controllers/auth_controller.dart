@@ -31,8 +31,8 @@ class UserController extends GetxController {
     }
   }
 
-  Future<bool> join(String email, String password) async {
-    UserModel principal = await _userRepo.join(email, password);
+  Future<bool> join(String email, String password, String username) async {
+    UserModel principal = await _userRepo.join(email, password,username);
     print(principal);
     if (principal.uid != null) {
       this.isLogin.value = true;

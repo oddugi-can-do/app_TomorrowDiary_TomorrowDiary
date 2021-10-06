@@ -21,6 +21,8 @@ class _AuthScreenState extends State<AuthScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _cfPasswordController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+
   UserController uc = Get.put(UserController());
 
   final _duration = Duration(milliseconds: 500);
@@ -53,7 +55,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 40),
+                  SizedBox(height: 50),
 
                   //Register and Login
                   ButtonBar(children: [
@@ -87,6 +89,20 @@ class _AuthScreenState extends State<AuthScreen> {
                                     ? FontWeight.bold
                                     : FontWeight.w200))),
                   ]),
+                  SizedBox(height:40),
+                  AnimatedContainer( 
+                    duration: _duration,
+                    curve: Curves.fastOutSlowIn,
+                    height: isRegister ? 60 : 0,
+                    child: SizedBox(
+                      height: 60,
+                      child: AuthFormField(
+                        hint: 'Username',
+                        controller: _usernameController,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height:7),
                   // Email 
                   AuthFormField(hint: 'Email', controller: _emailController), 
                   SizedBox(height: 16),
@@ -135,7 +151,9 @@ class _AuthScreenState extends State<AuthScreen> {
                   SizedBox(height: 5),
                   _socialLoginButton('facebook', () {
                     print("facebook");
-                    Get.to(HomeScreen());
+                   
+                    Get.to(HomeScreen(),binding: HomeScreenBindings());
+                    // Get.to(HomeScreen());
                   })
                 ].reversed.toList(),
               ),
@@ -151,7 +169,7 @@ class _AuthScreenState extends State<AuthScreen> {
       onPressed: () {
         if (_formKey.currentState!.validate()) {
           isRegister ? (_cfPasswordController.text == _passwordController.text)
-                  ? uc.join(_emailController.text.trim(), _passwordController.text.trim()) 
+                  ? uc.join(_emailController.text.trim(), _passwordController.text.trim(), _usernameController.text.trim()) 
                   : snackBar(msg: "패스워드가 맞지 않습니다.")
                   : uc.login(_emailController.text.trim(),_passwordController.text.trim());
         }

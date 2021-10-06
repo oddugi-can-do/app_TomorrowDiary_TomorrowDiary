@@ -52,7 +52,7 @@ class UserRepo {
     return UserModel();
   }
 
-  Future<UserModel> join(String email, String password) async {
+  Future<UserModel> join(String email, String password, String username) async {
     UserCredential? user;
 
     String _msg = '';
@@ -78,7 +78,7 @@ class UserRepo {
 
     if (user != null) {
       UserModel principal =
-          UserModel(email: '${user.user!.email}', uid: '${user.user!.uid}');
+          UserModel(email: '${user.user!.email}', uid: '${user.user!.uid}' , username: '${username}');
       await _userProvider.sendUserDataFb(principal,user.user!.uid);
       return principal;
     } else {

@@ -14,6 +14,9 @@ class DrawerSideMenu extends StatelessWidget {
     return Drawer(
       child: Container(
         child: ListView(children: [
+          IconButton(onPressed: (){
+            Get.to(GalleryScreen());
+          }, icon: Icon(Icons.camera_alt)),
           Card(
             child: ListTile(
               leading: Icon(Icons.logout),

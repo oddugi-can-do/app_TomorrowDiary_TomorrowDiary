@@ -25,10 +25,9 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
         children: [
           Container(
             height: height,
-            color: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
-                color: TdColor.gray,
+                color: Colors.black87,
                 borderRadius: BorderRadius.circular(TdSize.radiusM),
               ),
             ),
@@ -39,7 +38,6 @@ class ServeWidget extends StatelessWidget with PrintLogMixin {
             child: Container(
               width: 300 * 0.05,
               height: 100,
-              color: Colors.transparent,
               child: Container(
                 decoration: BoxDecoration(
                   color: color,
