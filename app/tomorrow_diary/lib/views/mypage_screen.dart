@@ -3,20 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/achievement_controller.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/views/views.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
-class MyPageScreen extends StatelessWidget {
+class MyPageScreen extends StatefulWidget {
   static const pageId = '/mypage';
+
+  @override
+  State<MyPageScreen> createState() => _MyPageScreenState();
+}
+
+class _MyPageScreenState extends State<MyPageScreen> {
+  Achievements myAchievements = Achievements();
+  GlobalKey<ScaffoldState> _key = GlobalKey();
+  final Widget _smallGap = const SizedBox.square(dimension: TdSize.s);
+  final Widget _largeGap = const SizedBox.square(dimension: TdSize.l);
+  @override
+  void initState() {
+    super.initState();
+    AchievementController a = Get.find();
+    a.findData().then((value) => myAchievements = value);
+  }
 
   @override
   Widget build(BuildContext context) {
     UserController u = Get.find();
-    AchievementController a = Get.find();
-    const Widget _smallGap = const SizedBox.square(dimension: TdSize.s);
-    const Widget _largeGap = const SizedBox.square(dimension: TdSize.l);
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         backgroundColor: TdColor.black,
         shadowColor: null,
@@ -33,11 +48,11 @@ class MyPageScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
               vertical: TdSize.xl, horizontal: TdSize.xxl),
           children: [
-            TextWidget.header(text: '사용자 정보'),
+            const TextWidget.header(text: '사용자 정보'),
             _largeGap,
             Row(
               children: [
-                TextWidget.body(text: '이메일 : '),
+                const TextWidget.body(text: '이메일 : '),
                 _smallGap,
                 TextWidget.body(
                   text: u.principal.value.email ?? "error : no email",
@@ -45,29 +60,72 @@ class MyPageScreen extends StatelessWidget {
               ],
             ),
             _largeGap,
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  AchievementController a = Get.find();
+                  a.setDataWithAchievementList(AchievementType.welcome);
+                });
+              },
+              child: TextWidget.body(text: '업적 추가 : welcome!'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  AchievementController a = Get.find();
+                  a.setDataWithAchievementList(AchievementType.openTmrDiary);
+                });
+              },
+              child: TextWidget.body(text: '업적 추가 : openTmrDiary!'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  AchievementController a = Get.find();
+                  a.setDataWithAchievementList(AchievementType.army);
+                });
+              },
+              child: TextWidget.body(text: '업적 추가 : army'),
+            ),
+            _largeGap,
             Row(
               children: [
-                TextWidget.body(text: '사용자 이름 : '),
+                const TextWidget.body(text: '사용자 이름 : '),
                 _smallGap,
-                TextWidget.body(
-                  text: u.principal.value.uid ?? "error : no username",
-                ),
+                // TextWidget.body(
+                //   text: u.principal.value.uid ?? "error : no username",
+                // ),
               ],
             ),
             _largeGap,
             _largeGap,
             TextWidget.header(text: '업적'),
-            ...a.achievements.value.achievements.map(
-              (e) => Column(
-                children: [
-                  _smallGap,
-                  AchievementWidget(title: e.title, description: e.description),
-                ],
-              ),
-            ),
+            Obx(() => _buildAchievements()),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildAchievements() {
+    AchievementController a = Get.find();
+    if ((a.achievements.value.achievements ?? []).isEmpty) {
+      return Column(
+        children: [
+          _smallGap,
+          TextWidget.body(text: '아직 업적이 없습니다'),
+        ],
+      );
+    } else {
+      List<Widget> temp = [];
+      for (var element in myAchievements.achievements ?? []) {
+        temp.add(_smallGap);
+        temp.add(AchievementWidget(achievement: element));
+      }
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: temp,
+      );
+    }
   }
 }

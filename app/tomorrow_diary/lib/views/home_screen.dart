@@ -25,19 +25,6 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   int selectedYear = 0;
   int selectedMonth = 0;
 
-  void _yearAndMonthChanged(int _year, int _month) {
-    CalendarController c = Get.find();
-    WidgetsBinding.instance!.addPostFrameCallback(
-      (_) => setState(
-        () {
-          selectedYear = _year;
-          selectedMonth = _month;
-          c.selectYearAndMonth(selectedYear, selectedMonth);
-        },
-      ),
-    );
-  }
-
   @override
   void initState() {
     super.initState();
@@ -239,6 +226,19 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
       backgroundColor: Colors.transparent,
       shadowColor: null,
       title: TextWidget.header(text: '$selectedYear년 $selectedMonth월'),
+    );
+  }
+
+  void _yearAndMonthChanged(int _year, int _month) {
+    CalendarController c = Get.find();
+    WidgetsBinding.instance!.addPostFrameCallback(
+      (_) => setState(
+        () {
+          selectedYear = _year;
+          selectedMonth = _month;
+          c.selectYearAndMonth(selectedYear, selectedMonth);
+        },
+      ),
     );
   }
 }

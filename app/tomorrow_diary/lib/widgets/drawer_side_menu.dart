@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,6 @@ import 'package:tomorrow_diary/views/views.dart';
 
 class DrawerSideMenu extends StatelessWidget {
   UserController uc = Get.find();
-
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +31,19 @@ class DrawerSideMenu extends StatelessWidget {
               leading: Icon(Icons.person),
               title: Text('MyPage'),
               onTap: () {
-                Get.to(() => MyPageScreen(), binding: MypageScreenBindings());
+                Get.to(() => MyPageScreen());
               },
             ),
-          )
+          ),
+          Card(
+            child: ListTile(
+              leading: Icon(CupertinoIcons.book),
+              title: Text('Open Source'),
+              onTap: () {
+                Get.to(() => OpenSourceScreen());
+              },
+            ),
+          ),
         ]),
       ),
     );
