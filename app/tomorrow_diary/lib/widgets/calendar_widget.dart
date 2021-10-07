@@ -29,7 +29,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     print('build calendar widget');
     _dayListForMonth = CalendarUtil.dayListForMonth(year, month);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: TdSize.s),
+      padding: const EdgeInsets.all(TdSize.s),
       child: GridView.builder(
         physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
         key: GlobalKey(),
@@ -37,8 +37,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 7, //1 개의 행에 보여줄 item 개수
           childAspectRatio: 1 / 1, //item 의 가로 1, 세로 1 의 비율
-          mainAxisSpacing: 10, //수평 Padding
-          crossAxisSpacing: 10, //수직 Padding
+          mainAxisSpacing: 2, //수평 Padding
+          crossAxisSpacing: 2, //수직 Padding
         ),
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
