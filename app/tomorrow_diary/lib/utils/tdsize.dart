@@ -8,5 +8,5 @@ class TdSize {
   static const double xxxl = 45;
   static const double radiusS = 5;
   static const double radiusM = 10;
-  static const double calendarText = 14;
+  static const double calendarText = 17;
 }

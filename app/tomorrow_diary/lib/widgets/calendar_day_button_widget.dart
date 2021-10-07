@@ -95,21 +95,19 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
   }
 
   Widget _disabledContainerBuilder() {
-    return Container(
-        // width: TdSize.xxl,
-        // height: TdSize.xxl,
-        );
+    return Container();
   }
 
   Widget _calendarTextWidget() {
-    return TextWidget.calendar(text: widget.text);
+    return FittedBox(fit: BoxFit.contain, child: TextWidget.calendar(text: widget.text));
   }
 
   ButtonStyle selectedButtonStyle() {
     return ElevatedButton.styleFrom(
+      onSurface: Colors.transparent,
+      onPrimary: Colors.transparent,
       padding: const EdgeInsets.all(0),
       shadowColor: Colors.transparent,
-      // fixedSize: Size(TdSize.xxl, TdSize.xxl),
       shape: CircleBorder(),
       primary: TdColor.blue,
     );
@@ -117,9 +115,10 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
 
   ButtonStyle unselectedButtonStyle() {
     return ElevatedButton.styleFrom(
+      onSurface: Colors.transparent,
+      onPrimary: Colors.transparent,
       padding: const EdgeInsets.all(0),
       shadowColor: Colors.transparent,
-      // fixedSize: Size(TdSize.xxl, TdSize.xxl),
       shape: CircleBorder(),
       primary: Colors.transparent,
     );
@@ -127,9 +126,10 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
 
   ButtonStyle highlightedButtonStyle() {
     return ElevatedButton.styleFrom(
+      onSurface: Colors.transparent,
+      onPrimary: Colors.transparent,
       padding: const EdgeInsets.all(0),
       shadowColor: Colors.transparent,
-      // fixedSize: Size(TdSize.xxl, TdSize.xxl),
       shape: CircleBorder(),
       primary: TdColor.darkGray,
     );
