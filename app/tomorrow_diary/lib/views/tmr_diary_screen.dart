@@ -117,7 +117,7 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
               SingleLineForm(
                 hint: 'How will you feel tomorrow?',
                 // hint: '내일의 기분은 어떨 것 같나요?',
-                text: d.allData.value.tyDiary!.tyEmotion!,
+                text: d.allData.value.tmrDiary!.tmrEmotion!,
                 onChanged: _onTmrEmotionChanged,
               ),
               _largeGap,
