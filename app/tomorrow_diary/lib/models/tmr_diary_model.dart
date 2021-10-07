@@ -15,6 +15,19 @@ class TmrDiary {
   String? tmrHappen;
   List<Wish>? tmrWish;
 
+  bool isEmpty() {
+    if (title == null || title == '') {
+      if (tmrEmotion == null || tmrEmotion == '') {
+        if (tmrHappen == null || tmrHappen == '') {
+          if (tmrWish == null || tmrWish!.length == 0) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   factory TmrDiary.fromJson(String str) => TmrDiary.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());

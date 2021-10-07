@@ -13,36 +13,14 @@ class TmrDiaryScreen extends StatefulWidget {
 }
 
 class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
-  final Widget _smallGap = const SizedBox(height: TdSize.s);
-  final Widget _largeGap = const SizedBox(height: TdSize.l);
-
   DiaryController d = Get.find();
-
   CalendarController c = Get.find();
-
   List<Wish> wishList = [];
 
-  void _onTitleChanged(String value) {
-    d.allData.value.tmrDiary?.title = value;
-  }
-
-  void _onTmrHappenChanged(String value) {
-    d.allData.value.tmrDiary?.tmrHappen = value;
-  }
-
-  void _onTmrWishSubmitted(String value) {
-    setState(() {
-      wishList.add(Wish(wish: value, checked: false));
-      d.allData.value.tmrDiary?.tmrWish = wishList;
-    });
-  }
-
-  void _onTmrEmotionChanged(String value) {
-    d.allData.value.tmrDiary?.tmrEmotion = value;
-  }
-
-  void _onTmrDiarySubmitted() {
-    d.setPresentData();
+  @override
+  void dispose() {
+    c.selectDay(c.selectedDay);
+    super.dispose();
   }
 
   @override
@@ -153,5 +131,31 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
         ),
       ),
     );
+  }
+
+  final Widget _smallGap = const SizedBox(height: TdSize.s);
+  final Widget _largeGap = const SizedBox(height: TdSize.l);
+
+  void _onTitleChanged(String value) {
+    d.allData.value.tmrDiary?.title = value;
+  }
+
+  void _onTmrHappenChanged(String value) {
+    d.allData.value.tmrDiary?.tmrHappen = value;
+  }
+
+  void _onTmrWishSubmitted(String value) {
+    setState(() {
+      wishList.add(Wish(wish: value, checked: false));
+      d.allData.value.tmrDiary?.tmrWish = wishList;
+    });
+  }
+
+  void _onTmrEmotionChanged(String value) {
+    d.allData.value.tmrDiary?.tmrEmotion = value;
+  }
+
+  void _onTmrDiarySubmitted() {
+    d.setPresentData();
   }
 }

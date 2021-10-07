@@ -31,9 +31,11 @@ class CalendarDayButtonWidget extends StatefulWidget {
 
 class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
     with PrintLogMixin {
+  late CalendarController c;
   @override
   void initState() {
     super.initState();
+    c = Get.find();
   }
 
   @override
@@ -48,50 +50,40 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
     );
   }
 
-  GetBuilder<CalendarController> _enabledContainerBuilder() {
-    return GetBuilder<CalendarController>(
-      init: Get.find<CalendarController>(),
-      builder: (controller) {
-        return controller.isSelected(widget.day)
-            ? ElevatedButton(
-                onPressed: () {
-                  controller.selectDay(widget.day);
-                },
-                child: _calendarTextWidget(),
-                style: selectedButtonStyle(),
-              )
-            : ElevatedButton(
-                onPressed: () {
-                  controller.selectDay(widget.day);
-                },
-                child: _calendarTextWidget(),
-                style: unselectedButtonStyle(),
-              );
-      },
-    );
+  Widget _enabledContainerBuilder() {
+    return c.isSelected(widget.day)
+        ? ElevatedButton(
+            onPressed: () {
+              c.selectDay(widget.day);
+            },
+            child: _calendarTextWidget(),
+            style: selectedButtonStyle(),
+          )
+        : ElevatedButton(
+            onPressed: () {
+              c.selectDay(widget.day);
+            },
+            child: _calendarTextWidget(),
+            style: unselectedButtonStyle(),
+          );
   }
 
-  GetBuilder<CalendarController> _highlightedContainerBuilder() {
-    return GetBuilder<CalendarController>(
-      init: Get.find<CalendarController>(),
-      builder: (controller) {
-        return controller.isSelected(widget.day)
-            ? ElevatedButton(
-                onPressed: () {
-                  controller.selectDay(widget.day);
-                },
-                child: _calendarTextWidget(),
-                style: selectedButtonStyle(),
-              )
-            : ElevatedButton(
-                onPressed: () {
-                  controller.selectDay(widget.day);
-                },
-                child: _calendarTextWidget(),
-                style: highlightedButtonStyle(),
-              );
-      },
-    );
+  Widget _highlightedContainerBuilder() {
+    return c.isSelected(widget.day)
+        ? ElevatedButton(
+            onPressed: () {
+              c.selectDay(widget.day);
+            },
+            child: _calendarTextWidget(),
+            style: selectedButtonStyle(),
+          )
+        : ElevatedButton(
+            onPressed: () {
+              c.selectDay(widget.day);
+            },
+            child: _calendarTextWidget(),
+            style: highlightedButtonStyle(),
+          );
   }
 
   Widget _disabledContainerBuilder() {
@@ -99,7 +91,8 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
   }
 
   Widget _calendarTextWidget() {
-    return FittedBox(fit: BoxFit.contain, child: TextWidget.calendar(text: widget.text));
+    return FittedBox(
+        fit: BoxFit.contain, child: TextWidget.calendar(text: widget.text));
   }
 
   ButtonStyle selectedButtonStyle() {

@@ -13,33 +13,20 @@ class TodoListScreen extends StatefulWidget {
 }
 
 class _TodoListScreenState extends State<TodoListScreen> {
-  final Widget _smallGap = const SizedBox(height: TdSize.s);
-  final Widget _largeGap = const SizedBox(height: TdSize.l);
   DiaryController d = Get.find();
   CalendarController c = Get.find();
-
   List<Todo> todoList = [];
-
-  void _onTodoSubmitted(Todo value) {
-    setState(() {
-      todoList.add(value);
-      d.allData.value.todoList = todoList;
-      d.setPresentData();
-    });
-  }
-
-  void _onTodoRefreshed(List<Todo> value) {
-    setState(() {
-      todoList = value;
-      d.allData.value.todoList = todoList;
-      d.setPresentData();
-    });
-  }
 
   @override
   void initState() {
     super.initState();
     todoList = d.allData.value.todoList!;
+  }
+
+  @override
+  void dispose() {
+    c.selectDay(c.selectedDay);
+    super.dispose();
   }
 
   @override
@@ -98,5 +85,24 @@ class _TodoListScreenState extends State<TodoListScreen> {
         ),
       ),
     );
+  }
+
+  final Widget _smallGap = const SizedBox(height: TdSize.s);
+  final Widget _largeGap = const SizedBox(height: TdSize.l);
+
+  void _onTodoSubmitted(Todo value) {
+    setState(() {
+      todoList.add(value);
+      d.allData.value.todoList = todoList;
+      d.setPresentData();
+    });
+  }
+
+  void _onTodoRefreshed(List<Todo> value) {
+    setState(() {
+      todoList = value;
+      d.allData.value.todoList = todoList;
+      d.setPresentData();
+    });
   }
 }
