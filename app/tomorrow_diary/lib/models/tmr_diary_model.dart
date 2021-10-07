@@ -19,7 +19,7 @@ class TmrDiary {
     if (title == null || title == '') {
       if (tmrEmotion == null || tmrEmotion == '') {
         if (tmrHappen == null || tmrHappen == '') {
-          if (tmrWish == null || tmrWish!.length == 0) {
+          if (tmrWish == null || tmrWish!.isEmpty) {
             return true;
           }
         }

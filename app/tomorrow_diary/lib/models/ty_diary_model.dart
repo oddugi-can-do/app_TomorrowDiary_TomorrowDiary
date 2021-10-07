@@ -22,7 +22,7 @@ class TyDiary {
       if (tyEmotion == null || tyEmotion == '') {
         if (tyHappen == null || tyHappen == '') {
           if (tySurprise == null || tySurprise == '') {
-            if (tyWish == null || tyWish!.length == 0) {
+            if (tyWish == null || tyWish!.isEmpty) {
               return true;
             }
           }

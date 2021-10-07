@@ -76,7 +76,7 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
               MultiLineForm(
                   hint: 'what to do tomorrow?',
                   // hint: '내일 있어야 할 일을 최대한 객관적으로 적어주세요',
-                  text: d.allData.value.tmrDiary!.tmrHappen,
+                  text: d.allData.value.tmrDiary!.tmrHappen!,
                   onChanged: _onTmrHappenChanged),
               _largeGap,
               // ---위시 리스트---
