@@ -1,14 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:tomorrow_diary/bindings/home_screen_bindings.dart';
+import 'package:tomorrow_diary/bindings/bindings.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
-import 'package:tomorrow_diary/utils/screen_size.dart';
-import 'package:tomorrow_diary/utils/snackbar_util.dart';
-import 'package:tomorrow_diary/views/home_screen.dart';
+import 'package:tomorrow_diary/utils/utils.dart';
+import 'package:tomorrow_diary/views/views.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);

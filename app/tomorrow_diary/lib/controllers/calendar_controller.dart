@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
-import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
-
 import 'controllers.dart';
 
-class CalendarController extends GetxController with PrintLogMixin {
+class CalendarController extends GetxController {
   int _selectedYear = CalendarUtil.thisYear();
   int _selectedMonth = CalendarUtil.thisMonth();
   int _selectedDay = CalendarUtil.thisDay();
@@ -19,7 +17,6 @@ class CalendarController extends GetxController with PrintLogMixin {
   void selectDay(int day) {
     _selectedDay = day;
     _d.findDataByDate(selectedDate);
-    printLog('selectedDay : $_selectedDay');
     update();
   }
 

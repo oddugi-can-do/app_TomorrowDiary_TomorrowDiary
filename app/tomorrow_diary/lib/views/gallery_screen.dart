@@ -1,12 +1,6 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:local_image_provider/device_image.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:tomorrow_diary/controllers/gallery_controller.dart';
+import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/views/views.dart';
 
 class GalleryScreen extends StatefulWidget {
@@ -32,15 +26,18 @@ class _GalleryScreenState extends State<GalleryScreen> {
       ),
       body: GridView.count(
         crossAxisCount: 3,
-        children : List.generate(
+        children: List.generate(
           30,
           (index) => InkWell(
-            child: Image.network('https://picsum.photos/id/${index}/150/150', fit: BoxFit.cover,),
-            onTap: () async {
-               String currentImage = 'https://picsum.photos/id/${index}/500/500';
-               Get.to(ShareScreen(imageFile: currentImage));
-            }
-          ),
+              child: Image.network(
+                'https://picsum.photos/id/${index}/150/150',
+                fit: BoxFit.cover,
+              ),
+              onTap: () async {
+                String currentImage =
+                    'https://picsum.photos/id/${index}/500/500';
+                Get.to(ShareScreen(imageFile: currentImage));
+              }),
         ),
       ),
     );

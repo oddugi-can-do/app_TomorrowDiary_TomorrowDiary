@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
-import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/tdcolor.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
@@ -29,8 +28,7 @@ class CalendarDayButtonWidget extends StatefulWidget {
       _CalendarDayButtonWidgetState();
 }
 
-class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget>
-    with PrintLogMixin {
+class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget> {
   late CalendarController c;
   @override
   void initState() {
