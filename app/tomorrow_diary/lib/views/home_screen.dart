@@ -76,18 +76,13 @@ class _HomeScreenState extends State<HomeScreen>
               }
             });
           }),
-          duration: Duration(milliseconds: 3000),
+          duration: _menuStatus == MenuStatus.opened ? Duration(milliseconds: 1000): Duration(milliseconds: 2000),
           transform: Matrix4.translationValues(bodyXpos, 0, 0),
           curve: Curves.fastOutSlowIn,
         ),
         AnimatedContainer(
-          child: Positioned(
-            top: 0,
-            bottom: 0,
-            width: menuWidth,
-            child: DrawerSideMenu(menuWidth),
-          ),
-          duration: Duration(milliseconds: 3000),
+          child: DrawerSideMenu(menuWidth),
+          duration:  _menuStatus == MenuStatus.opened? Duration(milliseconds: 2000) : Duration(milliseconds: 2000),
           transform: Matrix4.translationValues(menuXpos, 0, 0),
           curve: Curves.fastOutSlowIn,
         ),
@@ -303,6 +298,7 @@ class _HomeScreenState extends State<HomeScreen>
   AppBar appBar(Function changeMenuStatus) {
     DateTime _selectedTime;
     return AppBar(
+      automaticallyImplyLeading: false,
       actions: [
         IconButton(
           alignment: Alignment.center,
