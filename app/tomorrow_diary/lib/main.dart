@@ -2,14 +2,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/bindings/bindings.dart';
-import 'package:tomorrow_diary/controllers/controllers.dart';
-import 'package:tomorrow_diary/controllers/user_network_controller.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
-import 'package:tomorrow_diary/routes.dart';
-import 'package:tomorrow_diary/utils/utils.dart';
-import 'models/models.dart';
 import 'views/views.dart';
 
 void main() async {

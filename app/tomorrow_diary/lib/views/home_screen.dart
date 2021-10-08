@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/utils/screen_size.dart';
 import 'package:tomorrow_diary/views/select_year_and_month_screen.dart';
 import 'package:get/get.dart';
-import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
+
+
+
+enum MenuStatus{
+  opened,
+  closed
+}
+
 
 class HomeScreen extends StatefulWidget {
   static const pageId = '/home';
@@ -15,31 +23,115 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   GlobalKey<ScaffoldState> _key = GlobalKey();
+  AnimationController? _animationMenuController;
   int selectedYear = 0;
   int selectedMonth = 0;
-
+  MenuStatus _menuStatus = MenuStatus.closed;
+  double menuXpos =  screenSize!.width;
+  double menuWidth =  screenSize!.width/2;
+  double bodyXpos = 0;
   @override
   void initState() {
     super.initState();
     DiaryController d = Get.find();
     CalendarController c = Get.find();
+    _animationMenuController= AnimationController(vsync: this, duration : duration);
     d.findDataByDate(c.selectedDate);
     selectedYear = c.selectedYear;
     selectedMonth = c.selectedMonth;
   }
 
   @override
+  void dispose() {
+    _animationMenuController!.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         key: _key,
+
         endDrawer: ClipPath(child: DrawerSideMenu()),
+
         backgroundColor: TdColor.black,
-        appBar: appBar(),
-        body: SafeArea(child: _buildHomeScreen(context)));
+        body: _buildAnimatedHomeScreen(context),
+        );
   }
+
+
+  Stack _buildAnimatedHomeScreen(BuildContext context) {
+    return Stack(
+        children: [
+          AnimatedContainer(
+            child: _buildHomeScreen(context,() {
+              setState(() {
+                _menuStatus = (_menuStatus == MenuStatus.closed) ? MenuStatus.opened : MenuStatus.closed;
+                switch(_menuStatus){
+                  case MenuStatus.opened:
+                    bodyXpos = -menuWidth;
+                    menuXpos =  screenSize!.width - menuWidth;
+                    break;
+                  case MenuStatus.closed:
+                    bodyXpos = 0;
+                    menuXpos = screenSize!.width;
+                    break;
+                }
+              });
+            }),
+            duration: Duration(milliseconds: 3000),
+            transform: Matrix4.translationValues(bodyXpos, 0, 0),
+            curve: Curves.fastOutSlowIn,
+            ),
+          AnimatedContainer(
+            child: Positioned(
+              top:0,
+              bottom:0,
+              width: menuWidth,
+              child: DrawerSideMenu(menuWidth),
+            ),
+            duration: Duration(milliseconds: 3000),
+            transform: Matrix4.translationValues(menuXpos, 0, 0),
+            curve: Curves.fastOutSlowIn,
+          ),
+        ],
+      );
+  }
+
+  Widget _buildHomeScreen(BuildContext context,Function changeMenuStatus) { //ListView
+    CalendarController c = Get.find();
+    
+    return  SafeArea(
+      child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/tomorrow2.gif'), fit: BoxFit.cover),
+          ),
+          child:ListView(
+        key: GlobalKey(),
+        children: [
+          appBar(changeMenuStatus),
+          CalendarWidget(year: selectedYear, month: selectedMonth),
+          const Padding(
+            padding: EdgeInsets.only(left: 13),
+            child: TextWidget.body(text: '일기 쓰기'),
+          ),
+          GetBuilder<CalendarController>(builder: (controller) {
+            TimePoint timePoint =
+                CalendarUtil.decidePastPresentFutureWithDate(c.selectedDate);
+            return Column(
+              children: [
+                _buildTyServeWidget(timePoint),
+                _buildTmrServeWidget(timePoint),
+                _buildTodoServeWidget(timePoint),
+              ],
+            );
+          })
+        ],
+          )
 
   Widget _buildHomeScreen(BuildContext context) {
     CalendarController c = Get.find();
@@ -72,6 +164,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
             ],
           );
         },
+
       ),
     );
   }
@@ -245,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     }
   }
 
-  AppBar appBar() {
+  AppBar appBar(Function changeMenuStatus) {
     DateTime _selectedTime;
     return AppBar(
       actions: [
@@ -268,9 +361,11 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
           icon: const Icon(Icons.calendar_today_rounded),
         ),
         IconButton(
-          icon: const Icon(Icons.menu_rounded),
+          icon: AnimatedIcon(icon: AnimatedIcons.menu_close, progress : _animationMenuController!,),
           onPressed: () {
-            _key.currentState!.openEndDrawer();
+            changeMenuStatus();
+            _animationMenuController!.status == AnimationStatus.completed ? _animationMenuController!.reverse():_animationMenuController!.forward();
+            // _key.currentState!.openEndDrawer();
           },
         ),
       ],
