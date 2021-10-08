@@ -25,7 +25,7 @@ class AuthFormField extends StatelessWidget {
         border: _border,
         enabledBorder: _border,
         focusedBorder: _border,
-        errorBorder: hint != "Confirm Password"
+        errorBorder: hint != "Confirm Password" 
             ? _border
             : OutlineInputBorder(borderSide: BorderSide.none),
       ),

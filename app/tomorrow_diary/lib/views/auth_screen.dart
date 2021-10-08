@@ -63,6 +63,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         onPressed: () {
                           setState(() {
                             isRegister = false;
+                            _usernameController.clear();
                             _cfPasswordController.clear();
                             _emailController.clear();
                             _passwordController.clear();
@@ -102,7 +103,8 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 7),
+                   AnimatedContainer(
+                      duration: _duration, height: isRegister ? 12 : 0),
                   // Email
                   AuthFormField(hint: 'Email', controller: _emailController),
                   SizedBox(height: 16),
