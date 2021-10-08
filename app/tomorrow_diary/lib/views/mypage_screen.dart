@@ -67,7 +67,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   a.setDataWithAchievementList(AchievementType.welcome);
                 });
               },
-              child: TextWidget.body(text: '업적 추가 : welcome!'),
+              child: TextWidget.body(text: 'test : 업적 추가 : welcome!'),
             ),
             TextButton(
               onPressed: () {
@@ -76,7 +76,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   a.setDataWithAchievementList(AchievementType.openTmrDiary);
                 });
               },
-              child: TextWidget.body(text: '업적 추가 : openTmrDiary!'),
+              child: TextWidget.body(text: 'test : 업적 추가 : openTmrDiary!'),
             ),
             TextButton(
               onPressed: () {
@@ -85,16 +85,16 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   a.setDataWithAchievementList(AchievementType.army);
                 });
               },
-              child: TextWidget.body(text: '업적 추가 : army'),
+              child: TextWidget.body(text: 'test : 업적 추가 : army'),
             ),
             _largeGap,
             Row(
               children: [
                 const TextWidget.body(text: '사용자 이름 : '),
                 _smallGap,
-                // TextWidget.body(
-                //   text: u.principal.value.uid ?? "error : no username",
-                // ),
+                TextWidget.body(
+                  text: u.principal.value.username ?? '',
+                ),
               ],
             ),
             _largeGap,

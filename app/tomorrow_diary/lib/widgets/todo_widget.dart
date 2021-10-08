@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/tdcolor.dart';
@@ -7,7 +8,12 @@ import 'package:tomorrow_diary/widgets/widgets.dart';
 class TodoWidget extends StatefulWidget {
   Todo todo;
   void Function(bool) onTap;
-  TodoWidget({Key? key, required this.todo, required this.onTap})
+  void Function(bool) onLongPressed;
+  TodoWidget(
+      {Key? key,
+      required this.todo,
+      required this.onTap,
+      required this.onLongPressed})
       : super(key: key);
 
   @override
@@ -16,6 +22,8 @@ class TodoWidget extends StatefulWidget {
 
 class _TodoWidgetState extends State<TodoWidget> {
   Todo todo = Todo();
+  var _tapPosition;
+
   @override
   void initState() {
     super.initState();
@@ -24,7 +32,9 @@ class _TodoWidgetState extends State<TodoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
+      onLongPress: _showDeleteMenu,
+      onTapDown: _storePosition,
       onTap: () {
         print('todo checked : ${todo.checked}');
         setState(() {
@@ -68,5 +78,32 @@ class _TodoWidgetState extends State<TodoWidget> {
         ),
       ),
     );
+  }
+
+  void _showDeleteMenu() {
+    print('show delete menu');
+    final Size overlaySize =
+        Overlay.of(context)!.context.findRenderObject()!.semanticBounds.size;
+
+    print('overlay size defined');
+    showMenu(
+      elevation: 0,
+      color: Colors.transparent,
+      context: context,
+      items: <PopupMenuEntry<bool>>[DeleteEntry()],
+      position: RelativeRect.fromRect(
+        _tapPosition & Size(0, 0), // smaller rect, the touch area
+        Offset.zero & overlaySize, // Bigger rect, the entire screen
+      ),
+    ).then<void>((bool? delta) {
+      if (delta == null) return;
+      setState(() {
+        widget.onLongPressed(delta);
+      });
+    });
+  }
+
+  void _storePosition(TapDownDetails details) {
+    _tapPosition = details.globalPosition;
   }
 }

@@ -13,28 +13,9 @@ class TodoListScreen extends StatefulWidget {
 }
 
 class _TodoListScreenState extends State<TodoListScreen> {
-  final Widget _smallGap = const SizedBox(height: TdSize.s);
-  final Widget _largeGap = const SizedBox(height: TdSize.l);
   DiaryController d = Get.find();
   CalendarController c = Get.find();
-
   List<Todo> todoList = [];
-
-  void _onTodoSubmitted(Todo value) {
-    setState(() {
-      todoList.add(value);
-      d.allData.value.todoList = todoList;
-      d.setPresentData();
-    });
-  }
-
-  void _onTodoRefreshed(List<Todo> value) {
-    setState(() {
-      todoList = value;
-      d.allData.value.todoList = todoList;
-      d.setPresentData();
-    });
-  }
 
   @override
   void initState() {
@@ -43,9 +24,15 @@ class _TodoListScreenState extends State<TodoListScreen> {
   }
 
   @override
+  void dispose() {
+    c.selectDay(c.selectedDay);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Ink(
-      color:Colors.black87,
+      color: Colors.black87,
       child: NestedScrollView(
         controller: ScrollController(),
         physics: const ScrollPhysics(parent: PageScrollPhysics()),
@@ -79,12 +66,17 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 children: [
                   _smallGap,
                   TodoWidget(
-                    todo: todoList[i],
-                    onTap: (checked) {
-                      todoList[i].checked = checked;
-                      _onTodoRefreshed(todoList);
-                    },
-                  ),
+                      todo: todoList[i],
+                      onTap: (checked) {
+                        todoList[i].checked = checked;
+                        _onTodoRefreshed(todoList);
+                      },
+                      onLongPressed: (deleted) {
+                        if (deleted == true) {
+                          todoList.removeAt(i);
+                          _onTodoRefreshed(todoList);
+                        }
+                      }),
                 ],
               ),
             _smallGap,
@@ -93,5 +85,24 @@ class _TodoListScreenState extends State<TodoListScreen> {
         ),
       ),
     );
+  }
+
+  final Widget _smallGap = const SizedBox(height: TdSize.s);
+  final Widget _largeGap = const SizedBox(height: TdSize.l);
+
+  void _onTodoSubmitted(Todo value) {
+    setState(() {
+      todoList.add(value);
+      d.allData.value.todoList = todoList;
+      d.setPresentData();
+    });
+  }
+
+  void _onTodoRefreshed(List<Todo> value) {
+    setState(() {
+      todoList = value;
+      d.allData.value.todoList = todoList;
+      d.setPresentData();
+    });
   }
 }

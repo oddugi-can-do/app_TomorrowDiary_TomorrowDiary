@@ -17,6 +17,21 @@ class TyDiary {
   String? tySurprise;
   List<Wish>? tyWish;
 
+  bool isEmpty() {
+    if (title == null || title == '') {
+      if (tyEmotion == null || tyEmotion == '') {
+        if (tyHappen == null || tyHappen == '') {
+          if (tySurprise == null || tySurprise == '') {
+            if (tyWish == null || tyWish!.isEmpty) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   factory TyDiary.fromJson(String str) => TyDiary.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());

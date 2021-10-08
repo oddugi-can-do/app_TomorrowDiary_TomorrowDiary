@@ -9,6 +9,7 @@ export 'drawer_side_menu.dart';
 export 'wish_list_widget.dart';
 export 'time_select_widget.dart';
 export 'calendar_widget.dart';
+export 'delete_entry.dart';
 export 'forms/emotion_form.dart';
 export 'forms/multi_line_form.dart';
 export 'forms/single_line_form.dart';

@@ -17,27 +17,11 @@ class TyDiaryScreen extends StatefulWidget {
 class _TyDiaryScreenState extends State<TyDiaryScreen> {
   DiaryController d = Get.find();
   CalendarController c = Get.find();
-  final Widget _smallGap = const SizedBox(height: TdSize.s);
-  final Widget _largeGap = const SizedBox(height: TdSize.l);
-  void _onTitleChanged(String value) {
-    d.allData.value.tyDiary?.title = value;
-    print('tyDiary title changed : ${d.allData.value.tyDiary?.title}');
-  }
 
-  void _onTyHappenChanged(String value) {
-    d.allData.value.tyDiary?.tyHappen = value;
-  }
-
-  void _onTySurpriseChanged(String value) {
-    d.allData.value.tyDiary?.tySurprise = value;
-  }
-
-  void _onTyEmotionChanged(String value) {
-    d.allData.value.tyDiary?.tyEmotion = value;
-  }
-
-  void _onTyDiarySubmitted() {
-    d.setPresentData();
+  @override
+  void dispose() {
+    c.selectDay(c.selectedDay);
+    super.dispose();
   }
 
   @override
@@ -82,7 +66,7 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
             _largeGap,
             // ---오늘 있었던 일---
             const TextWidget.body(text: '오늘 있었던 일'),
-            SizedBox(height:10),
+            SizedBox(height: 10),
             _smallGap,
             MultiLineForm(
                 hint: "what happened today?",
@@ -117,7 +101,7 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
             _largeGap,
             // ---오늘 깜짝! 놀랐던 일---
             const TextWidget.body(text: '오늘 깜짝! 놀랐던 일'),
-            SizedBox(height:10),
+            SizedBox(height: 10),
             _smallGap,
             MultiLineForm(
               hint: 'Did you have any surprises?',
@@ -127,7 +111,7 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
             _largeGap,
             // ---오늘의 진짜 기분---
             const TextWidget.body(text: '오늘의 진짜 기분'),
-            SizedBox(height:10),
+            SizedBox(height: 10),
             _smallGap,
             SingleLineForm(
               hint: "How are u today?",
@@ -146,7 +130,32 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
       ),
     );
   }
+
+  final Widget _smallGap = const SizedBox(height: TdSize.s);
+  final Widget _largeGap = const SizedBox(height: TdSize.l);
+  void _onTitleChanged(String value) {
+    d.allData.value.tyDiary?.title = value;
+    print('tyDiary title changed : ${d.allData.value.tyDiary?.title}');
+  }
+
+  void _onTyHappenChanged(String value) {
+    d.allData.value.tyDiary?.tyHappen = value;
+  }
+
+  void _onTySurpriseChanged(String value) {
+    d.allData.value.tyDiary?.tySurprise = value;
+  }
+
+  void _onTyEmotionChanged(String value) {
+    d.allData.value.tyDiary?.tyEmotion = value;
+  }
+
+  void _onTyDiarySubmitted() {
+    d.setPresentData();
+  }
 }
+
+
 
 /*
  * 리펙토링 이유 : 

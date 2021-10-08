@@ -15,6 +15,13 @@ class Todo {
   bool? checked;
   bool? timeEnabled;
 
+  bool isEmpty() {
+    if (todo == null || todo == '') {
+      return true;
+    }
+    return false;
+  }
+
   factory Todo.fromJson(String str) => Todo.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
