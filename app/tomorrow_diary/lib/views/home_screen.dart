@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:provider/provider.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
-import 'package:tomorrow_diary/controllers/user_network_controller.dart';
-import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/views/select_year_and_month_screen.dart';
-import 'package:tomorrow_diary/views/views.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   static const pageId = '/home';
@@ -40,70 +35,97 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
     return Scaffold(
         extendBodyBehindAppBar: true,
         key: _key,
-        endDrawer: ClipPath(child: DrawerSideMenu()
-        ),
+        endDrawer: ClipPath(child: DrawerSideMenu()),
         backgroundColor: TdColor.black,
         appBar: appBar(),
         body: SafeArea(child: _buildHomeScreen(context)));
   }
 
-  Widget _buildHomeScreen(BuildContext context) { //ListView
+  Widget _buildHomeScreen(BuildContext context) {
     CalendarController c = Get.find();
 
-    return  Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/tomorrow2.gif'), fit: BoxFit.cover),
-        ),
-        child:ListView(
-      key: GlobalKey(),
-      children: [
-        CalendarWidget(year: selectedYear, month: selectedMonth),
-        const Padding(
-          padding: EdgeInsets.only(left: 13),
-          child: TextWidget.body(text: '일기 쓰기'),
-        ),
-        GetBuilder<CalendarController>(builder: (controller) {
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/tomorrow2.gif'), fit: BoxFit.cover),
+      ),
+      child: Obx(
+        () {
           TimePoint timePoint =
               CalendarUtil.decidePastPresentFutureWithDate(c.selectedDate);
-          return Column(
+          return ListView(
+            key: GlobalKey(),
             children: [
-              _buildTyServeWidget(timePoint),
-              _buildTmrServeWidget(timePoint),
-              _buildTodoServeWidget(timePoint),
+              CalendarWidget(year: selectedYear, month: selectedMonth),
+              const Padding(
+                padding: EdgeInsets.only(left: 13),
+                child: TextWidget.body(text: '일기 쓰기'),
+              ),
+              Column(
+                key: GlobalKey(),
+                children: [
+                  _buildTyServeWidget(timePoint),
+                  _buildTmrServeWidget(timePoint),
+                  _buildTodoServeWidget(timePoint),
+                ],
+              ),
             ],
           );
-        })
-      ],
-        )
+        },
+      ),
     );
   }
 
   Widget _buildTyServeWidget(TimePoint timePoint) {
+    DiaryController d = Get.find();
     switch (timePoint) {
       case TimePoint.past:
-        return Padding(
-          padding: const EdgeInsets.all(TdSize.s),
-          child: ServeWidget(
-            text: '오늘의 일기 보기',
-            color: TdColor.lightRed,
-            //TODO: ServeWidget 안에서 color 판단하기!
-            onPressed: () {
-              ModalUtil.barModalWithTyDiaryScreen(context);
-            },
-          ),
-        );
+        if (d.allData.value.tyDiary == null ||
+            d.allData.value.tyDiary!.isEmpty()) {
+          return Container();
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(TdSize.s),
+            child: ServeWidget(
+              text: '오늘의 일기 보기',
+              color: TdColor.lightRed,
+              onPressed: () {
+                setState(() {
+                  ModalUtil.barModalWithTyDiaryScreen(context);
+                });
+              },
+            ),
+          );
+        }
       case TimePoint.present:
-        return Padding(
-          padding: const EdgeInsets.all(TdSize.s),
-          child: ServeWidget(
-            text: '오늘의 일기 쓰기',
-            color: TdColor.lightGray,
-            onPressed: () {
-              ModalUtil.barModalWithTyDiaryScreen(context);
-            },
-          ),
-        );
+        if (d.allData.value.tyDiary == null ||
+            d.allData.value.tyDiary!.isEmpty()) {
+          return Padding(
+            padding: const EdgeInsets.all(TdSize.s),
+            child: ServeWidget(
+              text: '오늘의 일기 쓰기',
+              color: TdColor.lightGray,
+              onPressed: () {
+                setState(() {
+                  ModalUtil.barModalWithTyDiaryScreen(context);
+                });
+              },
+            ),
+          );
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(TdSize.s),
+            child: ServeWidget(
+              text: '오늘의 일기 보기',
+              color: TdColor.lightRed,
+              onPressed: () {
+                setState(() {
+                  ModalUtil.barModalWithTyDiaryScreen(context);
+                });
+              },
+            ),
+          );
+        }
       case TimePoint.future:
         return Container();
       case TimePoint.tomorrow:
@@ -112,82 +134,114 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
   }
 
   Widget _buildTmrServeWidget(TimePoint timePoint) {
+    DiaryController d = Get.find();
     switch (timePoint) {
       case TimePoint.past:
-        return Padding(
-          padding: const EdgeInsets.all(TdSize.s),
-          child: ServeWidget(
-            text: '내일의 일기 보기',
-            color: TdColor.lightBlue,
-            onPressed: () {
-              ModalUtil.barModalWithTmrDiaryScreen(context);
-            },
-          ),
-        );
+        if (d.allData.value.tmrDiary == null ||
+            d.allData.value.tmrDiary!.isEmpty()) {
+          return Container();
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(TdSize.s),
+            child: ServeWidget(
+              text: '내일의 일기 보기',
+              color: TdColor.lightBlue,
+              onPressed: () {
+                setState(() {
+                  ModalUtil.barModalWithTmrDiaryScreen(context);
+                });
+              },
+            ),
+          );
+        }
       case TimePoint.present:
         return Container();
       case TimePoint.tomorrow:
-        return Padding(
-          padding: const EdgeInsets.all(TdSize.s),
-          child: ServeWidget(
-            text: '내일의 일기 쓰기',
-            color: TdColor.lightGray,
-            onPressed: () {
-              ModalUtil.barModalWithTmrDiaryScreen(context);
-            },
-          ),
-        );
+        if (d.allData.value.tmrDiary == null ||
+            d.allData.value.tmrDiary!.isEmpty()) {
+          return Padding(
+            padding: const EdgeInsets.all(TdSize.s),
+            child: ServeWidget(
+              text: '내일의 일기 쓰기',
+              color: TdColor.lightGray,
+              onPressed: () {
+                setState(() {
+                  ModalUtil.barModalWithTmrDiaryScreen(context);
+                });
+              },
+            ),
+          );
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(TdSize.s),
+            child: ServeWidget(
+              text: '내일의 일기 보기',
+              color: TdColor.lightBlue,
+              onPressed: () {
+                setState(() {
+                  ModalUtil.barModalWithTmrDiaryScreen(context);
+                });
+              },
+            ),
+          );
+        }
       case TimePoint.future:
         return Container();
     }
   }
 
   Widget _buildTodoServeWidget(TimePoint timePoint) {
+    DiaryController d = Get.find();
     switch (timePoint) {
       case TimePoint.past:
-        return Padding(
-          padding: const EdgeInsets.all(TdSize.s),
-          child: ServeWidget(
-            text: 'To-do List 보기',
-            color: TdColor.lightGreen,
-            onPressed: () {
-              ModalUtil.barModalWithTodoListScreen(context);
-            },
-          ),
-        );
+        if (d.allData.value.todoList == null ||
+            d.allData.value.todoList!.isEmpty) {
+          return Container();
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(TdSize.s),
+            child: ServeWidget(
+              text: 'To-do List 보기',
+              color: TdColor.lightGreen,
+              onPressed: () {
+                setState(() {
+                  ModalUtil.barModalWithTodoListScreen(context);
+                });
+              },
+            ),
+          );
+        }
       case TimePoint.present:
-        return Padding(
-          padding: const EdgeInsets.all(TdSize.s),
-          child: ServeWidget(
-            text: 'To-do List 보기',
-            color: TdColor.lightGray,
-            onPressed: () {
-              ModalUtil.barModalWithTodoListScreen(context);
-            },
-          ),
-        );
       case TimePoint.tomorrow:
-        return Padding(
-          padding: const EdgeInsets.all(TdSize.s),
-          child: ServeWidget(
-            text: 'To-do List 보기',
-            color: TdColor.lightGray,
-            onPressed: () {
-              ModalUtil.barModalWithTodoListScreen(context);
-            },
-          ),
-        );
       case TimePoint.future:
-        return Padding(
-          padding: const EdgeInsets.all(TdSize.s),
-          child: ServeWidget(
-            text: 'To-do List 보기',
-            color: TdColor.lightGray,
-            onPressed: () {
-              ModalUtil.barModalWithTodoListScreen(context);
-            },
-          ),
-        );
+        if (d.allData.value.todoList == null ||
+            d.allData.value.todoList!.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(TdSize.s),
+            child: ServeWidget(
+              text: 'To-do List 쓰기',
+              color: TdColor.lightGray,
+              onPressed: () {
+                setState(() {
+                  ModalUtil.barModalWithTodoListScreen(context);
+                });
+              },
+            ),
+          );
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(TdSize.s),
+            child: ServeWidget(
+              text: 'To-do List 보기',
+              color: TdColor.lightGreen,
+              onPressed: () {
+                setState(() {
+                  ModalUtil.barModalWithTodoListScreen(context);
+                });
+              },
+            ),
+          );
+        }
     }
   }
 
@@ -208,7 +262,7 @@ class _HomeScreenState extends State<HomeScreen> with PrintLogMixin {
                     initialYear: selectedYear,
                     initialMonth: selectedMonth,
                     onChanged: _yearAndMonthChanged),
-                  ),
+              ),
             );
           },
           icon: const Icon(Icons.calendar_today_rounded),

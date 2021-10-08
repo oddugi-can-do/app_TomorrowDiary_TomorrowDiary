@@ -67,9 +67,9 @@ class _TodoListFormState extends State<TodoListForm> {
                               })
                           : TimeSelectWidget.disable(text: '-'),
                     ),
-                    const SizedBox(width: 20),
+                    const SizedBox(width: 5),
                     const Center(child: TextWidget.body(text: '~')),
-                    const SizedBox(width: 20),
+                    const SizedBox(width: 5),
                     Expanded(
                       child: _todo.timeEnabled ?? false
                           ? TimeSelectWidget(

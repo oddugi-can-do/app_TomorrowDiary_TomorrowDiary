@@ -13,36 +13,14 @@ class TmrDiaryScreen extends StatefulWidget {
 }
 
 class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
-  final Widget _smallGap = const SizedBox(height: TdSize.s);
-  final Widget _largeGap = const SizedBox(height: TdSize.l);
-
   DiaryController d = Get.find();
-
   CalendarController c = Get.find();
-
   List<Wish> wishList = [];
 
-  void _onTitleChanged(String value) {
-    d.allData.value.tmrDiary?.title = value;
-  }
-
-  void _onTmrHappenChanged(String value) {
-    d.allData.value.tmrDiary?.tmrHappen = value;
-  }
-
-  void _onTmrWishSubmitted(String value) {
-    setState(() {
-      wishList.add(Wish(wish: value, checked: false));
-      d.allData.value.tmrDiary?.tmrWish = wishList;
-    });
-  }
-
-  void _onTmrEmotionChanged(String value) {
-    d.allData.value.tmrDiary?.tmrEmotion = value;
-  }
-
-  void _onTmrDiarySubmitted() {
-    d.setPresentData();
+  @override
+  void dispose() {
+    c.selectDay(c.selectedDay);
+    super.dispose();
   }
 
   @override
@@ -96,9 +74,9 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
               const TextWidget.body(text: '내일 있어야 할 일'),
               _smallGap,
               MultiLineForm(
-                  hint : 'what to do tomorrow?',
+                  hint: 'what to do tomorrow?',
                   // hint: '내일 있어야 할 일을 최대한 객관적으로 적어주세요',
-                  text: d.allData.value.tmrDiary!.tmrHappen,
+                  text: d.allData.value.tmrDiary!.tmrHappen!,
                   onChanged: _onTmrHappenChanged),
               _largeGap,
               // ---위시 리스트---
@@ -115,12 +93,20 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
                       onTap: (checked) {
                         wishList[i].checked = checked;
                       },
+                      onLongPressed: (deleted) {
+                        if (deleted == true) {
+                          setState(() {
+                            wishList.removeAt(i);
+                            d.allData.value.tmrDiary!.tmrWish = wishList;
+                          });
+                        }
+                      },
                     ),
                   ],
                 ),
               _smallGap,
               WishListForm(
-                hint : 'What you want to do tomorrow?',
+                hint: 'What you want to do tomorrow?',
                 // hint: '내일 하고 싶은 일은 무엇인가요?',
                 onSubmitted: _onTmrWishSubmitted,
               ),
@@ -129,9 +115,9 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
               const TextWidget.body(text: '내일의 기분'),
               _smallGap,
               SingleLineForm(
-                hint : 'How will you feel tomorrow?',
+                hint: 'How will you feel tomorrow?',
                 // hint: '내일의 기분은 어떨 것 같나요?',
-                text: d.allData.value.tyDiary!.tyEmotion!,
+                text: d.allData.value.tmrDiary!.tmrEmotion!,
                 onChanged: _onTmrEmotionChanged,
               ),
               _largeGap,
@@ -145,5 +131,31 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
         ),
       ),
     );
+  }
+
+  final Widget _smallGap = const SizedBox(height: TdSize.s);
+  final Widget _largeGap = const SizedBox(height: TdSize.l);
+
+  void _onTitleChanged(String value) {
+    d.allData.value.tmrDiary?.title = value;
+  }
+
+  void _onTmrHappenChanged(String value) {
+    d.allData.value.tmrDiary?.tmrHappen = value;
+  }
+
+  void _onTmrWishSubmitted(String value) {
+    setState(() {
+      wishList.add(Wish(wish: value, checked: false));
+      d.allData.value.tmrDiary?.tmrWish = wishList;
+    });
+  }
+
+  void _onTmrEmotionChanged(String value) {
+    d.allData.value.tmrDiary?.tmrEmotion = value;
+  }
+
+  void _onTmrDiarySubmitted() {
+    d.setPresentData();
   }
 }
