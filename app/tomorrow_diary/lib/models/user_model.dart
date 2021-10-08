@@ -1,11 +1,3 @@
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
-import 'package:tomorrow_diary/models/models.dart';
-import 'package:tomorrow_diary/utils/firestore_key.dart';
-
 class UserModel {
   final String? uid;
   final String? email;

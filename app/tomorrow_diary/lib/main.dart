@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/bindings/bindings.dart';
-import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'views/views.dart';
 
 void main() async {
@@ -12,7 +11,7 @@ void main() async {
   runApp(MyDiaryApp());
 }
 
-class MyDiaryApp extends StatelessWidget with PrintLogMixin {
+class MyDiaryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

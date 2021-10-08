@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/views/views.dart';
 
@@ -18,13 +17,12 @@ class DrawerSideMenu extends StatelessWidget {
       child: Container(
         child: ListView(children: [
           CircleAvatar(
-            child: ClipOval(
-              child: Image.network('${gc.todayImages}')
-            ),
-            radius: 50
-          ),
-          Text("${uc.principal.value.username}", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 30)),
-          SizedBox(height:30),
+              child: ClipOval(child: Image.network('${gc.todayImages}')),
+              radius: 50),
+          Text("${uc.principal.value.username}",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontSize: 30)),
+          SizedBox(height: 30),
           Card(
             color: Colors.transparent,
             child: ListTile(

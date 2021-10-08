@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tomorrow_diary/mixins/mixins.dart';
 import 'package:tomorrow_diary/utils/tdsize.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
-class ServeWidget extends StatelessWidget with PrintLogMixin {
+class ServeWidget extends StatelessWidget {
   final double height;
   final String text;
   final Color color;

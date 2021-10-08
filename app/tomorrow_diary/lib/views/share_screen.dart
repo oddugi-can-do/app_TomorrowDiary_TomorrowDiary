@@ -1,9 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/controllers/gallery_controller.dart';
-import 'package:http/http.dart' as http;
+import 'package:tomorrow_diary/views/views.dart';
 
 class ShareScreen extends StatelessWidget {
   final String? imageFile;
@@ -20,16 +19,16 @@ class ShareScreen extends StatelessWidget {
         backgroundColor: Colors.black87,
         appBar: AppBar(
           backgroundColor: Colors.black87,
-          title: Text("Image", textAlign: TextAlign.center),
+          title: const Text("Image", textAlign: TextAlign.center),
           actions: [
             TextButton(
-              onPressed: ()  {
-
+              onPressed: () {
                 gc.todayImages.value = imageFile!;
                 // final file = await getFileFromNetworkImage(imageFile!);
                 // gc.uploadImage(file, uid);
+                Get.off(() => HomeScreen());
               },
-              child: Text("Select",
+              child: const Text("Select",
                   textScaleFactor: 1.4, style: TextStyle(color: Colors.blue)),
             )
           ],
