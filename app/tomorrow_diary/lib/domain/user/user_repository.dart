@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tomorrow_diary/domain/user/user_provider.dart';
 import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
@@ -88,19 +89,19 @@ class UserRepo {
 
 // 구글과 페이스북 설정을 해야하는데 설정에 문제가 있어 못하고 있음
 
-  // Future<UserCredential> googleSiginIn() async {
-  //   //구글에 로그인
-  //   final googleAuth = await GoogleSignIn().signIn();
-  //   //로그인된 정보를 가져옴
-  //   final googleUser = await googleAuth!.authentication;
-  //   //가져온 정보로 로그인할 수 있게 만들어줌(토큰)
-  //   final googleAuthCredential = GoogleAuthProvider.credential(
-  //     accessToken: googleUser.accessToken,
-  //     idToken: googleUser.idToken,
-  //   );
-  //   //로그인함
-  //   final user =
-  //       await FirebaseAuth.instance.signInWithCredential(googleAuthCredential);
-  //   return user;
-  // }
+  Future<UserCredential> googleSiginIn() async {
+    //구글에 로그인
+    final googleAuth = await GoogleSignIn().signIn();
+    //로그인된 정보를 가져옴
+    final googleUser = await googleAuth!.authentication;
+    //가져온 정보로 로그인할 수 있게 만들어줌(토큰)
+    final googleAuthCredential = GoogleAuthProvider.credential(
+      accessToken: googleUser.accessToken,
+      idToken: googleUser.idToken,
+    );
+    //로그인함
+    final user =
+        await FirebaseAuth.instance.signInWithCredential(googleAuthCredential);
+    return user;
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/bindings/bindings.dart';
 import 'package:tomorrow_diary/domain/user/user_repository.dart';
@@ -32,12 +33,24 @@ class UserController extends GetxController {
   }
 
   Future<bool> join(String email, String password, String username) async {
-    UserModel principal = await _userRepo.join(email, password,username);
+    UserModel principal = await _userRepo.join(email, password, username);
     print(principal);
     if (principal.uid != null) {
       this.isLogin.value = true;
       this.principal.value = principal;
       Get.to(HomeScreen(), binding: HomeScreenBindings());
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> googleLogin() async {
+    UserCredential user = await _userRepo.googleSiginIn();
+    print(user);
+    if (user.user!.uid != null) {
+      Get.to(HomeScreen(), binding: HomeScreenBindings());
+
       return true;
     } else {
       return false;

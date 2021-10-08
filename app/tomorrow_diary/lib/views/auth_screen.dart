@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tomorrow_diary/bindings/home_screen_bindings.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/utils/screen_size.dart';
 import 'package:tomorrow_diary/utils/snackbar_util.dart';
 import 'package:tomorrow_diary/views/home_screen.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
@@ -29,6 +30,7 @@ class _AuthScreenState extends State<AuthScreen> {
   bool isRegister = true;
   @override
   Widget build(BuildContext context) {
+    if (screenSize == null) screenSize = MediaQuery.of(context).size;
     return Material(
       child: Container(
         decoration: BoxDecoration(
@@ -89,8 +91,8 @@ class _AuthScreenState extends State<AuthScreen> {
                                     ? FontWeight.bold
                                     : FontWeight.w200))),
                   ]),
-                  SizedBox(height:40),
-                  AnimatedContainer( 
+                  SizedBox(height: 40),
+                  AnimatedContainer(
                     duration: _duration,
                     curve: Curves.fastOutSlowIn,
                     height: isRegister ? 60 : 0,
@@ -102,9 +104,9 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height:7),
-                  // Email 
-                  AuthFormField(hint: 'Email', controller: _emailController), 
+                  SizedBox(height: 7),
+                  // Email
+                  AuthFormField(hint: 'Email', controller: _emailController),
                   SizedBox(height: 16),
 
                   // Password
@@ -112,8 +114,8 @@ class _AuthScreenState extends State<AuthScreen> {
                       hint: 'Password', controller: _passwordController),
                   SizedBox(height: 16),
 
-                  // Confirm password 
-                  AnimatedContainer( 
+                  // Confirm password
+                  AnimatedContainer(
                     duration: _duration,
                     curve: Curves.fastOutSlowIn,
                     height: isRegister ? 60 : 0,
@@ -151,8 +153,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   SizedBox(height: 5),
                   _socialLoginButton('facebook', () {
                     print("facebook");
-                   
-                    Get.to(HomeScreen(),binding: HomeScreenBindings());
+                    Get.to(HomeScreen(), binding: HomeScreenBindings());
                     // Get.to(HomeScreen());
                   })
                 ].reversed.toList(),
@@ -168,10 +169,15 @@ class _AuthScreenState extends State<AuthScreen> {
     return ElevatedButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
-          isRegister ? (_cfPasswordController.text == _passwordController.text)
-                  ? uc.join(_emailController.text.trim(), _passwordController.text.trim(), _usernameController.text.trim()) 
+          isRegister
+              ? (_cfPasswordController.text == _passwordController.text)
+                  ? uc.join(
+                      _emailController.text.trim(),
+                      _passwordController.text.trim(),
+                      _usernameController.text.trim())
                   : snackBar(msg: "패스워드가 맞지 않습니다.")
-                  : uc.login(_emailController.text.trim(),_passwordController.text.trim());
+              : uc.login(_emailController.text.trim(),
+                  _passwordController.text.trim());
         }
       },
       style: ElevatedButton.styleFrom(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/tdcolor.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
