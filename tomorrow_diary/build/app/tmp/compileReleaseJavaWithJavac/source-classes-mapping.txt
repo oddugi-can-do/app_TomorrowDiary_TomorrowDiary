@@ -1,4 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-com/example/tomorrow_diary/BuildConfig.java
- com.example.tomorrow_diary.BuildConfig
