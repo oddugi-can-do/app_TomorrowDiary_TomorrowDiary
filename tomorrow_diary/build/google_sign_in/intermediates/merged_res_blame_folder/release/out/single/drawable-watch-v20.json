@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/google_sign_in/intermediates/res/merged/release/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml",
+        "source": "/home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml"
+    },
+    {
+        "merged": "/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/google_sign_in/intermediates/res/merged/release/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml",
+        "source": "/home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml"
+    },
+    {
+        "merged": "/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/google_sign_in/intermediates/res/merged/release/drawable-watch-v20/common_google_signin_btn_text_disabled.xml",
+        "source": "/home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_disabled.xml"
+    }
+]
