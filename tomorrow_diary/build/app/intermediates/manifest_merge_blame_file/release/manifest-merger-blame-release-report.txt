@@ -1,0 +1,316 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.tomorrow_diary"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+11-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:3:4-79
+11-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:3:21-76
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->[:google_sign_in] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/google_sign_in/intermediates/library_manifest/release/AndroidManifest.xml:7:5-67
+12-->[:google_sign_in] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/google_sign_in/intermediates/library_manifest/release/AndroidManifest.xml:7:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:24:5-79
+13-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:24:22-76
+14
+15    <application
+15-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:4:4-41:19
+16        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+16-->[androidx.core:core:1.1.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/3c8fd1bfddb99a7a7e21faa1397acdb4/core-1.1.0/AndroidManifest.xml:24:18-86
+17        android:icon="@mipmap/ic_launcher"
+17-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:6:9-43
+18        android:label="tomorrow_diary" >
+18-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:5:9-39
+19        <activity
+19-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:7:9-35:20
+20            android:name="com.example.tomorrow_diary.MainActivity"
+20-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:8:13-41
+21            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+21-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:11:13-163
+22            android:hardwareAccelerated="true"
+22-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:12:13-47
+23            android:launchMode="singleTop"
+23-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:9:13-43
+24            android:theme="@style/LaunchTheme"
+24-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:10:13-47
+25            android:windowSoftInputMode="adjustResize" >
+25-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:13:13-55
+26
+27            <!--
+28                 Specifies an Android theme to apply to this Activity as soon as
+29                 the Android process has started. This theme is visible to the user
+30                 while the Flutter UI initializes. After that, this theme continues
+31                 to determine the Window background behind the Flutter UI.
+32            -->
+33            <meta-data
+33-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:18:13-21:17
+34                android:name="io.flutter.embedding.android.NormalTheme"
+34-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:19:15-70
+35                android:resource="@style/NormalTheme" />
+35-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:20:15-52
+36            <!--
+37                 Displays an Android View that continues showing the launch screen
+38                 Drawable until Flutter paints its first frame, then this splash
+39                 screen fades out. A splash screen is useful to avoid any visual
+40                 gap between the end of Android's launch screen and the painting of
+41                 Flutter's first frame.
+42            -->
+43            <meta-data
+43-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:27:13-30:17
+44                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+44-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:28:15-79
+45                android:resource="@drawable/launch_background" />
+45-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:29:15-61
+46
+47            <intent-filter>
+47-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:31:13-34:29
+48                <action android:name="android.intent.action.MAIN" />
+48-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:32:17-68
+48-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:32:25-66
+49
+50                <category android:name="android.intent.category.LAUNCHER" />
+50-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:33:17-76
+50-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:33:27-74
+51            </intent-filter>
+52        </activity>
+53        <!--
+54             Don't delete the meta-data below.
+55             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+56        -->
+57        <meta-data
+57-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:38:9-40:33
+58            android:name="flutterEmbedding"
+58-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:39:13-44
+59            android:value="2" />
+59-->/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/android/app/src/main/AndroidManifest.xml:40:13-30
+60
+61        <service
+61-->[:firebase_auth] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_auth/intermediates/library_manifest/release/AndroidManifest.xml:8:9-12:19
+62            android:name="com.google.firebase.components.ComponentDiscoveryService"
+62-->[:firebase_auth] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_auth/intermediates/library_manifest/release/AndroidManifest.xml:8:18-89
+63            android:directBootAware="true"
+63-->[com.google.firebase:firebase-common:20.0.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/e8c12af64c0d197211b7d090cb61cdf8/jetified-firebase-common-20.0.0/AndroidManifest.xml:35:13-43
+64            android:exported="false" >
+64-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:76:13-37
+65            <meta-data
+65-->[:firebase_auth] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_auth/intermediates/library_manifest/release/AndroidManifest.xml:9:13-11:85
+66                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
+66-->[:firebase_auth] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_auth/intermediates/library_manifest/release/AndroidManifest.xml:10:17-124
+67                android:value="com.google.firebase.components.ComponentRegistrar" />
+67-->[:firebase_auth] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_auth/intermediates/library_manifest/release/AndroidManifest.xml:11:17-82
+68            <meta-data
+68-->[:firebase_storage] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_storage/intermediates/library_manifest/release/AndroidManifest.xml:9:13-11:85
+69                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
+69-->[:firebase_storage] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_storage/intermediates/library_manifest/release/AndroidManifest.xml:10:17-126
+70                android:value="com.google.firebase.components.ComponentRegistrar" />
+70-->[:firebase_storage] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_storage/intermediates/library_manifest/release/AndroidManifest.xml:11:17-82
+71            <meta-data
+71-->[:cloud_firestore] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:9:13-11:85
+72                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
+72-->[:cloud_firestore] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:10:17-134
+73                android:value="com.google.firebase.components.ComponentRegistrar" />
+73-->[:cloud_firestore] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:11:17-82
+74            <meta-data
+74-->[:firebase_core] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:9:13-11:85
+75                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+75-->[:firebase_core] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:10:17-124
+76                android:value="com.google.firebase.components.ComponentRegistrar" />
+76-->[:firebase_core] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:11:17-82
+77            <meta-data
+77-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:77:13-79:85
+78                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+78-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:78:17-109
+79                android:value="com.google.firebase.components.ComponentRegistrar" />
+79-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:79:17-82
+80            <meta-data
+80-->[com.google.firebase:firebase-firestore:23.0.4] /home/codespace/.gradle/caches/transforms-2/files-2.1/ae42bde39caf7196b61b7cffba3b5337/jetified-firebase-firestore-23.0.4/AndroidManifest.xml:20:13-22:85
+81                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+81-->[com.google.firebase:firebase-firestore:23.0.4] /home/codespace/.gradle/caches/transforms-2/files-2.1/ae42bde39caf7196b61b7cffba3b5337/jetified-firebase-firestore-23.0.4/AndroidManifest.xml:21:17-111
+82                android:value="com.google.firebase.components.ComponentRegistrar" />
+82-->[com.google.firebase:firebase-firestore:23.0.4] /home/codespace/.gradle/caches/transforms-2/files-2.1/ae42bde39caf7196b61b7cffba3b5337/jetified-firebase-firestore-23.0.4/AndroidManifest.xml:22:17-82
+83            <meta-data
+83-->[com.google.firebase:firebase-storage:20.0.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/aac17191751d9819c4ba4efa4c4713d8/jetified-firebase-storage-20.0.0/AndroidManifest.xml:33:13-35:85
+84                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+84-->[com.google.firebase:firebase-storage:20.0.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/aac17191751d9819c4ba4efa4c4713d8/jetified-firebase-storage-20.0.0/AndroidManifest.xml:34:17-107
+85                android:value="com.google.firebase.components.ComponentRegistrar" />
+85-->[com.google.firebase:firebase-storage:20.0.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/aac17191751d9819c4ba4efa4c4713d8/jetified-firebase-storage-20.0.0/AndroidManifest.xml:35:17-82
+86        </service>
+87
+88        <provider
+88-->[:image_picker] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:8:9-16:20
+89            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+89-->[:image_picker] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:9:13-82
+90            android:authorities="com.example.tomorrow_diary.flutter.image_provider"
+90-->[:image_picker] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:10:13-74
+91            android:exported="false"
+91-->[:image_picker] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:11:13-37
+92            android:grantUriPermissions="true" >
+92-->[:image_picker] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:12:13-47
+93            <meta-data
+93-->[:image_picker] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:13:13-15:75
+94                android:name="android.support.FILE_PROVIDER_PATHS"
+94-->[:image_picker] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:14:17-67
+95                android:resource="@xml/flutter_image_picker_file_paths" />
+95-->[:image_picker] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:15:17-72
+96        </provider>
+97
+98        <activity
+98-->[:url_launcher] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:8:9-11:74
+99            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+99-->[:url_launcher] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:9:13-74
+100            android:exported="false"
+100-->[:url_launcher] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:10:13-37
+101            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+101-->[:url_launcher] /workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
+102        <activity
+102-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:27:9-44:20
+103            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+103-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:28:13-80
+104            android:excludeFromRecents="true"
+104-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:29:13-46
+105            android:exported="true"
+105-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:30:13-36
+106            android:launchMode="singleTask"
+106-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:31:13-44
+107            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+107-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:32:13-72
+108            <intent-filter>
+108-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:33:13-43:29
+109                <action android:name="android.intent.action.VIEW" />
+109-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:34:17-69
+109-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:34:25-66
+110
+111                <category android:name="android.intent.category.DEFAULT" />
+111-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:36:17-76
+111-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:36:27-73
+112                <category android:name="android.intent.category.BROWSABLE" />
+112-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:37:17-78
+112-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:37:27-75
+113
+114                <data
+114-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:39:17-42:51
+115                    android:host="firebase.auth"
+115-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:40:21-49
+116                    android:path="/"
+116-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:41:21-37
+117                    android:scheme="genericidp" />
+117-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:42:21-48
+118            </intent-filter>
+119        </activity>
+120        <activity
+120-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:45:9-62:20
+121            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+121-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:46:13-79
+122            android:excludeFromRecents="true"
+122-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:47:13-46
+123            android:exported="true"
+123-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:48:13-36
+124            android:launchMode="singleTask"
+124-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:49:13-44
+125            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+125-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:50:13-72
+126            <intent-filter>
+126-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:51:13-61:29
+127                <action android:name="android.intent.action.VIEW" />
+127-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:34:17-69
+127-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:34:25-66
+128
+129                <category android:name="android.intent.category.DEFAULT" />
+129-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:36:17-76
+129-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:36:27-73
+130                <category android:name="android.intent.category.BROWSABLE" />
+130-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:37:17-78
+130-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:37:27-75
+131
+132                <data
+132-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:39:17-42:51
+133                    android:host="firebase.auth"
+133-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:40:21-49
+134                    android:path="/"
+134-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:41:21-37
+135                    android:scheme="recaptcha" />
+135-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:42:21-48
+136            </intent-filter>
+137        </activity>
+138
+139        <service
+139-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:64:9-73:19
+140            android:name="com.google.firebase.auth.api.fallback.service.FirebaseAuthFallbackService"
+140-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:65:13-101
+141            android:enabled="true"
+141-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:66:13-35
+142            android:exported="false" >
+142-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:67:13-37
+143            <intent-filter>
+143-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:68:13-72:29
+144                <action android:name="com.google.firebase.auth.api.gms.service.START" />
+144-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:69:17-89
+144-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:69:25-86
+145
+146                <category android:name="android.intent.category.DEFAULT" />
+146-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:36:17-76
+146-->[com.google.firebase:firebase-auth:21.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/cb85e813550ceb859d5d8655b705694f/jetified-firebase-auth-21.0.1/AndroidManifest.xml:36:27-73
+147            </intent-filter>
+148        </service>
+149
+150        <provider
+150-->[com.google.firebase:firebase-common:20.0.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/e8c12af64c0d197211b7d090cb61cdf8/jetified-firebase-common-20.0.0/AndroidManifest.xml:26:9-31:39
+151            android:name="com.google.firebase.provider.FirebaseInitProvider"
+151-->[com.google.firebase:firebase-common:20.0.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/e8c12af64c0d197211b7d090cb61cdf8/jetified-firebase-common-20.0.0/AndroidManifest.xml:27:13-77
+152            android:authorities="com.example.tomorrow_diary.firebaseinitprovider"
+152-->[com.google.firebase:firebase-common:20.0.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/e8c12af64c0d197211b7d090cb61cdf8/jetified-firebase-common-20.0.0/AndroidManifest.xml:28:13-72
+153            android:directBootAware="true"
+153-->[com.google.firebase:firebase-common:20.0.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/e8c12af64c0d197211b7d090cb61cdf8/jetified-firebase-common-20.0.0/AndroidManifest.xml:29:13-43
+154            android:exported="false"
+154-->[com.google.firebase:firebase-common:20.0.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/e8c12af64c0d197211b7d090cb61cdf8/jetified-firebase-common-20.0.0/AndroidManifest.xml:30:13-37
+155            android:initOrder="100" />
+155-->[com.google.firebase:firebase-common:20.0.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/e8c12af64c0d197211b7d090cb61cdf8/jetified-firebase-common-20.0.0/AndroidManifest.xml:31:13-36
+156
+157        <activity
+157-->[com.google.android.gms:play-services-auth:16.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/AndroidManifest.xml:23:9-27:75
+158            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+158-->[com.google.android.gms:play-services-auth:16.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/AndroidManifest.xml:24:13-93
+159            android:excludeFromRecents="true"
+159-->[com.google.android.gms:play-services-auth:16.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/AndroidManifest.xml:25:13-46
+160            android:exported="false"
+160-->[com.google.android.gms:play-services-auth:16.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/AndroidManifest.xml:26:13-37
+161            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+161-->[com.google.android.gms:play-services-auth:16.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/AndroidManifest.xml:27:13-72
+162        <!--
+163            Service handling Google Sign-In user revocation. For apps that do not integrate with
+164            Google Sign-In, this service will never be started.
+165        -->
+166        <service
+166-->[com.google.android.gms:play-services-auth:16.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/AndroidManifest.xml:33:9-36:110
+167            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+167-->[com.google.android.gms:play-services-auth:16.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/AndroidManifest.xml:34:13-89
+168            android:exported="true"
+168-->[com.google.android.gms:play-services-auth:16.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/AndroidManifest.xml:35:13-36
+169            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />
+169-->[com.google.android.gms:play-services-auth:16.0.1] /home/codespace/.gradle/caches/transforms-2/files-2.1/f60b14174b1419286aa666985c6c689d/jetified-play-services-auth-16.0.1/AndroidManifest.xml:36:13-107
+170
+171        <activity
+171-->[com.google.android.gms:play-services-base:17.1.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/0813e45a0b3806629b40dbeb70c75a60/jetified-play-services-base-17.1.0/AndroidManifest.xml:23:9-26:75
+172            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+172-->[com.google.android.gms:play-services-base:17.1.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/0813e45a0b3806629b40dbeb70c75a60/jetified-play-services-base-17.1.0/AndroidManifest.xml:24:13-79
+173            android:exported="false"
+173-->[com.google.android.gms:play-services-base:17.1.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/0813e45a0b3806629b40dbeb70c75a60/jetified-play-services-base-17.1.0/AndroidManifest.xml:25:13-37
+174            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+174-->[com.google.android.gms:play-services-base:17.1.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/0813e45a0b3806629b40dbeb70c75a60/jetified-play-services-base-17.1.0/AndroidManifest.xml:26:13-72
+175
+176        <meta-data
+176-->[com.google.android.gms:play-services-basement:17.1.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/14e561dfe998324f0993f7eed2935f20/jetified-play-services-basement-17.1.0/AndroidManifest.xml:23:9-25:69
+177            android:name="com.google.android.gms.version"
+177-->[com.google.android.gms:play-services-basement:17.1.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/14e561dfe998324f0993f7eed2935f20/jetified-play-services-basement-17.1.0/AndroidManifest.xml:24:13-58
+178            android:value="@integer/google_play_services_version" />
+178-->[com.google.android.gms:play-services-basement:17.1.0] /home/codespace/.gradle/caches/transforms-2/files-2.1/14e561dfe998324f0993f7eed2935f20/jetified-play-services-basement-17.1.0/AndroidManifest.xml:25:13-66
+179    </application>
+180
+181</manifest>

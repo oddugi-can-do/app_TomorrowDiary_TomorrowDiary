@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">830530008181-0rjbvvk3crij5a0og7v1tlmik1gvson2.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">830530008181</string>
+    <string name="google_api_key" translatable="false">AIzaSyBgBuWtGWP_L6BQR272HYQI47nRNJCsF8Q</string>
+    <string name="google_app_id" translatable="false">1:830530008181:android:9ffc54c0807a4a08f3343c</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBgBuWtGWP_L6BQR272HYQI47nRNJCsF8Q</string>
+    <string name="google_storage_bucket" translatable="false">tomorrow-diary-b62df.appspot.com</string>
+    <string name="project_id" translatable="false">tomorrow-diary-b62df</string>
+</resources>

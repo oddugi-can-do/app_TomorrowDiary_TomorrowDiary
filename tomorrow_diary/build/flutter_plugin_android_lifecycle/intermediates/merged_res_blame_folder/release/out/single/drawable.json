@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/flutter_plugin_android_lifecycle/intermediates/res/merged/release/drawable/notification_bg_low.xml",
+        "source": "/home/codespace/.gradle/caches/transforms-2/files-2.1/3c8fd1bfddb99a7a7e21faa1397acdb4/core-1.1.0/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/flutter_plugin_android_lifecycle/intermediates/res/merged/release/drawable/notification_tile_bg.xml",
+        "source": "/home/codespace/.gradle/caches/transforms-2/files-2.1/3c8fd1bfddb99a7a7e21faa1397acdb4/core-1.1.0/res/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/flutter_plugin_android_lifecycle/intermediates/res/merged/release/drawable/notification_icon_background.xml",
+        "source": "/home/codespace/.gradle/caches/transforms-2/files-2.1/3c8fd1bfddb99a7a7e21faa1397acdb4/core-1.1.0/res/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "/workspaces/app_TomorrowDiary_TomorrowDiary/tomorrow_diary/build/flutter_plugin_android_lifecycle/intermediates/res/merged/release/drawable/notification_bg.xml",
+        "source": "/home/codespace/.gradle/caches/transforms-2/files-2.1/3c8fd1bfddb99a7a7e21faa1397acdb4/core-1.1.0/res/drawable/notification_bg.xml"
+    }
+]
