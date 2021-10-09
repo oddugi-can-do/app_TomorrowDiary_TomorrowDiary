@@ -1,16 +1,31 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/domain/diary/diary_repository.dart';
 import 'package:tomorrow_diary/models/models.dart';
-
+import 'package:tomorrow_diary/utils/calendar_util.dart';
+import 'package:tomorrow_diary/utils/date_converter.dart';
 import 'controllers.dart';
 
 class DiaryController extends GetxController {
   final DiaryRepository _diaryRepository = DiaryRepository();
   final allData = DataModel().obs;
+  final analysisData = <DataModel>[].obs;
 
   @override
   void onInit() {
     super.onInit();
+  }
+
+  Future<List<DataModel>> findDataByMonth(int year, int month) async {
+    List<DataModel> foundData = [];
+    for (int i = 0; i < CalendarUtil.daysCount(2021, 10); ++i) {
+      DataModel _temp = await _diaryRepository
+          .findDataByDate(DateConverter.dateToString(year, month, i));
+      foundData.add(_temp);
+    }
+    analysisData.value = foundData;
+    return foundData;
   }
 
   Future<DataModel> findDataByDate(String date) async {

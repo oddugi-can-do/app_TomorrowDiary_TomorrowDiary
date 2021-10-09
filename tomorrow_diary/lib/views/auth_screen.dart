@@ -48,7 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
                   //Title
                   Text(
-                    "Tmorrow Diary",
+                    "Tomorrow Diary",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 40,
@@ -103,7 +103,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                   ),
-                   AnimatedContainer(
+                  AnimatedContainer(
                       duration: _duration, height: isRegister ? 12 : 0),
                   // Email
                   AuthFormField(hint: 'Email', controller: _emailController),

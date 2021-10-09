@@ -7,3 +7,4 @@ export 'todo_list_screen.dart';
 export 'auth_screen.dart';
 export 'gallery_screen.dart';
 export 'share_screen.dart';
+export 'analysis_screen.dart';
