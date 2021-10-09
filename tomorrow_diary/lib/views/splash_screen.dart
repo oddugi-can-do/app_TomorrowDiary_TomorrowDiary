@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 Expanded(child: SizedBox()),
                 Align(
-                  child: Text("© Copyright 2021, 내일일기(Tomorrow Diary",
+                  child: Text("© Copyright 2021, 내일 일기(Tomorrow Diary)",
                       style: TextStyle(
                         fontSize: screenWidth * (14 / 360),
                         color: Color.fromRGBO(255, 255, 255, 0.6),

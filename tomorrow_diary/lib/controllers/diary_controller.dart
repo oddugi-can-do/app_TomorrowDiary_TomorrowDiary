@@ -18,6 +18,7 @@ class DiaryController extends GetxController {
   }
 
   Future<List<DataModel>> findDataByMonth(int year, int month) async {
+    print('diary controller : find data by month');
     List<DataModel> foundData = [];
     for (int i = 0; i < CalendarUtil.daysCount(2021, 10); ++i) {
       DataModel _temp = await _diaryRepository
@@ -65,5 +66,9 @@ class DiaryController extends GetxController {
       DataModel foundData = await _diaryRepository.findDataByDate(_date);
       allData.value = foundData;
     }
+  }
+
+  Future<List<DataModel>> getAnalyzedData() async {
+    return analysisData;
   }
 }
