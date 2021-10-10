@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       extendBodyBehindAppBar: true,
       key: _key,
-      backgroundColor: TdColor.brown,
+      backgroundColor: TdColor.black,
       body: _buildAnimatedHomeScreen(context),
     );
   }
@@ -313,9 +313,11 @@ class _HomeScreenState extends State<HomeScreen>
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.4,
                 child: SelectYearAndMonthScreen(
-                    initialYear: selectedYear,
-                    initialMonth: selectedMonth,
-                    onChanged: _yearAndMonthChanged),
+                  initialYear: selectedYear,
+                  initialMonth: selectedMonth,
+                  onSubmitted: _yearAndMonthChanged,
+                  onCanceled: () {},
+                ),
               ),
             );
           },

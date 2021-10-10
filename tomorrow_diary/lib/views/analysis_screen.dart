@@ -9,7 +9,11 @@ import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class AnalysisScreen extends StatefulWidget {
-  const AnalysisScreen({Key? key}) : super(key: key);
+  final selectedYear;
+  final selectedMonth;
+  const AnalysisScreen(
+      {Key? key, required this.selectedYear, required this.selectedMonth})
+      : super(key: key);
 
   @override
   _AnalysisScreenState createState() => _AnalysisScreenState();
@@ -34,12 +38,12 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
   Widget build(BuildContext context) {
     return FutureBuilder<List<DataModel>>(
       future: d.analysisData.isEmpty
-          ? d.findDataByMonth(2021, 10)
+          ? d.findDataByMonth(widget.selectedYear, widget.selectedMonth)
           : d.getAnalyzedData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           // data가 있을 때
-          double daysCount = CalendarUtil.daysCount(2021, 10) / 1;
+          double daysCount = CalendarUtil.daysCount(widget.selectedYear, widget.selectedMonth) / 1;
           // ---- profile ----
           double totalPercent = 0;
 
@@ -139,10 +143,19 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                           TextWidget.header(text: '데이터를 가져올 수 없습니다. 아...'))));
         } else {
           // 로딩 중일 때
-          return const Scaffold(
+          return Scaffold(
               backgroundColor: TdColor.brown,
               body: SafeArea(
-                  child: Center(child: TextWidget.header(text: '분석 중...'))));
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Center(child: TextWidget.header(text: '분석 중...')),
+                  SizedBox(height: 100),
+                  CircularProgressIndicator(
+                    color: TdColor.white,
+                  ),
+                ],
+              )));
         }
       },
     );
@@ -159,20 +172,21 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
       chartType: ChartType.ring,
       ringStrokeWidth: 32,
       // centerText: "HYBRID",
-      legendOptions: const LegendOptions(
+      legendOptions: LegendOptions(
         showLegendsInRow: false,
-        legendPosition: LegendPosition.right,
+        legendPosition: LegendPosition.bottom,
         showLegends: true,
-        legendTextStyle: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
+        legendTextStyle: GoogleFonts.notoSans(
+            fontSize: TdSize.s,
+            fontWeight: FontWeight.bold,
+            color: TdColor.white),
       ),
       chartValuesOptions: const ChartValuesOptions(
         showChartValueBackground: true,
         showChartValues: true,
         showChartValuesInPercentage: false,
-        showChartValuesOutside: false,
-        decimalPlaces: 1,
+        showChartValuesOutside: true,
+        decimalPlaces: 0,
       ),
     );
   }
