@@ -147,8 +147,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   // Social Login
                   SizedBox(height: 30),
                   _socialLoginButton('google', () async {
-                    print("google");
-                    Get.to(HomeScreen(), binding: HomeScreenBindings());
+                    await uc.googleLogin();
                   }),
                   SizedBox(height: 5),
                   _socialLoginButton('facebook', () {

@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tomorrow_diary/bindings/bindings.dart';
 import 'package:tomorrow_diary/domain/user/user_provider.dart';
 import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
+import 'package:tomorrow_diary/views/views.dart';
 
 class UserRepo {
   UserProvider _userProvider = UserProvider();
@@ -89,19 +92,25 @@ class UserRepo {
 
 // 구글과 페이스북 설정을 해야하는데 설정에 문제가 있어 못하고 있음
 
-  Future<UserCredential> googleSiginIn() async {
+  Future<UserModel> googleSiginIn() async {
     //구글에 로그인
-    final googleAuth = await GoogleSignIn().signIn();
-    //로그인된 정보를 가져옴
-    final googleUser = await googleAuth!.authentication;
+    final GoogleSignInAccount? googleAuth = await GoogleSignIn().signIn();
+    if(googleAuth != null ){
+      final GoogleSignInAuthentication googleUser = await googleAuth.authentication;
     //가져온 정보로 로그인할 수 있게 만들어줌(토큰)
     final googleAuthCredential = GoogleAuthProvider.credential(
       accessToken: googleUser.accessToken,
       idToken: googleUser.idToken,
     );
+   
     //로그인함
+    //UserCredential
     final user =
         await FirebaseAuth.instance.signInWithCredential(googleAuthCredential);
-    return user;
+    UserModel principal =  UserModel(email: user.user!.email,username:user.user!.displayName, uid: user.user!.uid );
+   await _userProvider.sendUserDataFb(principal,user.user!.uid);
+    return principal;
+    }
+    return UserModel();
   }
 }

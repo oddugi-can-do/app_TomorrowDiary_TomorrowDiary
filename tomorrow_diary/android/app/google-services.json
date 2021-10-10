@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:830530008181:android:9ffc54c0807a4a08f3343c",
         "android_client_info": {
-          "package_name": "com.example.tomorrow_diary"
+          "package_name": "com.android.application"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "830530008181-kintu7gborg9674uovkrek1qsdcls7a7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.tomorrow_diary",
+            "package_name": "com.android.application",
             "certificate_hash": "d738779c8662d0d610b58680d029e86cb365cc47"
           }
         },
