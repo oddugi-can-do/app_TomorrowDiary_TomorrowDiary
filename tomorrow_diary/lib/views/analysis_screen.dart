@@ -131,12 +131,16 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
           );
         } else if (snapshot.hasError) {
           // 에러가 있을 때
-          return const Center(
-              child: TextWidget.header(text: '데이터를 가져올 수 없습니다. 아...'));
+          return const Scaffold(
+              backgroundColor: TdColor.brown,
+              body: SafeArea(
+                  child: Center(
+                      child:
+                          TextWidget.header(text: '데이터를 가져올 수 없습니다. 아...'))));
         } else {
           // 로딩 중일 때
           return const Scaffold(
-              backgroundColor: TdColor.purple,
+              backgroundColor: TdColor.brown,
               body: SafeArea(
                   child: Center(child: TextWidget.header(text: '분석 중...'))));
         }

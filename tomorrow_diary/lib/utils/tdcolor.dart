@@ -15,4 +15,5 @@ class TdColor {
   static const gold = Color(0xffFFD700);
   static const silver = Color(0xffC0C0C0);
   static const bronze = Color(0xffC49C48);
+  static const brown = Color(0xffA37F4B); // Theme Color
 }

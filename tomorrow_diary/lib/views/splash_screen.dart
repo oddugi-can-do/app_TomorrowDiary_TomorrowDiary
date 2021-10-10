@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
       child: MediaQuery(
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
         child: Scaffold(
-          backgroundColor: TdColor.purple,
+          backgroundColor: TdColor.brown,
           body: Container(
             //height : MediaQuery.of(context).size.height,
             //color: kPrimaryColor,
