@@ -1,6 +1,6 @@
 
 # 내일 일기(Tomorrow Diary)
-![Logo](https://logosbynick.com/wp-content/uploads/2018/03/final-logo-example.png)
+![Logo](https://github.com/oddugi-can-do/app_TomorrowDiary_TomorrowDiary/blob/dev/Tomorrow_Diary_Banner.png)
 
 
 ## 프로젝트 소개
