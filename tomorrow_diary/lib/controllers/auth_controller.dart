@@ -1,3 +1,4 @@
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tomorrow_diary/bindings/bindings.dart';
@@ -22,6 +23,7 @@ class UserController extends GetxController {
         // TODO: Handle this case.
         break;
       case SignMethod.facebook:
+        FacebookAuth.instance.logOut();
         // TODO: Handle this case.
         break;
     }
@@ -34,11 +36,11 @@ class UserController extends GetxController {
     UserModel? principal =
         await _userRepo.login(email: email, password: password);
 
-    if (principal!.uid != null) {
+    if (principal.uid != null) {
       this.isLogin.value = true;
       this.principal.value = principal;
       this.signMethod.value = SignMethod.email;
-      Get.to(HomeScreen(), binding: HomeScreenBindings());
+      Get.offAll(HomeScreen(), binding: HomeScreenBindings());
       return true;
     } else {
       return false;
@@ -52,7 +54,7 @@ class UserController extends GetxController {
       this.isLogin.value = true;
       this.principal.value = principal;
       this.signMethod.value = SignMethod.email;
-      Get.to(HomeScreen(), binding: HomeScreenBindings());
+      Get.offAll(HomeScreen(), binding: HomeScreenBindings());
       return true;
     } else {
       return false;
@@ -61,12 +63,28 @@ class UserController extends GetxController {
 
   Future<void> googleLogin() async {
     UserModel principal = await _userRepo.googleSiginIn(); 
-    if(principal!= null) {
-          snackBar(msg: "${principal.email} , ${principal.username} , ${principal.uid}");
+    if(principal.uid!= null) {
           this.isLogin.value = true;
           this.principal.value = principal;
           this.signMethod.value = SignMethod.google;
-          Get.to(HomeScreen(), binding: HomeScreenBindings());
+          Get.offAll(HomeScreen(), binding: HomeScreenBindings());
+    }else{
+      snackBar(msg: "구글 로그인을 실패하였습니다.");
+      return;
+    }
+   
+  }
+
+  Future<void> facebookLogin() async {
+    UserModel? principal = await _userRepo.facebookSiginIn(); 
+    if(principal != null) {
+          this.isLogin.value = true;
+          this.principal.value = principal;
+          this.signMethod.value = SignMethod.facebook;
+          Get.offAll(HomeScreen(), binding: HomeScreenBindings());
+    }else{
+      snackBar(msg: "페이스북 로그인을 실패하였습니다.");
+      return;
     }
    
   }
