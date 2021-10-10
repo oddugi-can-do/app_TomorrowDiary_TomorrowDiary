@@ -33,7 +33,7 @@
  -  Flutter
 
 ## 설치 안내 (Installation Process)
-[apk 파일 주소](https://github.com/chongin12)
+[apk 파일 주소](https://github.com/osamhack2021/app_TomorrowDiary_TomorrowDiary/blob/dev/tomorrow_diary/Tomorrow_Diary.apk)
 
 ## 프로젝트 사용법 (Getting Started)
 apk 파일을 받고 설치한다.
