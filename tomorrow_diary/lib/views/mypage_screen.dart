@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
+import 'package:tomorrow_diary/views/select_year_and_month_screen.dart';
 import 'package:tomorrow_diary/views/views.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
@@ -102,7 +103,22 @@ class _MyPageScreenState extends State<MyPageScreen> {
             _largeGap,
             ElevatedButton(
               onPressed: () {
-                Get.to(const AnalysisScreen());
+                int year = CalendarUtil.thisYear(),
+                    month = CalendarUtil.thisMonth();
+                showModalBottomSheet(
+                  backgroundColor: Colors.black87,
+                  context: context,
+                  builder: (BuildContext context) => Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    child: SelectYearAndMonthScreen(
+                      initialYear: year,
+                      initialMonth: month,
+                      onSubmitted: _yearAndMonthChanged,
+                      onCanceled: () {},
+                    ),
+                  ),
+                );
               },
               child: const Padding(
                 padding: EdgeInsets.all(TdSize.l),
@@ -118,6 +134,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
         ),
       ),
     );
+  }
+
+  void _yearAndMonthChanged(int _year, int _month) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) =>
+        Get.to(AnalysisScreen(selectedYear: _year, selectedMonth: _month)));
   }
 
   Widget _buildAchievements() {

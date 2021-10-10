@@ -26,7 +26,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print('build calendar widget');
     _dayListForMonth = CalendarUtil.dayListForMonth(year, month);
     return Padding(
       padding: const EdgeInsets.all(TdSize.s),

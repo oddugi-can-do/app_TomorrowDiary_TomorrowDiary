@@ -135,7 +135,6 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
   final Widget _largeGap = const SizedBox(height: TdSize.l);
   void _onTitleChanged(String value) {
     d.allData.value.tyDiary?.title = value;
-    print('tyDiary title changed : ${d.allData.value.tyDiary?.title}');
   }
 
   void _onTyHappenChanged(String value) {
