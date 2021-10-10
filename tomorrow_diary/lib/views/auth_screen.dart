@@ -104,7 +104,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                   ),
                   AnimatedContainer(
-                      duration: _duration, height: isRegister ? 12 : 0),
+                      duration: _duration, height: isRegister ? 16 : 0),
                   // Email
                   AuthFormField(hint: 'Email', controller: _emailController),
                   SizedBox(height: 16),
@@ -150,9 +150,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     await uc.googleLogin();
                   }),
                   SizedBox(height: 5),
-                  _socialLoginButton('facebook', () {
-                    print("facebook");
-                    Get.to(HomeScreen(), binding: HomeScreenBindings());
+                  _socialLoginButton('facebook', () async {
+                    await uc.facebookLogin();
                     // Get.to(HomeScreen());
                   })
                 ].reversed.toList(),
