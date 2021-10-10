@@ -3,7 +3,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tomorrow_diary/bindings/bindings.dart';
 import 'package:tomorrow_diary/domain/user/user_repository.dart';
 import 'package:tomorrow_diary/models/models.dart';
-import 'package:tomorrow_diary/views/splash_screen.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/views/views.dart';
 
@@ -14,8 +13,8 @@ class UserController extends GetxController {
   final signMethod = SignMethod.email.obs;
 
   Future<void> logout() async {
-    switch (this.signMethod.value) {
-      case SignMethod.email:
+    switch(this.signMethod.value) {
+      case SignMethod.email :
         await _userRepo.logout();
         break;
       case SignMethod.google:
@@ -39,7 +38,7 @@ class UserController extends GetxController {
       this.isLogin.value = true;
       this.principal.value = principal;
       this.signMethod.value = SignMethod.email;
-      Get.to(SplashScreen(), binding: HomeScreenBindings());
+      Get.to(HomeScreen(), binding: HomeScreenBindings());
       return true;
     } else {
       return false;
@@ -53,7 +52,7 @@ class UserController extends GetxController {
       this.isLogin.value = true;
       this.principal.value = principal;
       this.signMethod.value = SignMethod.email;
-      Get.to(SplashScreen(), binding: HomeScreenBindings());
+      Get.to(HomeScreen(), binding: HomeScreenBindings());
       return true;
     } else {
       return false;
@@ -61,16 +60,18 @@ class UserController extends GetxController {
   }
 
   Future<void> googleLogin() async {
-    UserModel principal = await _userRepo.googleSiginIn();
-    if (principal != null) {
-      snackBar(
-          msg: "${principal.email} , ${principal.username} , ${principal.uid}");
-      this.isLogin.value = true;
-      this.principal.value = principal;
-      this.signMethod.value = SignMethod.google;
-      Get.to(HomeScreen(), binding: HomeScreenBindings());
+    UserModel principal = await _userRepo.googleSiginIn(); 
+    if(principal!= null) {
+          snackBar(msg: "${principal.email} , ${principal.username} , ${principal.uid}");
+          this.isLogin.value = true;
+          this.principal.value = principal;
+          this.signMethod.value = SignMethod.google;
+          Get.to(HomeScreen(), binding: HomeScreenBindings());
     }
+   
   }
 }
 
-enum SignMethod { google, facebook, email }
+enum SignMethod {
+  google,facebook,email
+}
