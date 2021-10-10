@@ -116,9 +116,11 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                 padding: const EdgeInsets.all(TdSize.m),
                 children: [
                   const TextWidget.header(text: '일기 완성도'),
+                  const SizedBox(height: 15),
                   _buildPieChart(summaryMap),
                   const SizedBox(height: 30),
                   const TextWidget.header(text: 'Todo 달성도'),
+                  const SizedBox(height: 15),
                   if (todoCount > 0)
                     _buildPieChart(todoMap)
                   else
