@@ -61,7 +61,9 @@ class _TodoListFormState extends State<TodoListForm> {
                           ? TimeSelectWidget(
                               text: 'start',
                               onChanged: (value) {
-                                _todo.start = value;
+                                setState(() {
+                                  _todo.start = value;
+                                });
                               })
                           : TimeSelectWidget.disable(text: '-'),
                     ),
@@ -73,7 +75,9 @@ class _TodoListFormState extends State<TodoListForm> {
                           ? TimeSelectWidget(
                               text: 'end',
                               onChanged: (value) {
-                                _todo.end = value;
+                                setState(() {
+                                  _todo.end = value;
+                                });
                               })
                           : TimeSelectWidget.disable(text: '-'),
                     ),
