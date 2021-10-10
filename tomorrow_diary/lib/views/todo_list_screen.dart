@@ -31,9 +31,9 @@ class _TodoListScreenState extends State<TodoListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      color: Colors.black87,
-      child: NestedScrollView(
+    return Scaffold(
+      backgroundColor: Colors.black87,
+      body: NestedScrollView(
         controller: ScrollController(),
         physics: const ScrollPhysics(parent: PageScrollPhysics()),
         headerSliverBuilder: (BuildContext context, bool isInnerBoxScrolled) {

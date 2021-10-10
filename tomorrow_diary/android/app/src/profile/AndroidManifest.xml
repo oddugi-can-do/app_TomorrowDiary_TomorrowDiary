@@ -3,9 +3,5 @@
     <!-- Flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->
-<<<<<<< HEAD
-    
-=======
->>>>>>> e80f891f37380b9312d387e8c3ecb269f01e395a
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
