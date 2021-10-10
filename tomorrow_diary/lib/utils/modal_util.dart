@@ -8,11 +8,10 @@ class ModalUtil {
   static Future<dynamic> barModalWithTyDiaryScreen(BuildContext context) {
     return showBarModalBottomSheet(
       context: context,
-      // expand: true,
+      expand: true,
       builder: (context) => Ink(
         color: TdColor.deepGray,
-        child: TyDiaryScreen()
-        // Scaffold(resizeToAvoidBottomInset: true , body: TyDiaryScreen()),
+        child: TyDiaryScreen(),
       ),
     );
   }

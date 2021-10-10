@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/controllers/diary_controller.dart';
+import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
+import 'package:tomorrow_diary/views/views.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
-
-
-
 
 class TyDiaryScreen extends StatefulWidget {
   static const pageId = '/write/tydiary';
@@ -27,8 +26,6 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
 
   @override
   Widget build(BuildContext context) {
-   final _verticalOffset = MediaQuery.of(context).viewInsets.bottom * -1.0;
-
     return Ink(
       color: Colors.black87,
       child: NestedScrollView(
@@ -52,7 +49,7 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
             ),
           ];
         },
-        body:  ListView(
+        body: ListView(
           padding: const EdgeInsets.symmetric(
               vertical: TdSize.m, horizontal: TdSize.xl),
           physics: const AlwaysScrollableScrollPhysics(),

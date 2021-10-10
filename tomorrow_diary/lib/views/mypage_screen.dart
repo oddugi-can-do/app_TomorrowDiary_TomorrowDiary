@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tomorrow_diary/controllers/achievement_controller.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
@@ -60,6 +59,14 @@ class _MyPageScreenState extends State<MyPageScreen> {
               ],
             ),
             _largeGap,
+            ElevatedButton(
+              onPressed: () {
+                Get.to(const AnalysisScreen());
+              },
+              child: const TextWidget.header(text: '분석하기'),
+              style: ElevatedButton.styleFrom(primary: TdColor.blue),
+            ),
+            _largeGap,
             TextButton(
               onPressed: () {
                 setState(() {
@@ -67,7 +74,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   a.setDataWithAchievementList(AchievementType.welcome);
                 });
               },
-              child: TextWidget.body(text: 'test : 업적 추가 : welcome!'),
+              child: const TextWidget.body(text: 'test : 업적 추가 : welcome!'),
             ),
             TextButton(
               onPressed: () {
@@ -76,7 +83,8 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   a.setDataWithAchievementList(AchievementType.openTmrDiary);
                 });
               },
-              child: TextWidget.body(text: 'test : 업적 추가 : openTmrDiary!'),
+              child:
+                  const TextWidget.body(text: 'test : 업적 추가 : openTmrDiary!'),
             ),
             TextButton(
               onPressed: () {
@@ -85,7 +93,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   a.setDataWithAchievementList(AchievementType.army);
                 });
               },
-              child: TextWidget.body(text: 'test : 업적 추가 : army'),
+              child: const TextWidget.body(text: 'test : 업적 추가 : army'),
             ),
             _largeGap,
             Row(
@@ -99,7 +107,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
             ),
             _largeGap,
             _largeGap,
-            TextWidget.header(text: '업적'),
+            const TextWidget.header(text: '업적'),
             Obx(() => _buildAchievements()),
           ],
         ),
@@ -113,7 +121,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
       return Column(
         children: [
           _smallGap,
-          TextWidget.body(text: '아직 업적이 없습니다'),
+          const TextWidget.body(text: '아직 업적이 없습니다'),
         ],
       );
     } else {

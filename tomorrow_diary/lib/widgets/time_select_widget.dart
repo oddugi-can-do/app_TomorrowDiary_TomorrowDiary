@@ -30,10 +30,11 @@ class _TimeSelectWidgetState extends State<TimeSelectWidget> {
   void onTimeChanged(TimeOfDay newTime) {
     _time = newTime;
     setState(() {
-      widget.timeText =
-          '${_time.period == DayPeriod.am ? '오전' : '오후'} ${_time.hourOfPeriod}:${_time.minute}';
+      // widget.timeText =
+      //     '${_time.period == DayPeriod.am ? '오전' : '오후'} ${_time.hourOfPeriod}:${_time.minute}';
+      widget.timeText = '${_time.hour}:${_time.minute}';
+      widget.onChanged(widget.timeText ?? '');
     });
-    widget.onChanged(widget.timeText ?? '');
   }
 
   @override
