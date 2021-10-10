@@ -19,6 +19,7 @@ class _TmrDiaryScreenState extends State<TmrDiaryScreen> {
 
   @override
   void dispose() {
+    d.setPresentData();
     c.selectDay(c.selectedDay);
     super.dispose();
   }
