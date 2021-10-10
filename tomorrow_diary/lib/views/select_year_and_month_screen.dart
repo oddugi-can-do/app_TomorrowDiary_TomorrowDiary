@@ -46,52 +46,48 @@ class _SelectYearAndMonthScreenState extends State<SelectYearAndMonthScreen> {
         Container(
           width: MediaQuery.of(context).size.width * 0.4,
           child: CupertinoPicker(
-              scrollController:
-                  FixedExtentScrollController(initialItem: year - firstYear),
-              itemExtent: TdSize.xxl,
-              onSelectedItemChanged: (value) {
-                print('onSelectedItemChanged: $value');
-                year = value + 2019;
-                print('and current year : $year');
-              },
-              children: [
-                ...List.generate(
-                    10,
-                    (index) => Center(
-                        child: TextWidget.body(text: '${index + firstYear}')))
-              ]),
+            scrollController:
+                FixedExtentScrollController(initialItem: year - firstYear),
+            itemExtent: TdSize.xxl,
+            selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+              background: TdColor.brown.withOpacity(0.5),
+            ),
+            onSelectedItemChanged: (value) {
+              print('onSelectedItemChanged: $value');
+              year = value + 2019;
+              print('and current year : $year');
+            },
+            children: [
+              ...List.generate(
+                  10,
+                  (index) => Center(
+                      child: TextWidget.body(text: '${index + firstYear}')))
+            ],
+          ),
         ),
         Container(
           width: MediaQuery.of(context).size.width * 0.4,
           child: CupertinoPicker(
-              scrollController:
-                  FixedExtentScrollController(initialItem: month - 1),
-              itemExtent: TdSize.xxl,
-              onSelectedItemChanged: (value) {
-                print('onSelectedItemChanged: $value');
-                month = value + 1;
-                print('and current month : $month');
-              },
-              children: [
-                ...List.generate(
-                    12,
-                    (index) =>
-                        Center(child: TextWidget.body(text: '${index + 1}')))
-              ]),
+            scrollController:
+                FixedExtentScrollController(initialItem: month - 1),
+            itemExtent: TdSize.xxl,
+            selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
+              background: TdColor.brown.withOpacity(0.5),
+            ),
+            onSelectedItemChanged: (value) {
+              print('onSelectedItemChanged: $value');
+              month = value + 1;
+              print('and current month : $month');
+            },
+            children: [
+              ...List.generate(
+                  12,
+                  (index) =>
+                      Center(child: TextWidget.body(text: '${index + 1}')))
+            ],
+          ),
         )
       ],
     );
-    // return Scaffold(
-    //   body: CupertinoPicker(
-    //       firstDate: DateTime(2019),
-    //       lastDate: DateTime(2050),
-    //       initialDate: DateTime.now(),
-    //       onChanged: (value) {
-    //         year = value.year;
-    //         month = value.month;
-    //         widget.onChanged(year, month);
-    //         Navigator.pop(context);
-    //       }),
-    // );
   }
 }

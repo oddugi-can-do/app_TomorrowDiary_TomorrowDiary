@@ -34,8 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Scaffold(
           backgroundColor: TdColor.brown,
           body: Container(
-            //height : MediaQuery.of(context).size.height,
-            //color: kPrimaryColor,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[

@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       extendBodyBehindAppBar: true,
       key: _key,
-      backgroundColor: TdColor.black,
+      backgroundColor: TdColor.brown,
       body: _buildAnimatedHomeScreen(context),
     );
   }
@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen>
             padding: const EdgeInsets.all(TdSize.s),
             child: ServeWidget(
               text: '오늘의 일기 보기',
-              color: TdColor.lightRed,
+              color: TdColor.brown,
               onPressed: () {
                 setState(() {
                   ModalUtil.barModalWithTyDiaryScreen(context);
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen>
             padding: const EdgeInsets.all(TdSize.s),
             child: ServeWidget(
               text: '오늘의 일기 보기',
-              color: TdColor.lightRed,
+              color: TdColor.brown,
               onPressed: () {
                 setState(() {
                   ModalUtil.barModalWithTyDiaryScreen(context);
@@ -199,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen>
             padding: const EdgeInsets.all(TdSize.s),
             child: ServeWidget(
               text: '내일의 일기 보기',
-              color: TdColor.lightBlue,
+              color: TdColor.brown,
               onPressed: () {
                 setState(() {
                   ModalUtil.barModalWithTmrDiaryScreen(context);
@@ -230,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen>
             padding: const EdgeInsets.all(TdSize.s),
             child: ServeWidget(
               text: '내일의 일기 보기',
-              color: TdColor.lightBlue,
+              color: TdColor.brown,
               onPressed: () {
                 setState(() {
                   ModalUtil.barModalWithTmrDiaryScreen(context);
@@ -256,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen>
             padding: const EdgeInsets.all(TdSize.s),
             child: ServeWidget(
               text: 'To-do List 보기',
-              color: TdColor.lightGreen,
+              color: TdColor.brown,
               onPressed: () {
                 setState(() {
                   ModalUtil.barModalWithTodoListScreen(context);
@@ -287,7 +287,7 @@ class _HomeScreenState extends State<HomeScreen>
             padding: const EdgeInsets.all(TdSize.s),
             child: ServeWidget(
               text: 'To-do List 보기',
-              color: TdColor.lightGreen,
+              color: TdColor.brown,
               onPressed: () {
                 setState(() {
                   ModalUtil.barModalWithTodoListScreen(context);
@@ -300,7 +300,6 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   AppBar appBar(Function changeMenuStatus) {
-    DateTime _selectedTime;
     return AppBar(
       automaticallyImplyLeading: false,
       actions: [

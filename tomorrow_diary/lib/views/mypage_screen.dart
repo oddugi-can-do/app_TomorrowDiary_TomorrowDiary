@@ -59,43 +59,36 @@ class _MyPageScreenState extends State<MyPageScreen> {
               ],
             ),
             _largeGap,
-            ElevatedButton(
-              onPressed: () {
-                Get.to(const AnalysisScreen());
-              },
-              child: const TextWidget.header(text: '분석하기'),
-              style: ElevatedButton.styleFrom(primary: TdColor.blue),
-            ),
-            _largeGap,
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  AchievementController a = Get.find();
-                  a.setDataWithAchievementList(AchievementType.welcome);
-                });
-              },
-              child: const TextWidget.body(text: 'test : 업적 추가 : welcome!'),
-            ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  AchievementController a = Get.find();
-                  a.setDataWithAchievementList(AchievementType.openTmrDiary);
-                });
-              },
-              child:
-                  const TextWidget.body(text: 'test : 업적 추가 : openTmrDiary!'),
-            ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  AchievementController a = Get.find();
-                  a.setDataWithAchievementList(AchievementType.army);
-                });
-              },
-              child: const TextWidget.body(text: 'test : 업적 추가 : army'),
-            ),
-            _largeGap,
+
+            // TextButton(
+            //   onPressed: () {
+            //     setState(() {
+            //       AchievementController a = Get.find();
+            //       a.setDataWithAchievementList(AchievementType.welcome);
+            //     });
+            //   },
+            //   child: const TextWidget.body(text: 'test : 업적 추가 : welcome!'),
+            // ),
+            // TextButton(
+            //   onPressed: () {
+            //     setState(() {
+            //       AchievementController a = Get.find();
+            //       a.setDataWithAchievementList(AchievementType.openTmrDiary);
+            //     });
+            //   },
+            //   child:
+            //       const TextWidget.body(text: 'test : 업적 추가 : openTmrDiary!'),
+            // ),
+            // TextButton(
+            //   onPressed: () {
+            //     setState(() {
+            //       AchievementController a = Get.find();
+            //       a.setDataWithAchievementList(AchievementType.army);
+            //     });
+            //   },
+            //   child: const TextWidget.body(text: 'test : 업적 추가 : army'),
+            // ),
+            // _largeGap,
             Row(
               children: [
                 const TextWidget.body(text: '사용자 이름 : '),
@@ -104,6 +97,18 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   text: u.principal.value.username ?? '',
                 ),
               ],
+            ),
+            _largeGap,
+            _largeGap,
+            ElevatedButton(
+              onPressed: () {
+                Get.to(const AnalysisScreen());
+              },
+              child: const Padding(
+                padding: EdgeInsets.all(TdSize.l),
+                child: TextWidget.header(text: '분석하기'),
+              ),
+              style: ElevatedButton.styleFrom(primary: TdColor.brown),
             ),
             _largeGap,
             _largeGap,

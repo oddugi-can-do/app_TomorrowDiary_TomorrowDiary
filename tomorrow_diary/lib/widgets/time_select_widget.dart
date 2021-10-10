@@ -2,6 +2,7 @@ import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
 
@@ -50,6 +51,12 @@ class _TimeSelectWidgetState extends State<TimeSelectWidget> {
                   minuteInterval: MinuteInterval.FIVE,
                   disableHour: false,
                   disableMinute: false,
+                  accentColor: TdColor.brown,
+                  cancelText: "취소",
+                  okText: "완료",
+                  blurredBackground: true,
+                  okCancelStyle: GoogleFonts.notoSans(
+                      color: TdColor.brown, fontWeight: FontWeight.bold),
                 ),
               );
             }
@@ -60,7 +67,7 @@ class _TimeSelectWidgetState extends State<TimeSelectWidget> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TdSize.radiusM),
         ),
-        primary: widget.isEnabled ? TdColor.blue : TdColor.gray,
+        primary: widget.isEnabled ? TdColor.brown : TdColor.gray,
       ),
     );
   }
