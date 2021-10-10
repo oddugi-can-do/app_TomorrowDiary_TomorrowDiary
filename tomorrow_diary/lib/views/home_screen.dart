@@ -76,13 +76,17 @@ class _HomeScreenState extends State<HomeScreen>
               }
             });
           }),
-          duration: _menuStatus == MenuStatus.opened ? Duration(milliseconds: 1000): Duration(milliseconds: 2000),
+          duration: _menuStatus == MenuStatus.opened
+              ? Duration(milliseconds: 1000)
+              : Duration(milliseconds: 2000),
           transform: Matrix4.translationValues(bodyXpos, 0, 0),
           curve: Curves.fastOutSlowIn,
         ),
         AnimatedContainer(
           child: DrawerSideMenu(menuWidth),
-          duration:  _menuStatus == MenuStatus.opened? Duration(milliseconds: 2000) : Duration(milliseconds: 2000),
+          duration: _menuStatus == MenuStatus.opened
+              ? Duration(milliseconds: 2000)
+              : Duration(milliseconds: 2000),
           transform: Matrix4.translationValues(menuXpos, 0, 0),
           curve: Curves.fastOutSlowIn,
         ),
