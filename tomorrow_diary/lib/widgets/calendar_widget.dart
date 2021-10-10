@@ -26,6 +26,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double _fontSize = MediaQuery.of(context).size.width * 0.035;
     _dayListForMonth = CalendarUtil.dayListForMonth(year, month);
     return Padding(
       padding: const EdgeInsets.all(TdSize.s),
@@ -44,7 +45,11 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         itemBuilder: (BuildContext context, int index) {
           if (index < 7) {
             return Center(
-              child: TextWidget.hint(text: CalendarUtil.week[index]),
+              child: TextWidget.calendar(
+                text: CalendarUtil.week[index],
+                fontSize: _fontSize,
+                color: TdColor.gray,
+              ),
             );
           }
           if (_dayListForMonth[index - 7] == -1) {

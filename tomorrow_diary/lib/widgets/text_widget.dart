@@ -7,47 +7,37 @@ enum TextCategory { title, header, body, hint, calendar }
 class TextWidget extends StatelessWidget {
   final String text;
   final TextCategory textCategory;
-  const TextWidget()
-      : text = '',
-        textCategory = TextCategory.title;
-  const TextWidget.title({required this.text})
-      : textCategory = TextCategory.title;
-  const TextWidget.header({required this.text})
-      : textCategory = TextCategory.header;
-  const TextWidget.body({required this.text})
-      : textCategory = TextCategory.body;
-  const TextWidget.hint({required this.text})
-      : textCategory = TextCategory.hint;
-  const TextWidget.calendar({required this.text})
+  final double fontSize;
+  final Color color;
+  const TextWidget.calendar(
+      {required this.text, required this.fontSize, this.color = TdColor.white})
       : textCategory = TextCategory.calendar;
+  const TextWidget.title({
+    required this.text,
+    this.fontSize = TdSize.xxl,
+    this.color = TdColor.white,
+  }) : textCategory = TextCategory.title;
+  const TextWidget.header({
+    required this.text,
+    this.fontSize = TdSize.l,
+    this.color = TdColor.white,
+  }) : textCategory = TextCategory.header;
+  const TextWidget.body({
+    required this.text,
+    this.fontSize = TdSize.m,
+    this.color = TdColor.white,
+  }) : textCategory = TextCategory.body;
+  const TextWidget.hint({
+    required this.text,
+    this.fontSize = TdSize.s,
+    this.color = TdColor.white,
+  }) : textCategory = TextCategory.hint;
 
   @override
   Widget build(BuildContext context) {
-    Color _color = Colors.white;
-    double _size = TdSize.l;
-
-    switch (textCategory) {
-      case TextCategory.title:
-        _size = TdSize.xxl;
-        break;
-      case TextCategory.header:
-        _size = TdSize.l;
-        break;
-      case TextCategory.body:
-        _size = TdSize.m;
-        break;
-      case TextCategory.hint:
-        _color = TdColor.lightGray;
-        _size = TdSize.s;
-        break;
-      case TextCategory.calendar:
-        _size = TdSize.calendarText;
-        break;
-      default:
-    }
     return Text(
       text,
-      style: GoogleFonts.notoSans(color: _color, fontSize: _size),
+      style: GoogleFonts.notoSans(color: color, fontSize: fontSize),
     );
   }
 }

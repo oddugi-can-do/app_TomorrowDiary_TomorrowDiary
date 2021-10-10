@@ -38,48 +38,49 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double fontSize = MediaQuery.of(context).size.width * 0.040;
     return Padding(
       padding: const EdgeInsets.all(2),
       child: widget.isEnabled
           ? widget.isHighlighted
-              ? _highlightedContainerBuilder()
-              : _enabledContainerBuilder()
+              ? _highlightedContainerBuilder(fontSize)
+              : _enabledContainerBuilder(fontSize)
           : _disabledContainerBuilder(),
     );
   }
 
-  Widget _enabledContainerBuilder() {
+  Widget _enabledContainerBuilder(double fontSize) {
     return c.isSelected(widget.day)
         ? ElevatedButton(
             onPressed: () {
               c.selectDay(widget.day);
             },
-            child: _calendarTextWidget(),
+            child: _calendarTextWidget(fontSize),
             style: selectedButtonStyle(),
           )
         : ElevatedButton(
             onPressed: () {
               c.selectDay(widget.day);
             },
-            child: _calendarTextWidget(),
+            child: _calendarTextWidget(fontSize),
             style: unselectedButtonStyle(),
           );
   }
 
-  Widget _highlightedContainerBuilder() {
+  Widget _highlightedContainerBuilder(double fontSize) {
     return c.isSelected(widget.day)
         ? ElevatedButton(
             onPressed: () {
               c.selectDay(widget.day);
             },
-            child: _calendarTextWidget(),
+            child: _calendarTextWidget(fontSize),
             style: selectedButtonStyle(),
           )
         : ElevatedButton(
             onPressed: () {
               c.selectDay(widget.day);
             },
-            child: _calendarTextWidget(),
+            child: _calendarTextWidget(fontSize),
             style: highlightedButtonStyle(),
           );
   }
@@ -88,9 +89,10 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget> {
     return Container();
   }
 
-  Widget _calendarTextWidget() {
+  Widget _calendarTextWidget(double fontSize) {
     return FittedBox(
-        fit: BoxFit.contain, child: TextWidget.calendar(text: widget.text));
+        fit: BoxFit.contain,
+        child: TextWidget.calendar(text: widget.text, fontSize: fontSize));
   }
 
   ButtonStyle selectedButtonStyle() {
