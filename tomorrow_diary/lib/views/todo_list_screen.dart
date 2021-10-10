@@ -25,6 +25,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
 
   @override
   void dispose() {
+    d.setPresentData();
     c.selectDay(c.selectedDay);
     super.dispose();
   }
