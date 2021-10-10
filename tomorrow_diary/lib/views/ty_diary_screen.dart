@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
-import 'package:tomorrow_diary/controllers/diary_controller.dart';
-import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
-import 'package:tomorrow_diary/views/views.dart';
 import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class TyDiaryScreen extends StatefulWidget {
   static const pageId = '/write/tydiary';
+
+  const TyDiaryScreen({Key? key}) : super(key: key);
 
   @override
   State<TyDiaryScreen> createState() => _TyDiaryScreenState();
@@ -20,6 +19,7 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
 
   @override
   void dispose() {
+    d.setPresentData();
     c.selectDay(c.selectedDay);
     super.dispose();
   }
@@ -66,7 +66,7 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
             _largeGap,
             // ---오늘 있었던 일---
             const TextWidget.body(text: '오늘 있었던 일'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _smallGap,
             MultiLineForm(
                 hint: "what happened today?",
@@ -75,8 +75,9 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
                 onChanged: _onTyHappenChanged),
             _largeGap,
             // ---위시 리스트---
-            const TextWidget.body(text: '위시리스트'),
-            /* 위시리스트 시작 */
+            ((d.allData.value.tyDiary?.tyWish?.length ?? 0) > 0)
+                ? const TextWidget.body(text: '위시리스트')
+                : Container(),
             for (int i = 0;
                 i < (d.allData.value.tyDiary?.tyWish?.length ?? 0);
                 ++i)
@@ -97,11 +98,12 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
                   ],
                 ),
               ),
-            /* 위시리스트 종료 */
-            _largeGap,
+            ((d.allData.value.tyDiary?.tyWish?.length ?? 0) > 0)
+                ? _largeGap
+                : Container(),
             // ---오늘 깜짝! 놀랐던 일---
             const TextWidget.body(text: '오늘 깜짝! 놀랐던 일'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _smallGap,
             MultiLineForm(
               hint: 'Did you have any surprises?',
@@ -111,7 +113,7 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
             _largeGap,
             // ---오늘의 진짜 기분---
             const TextWidget.body(text: '오늘의 진짜 기분'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _smallGap,
             SingleLineForm(
               hint: "How are u today?",
