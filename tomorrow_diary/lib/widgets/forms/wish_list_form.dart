@@ -38,7 +38,7 @@ class WishListForm extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             shadowColor: Colors.transparent,
             shape: const CircleBorder(),
-            primary: TdColor.blue,
+            primary: TdColor.brown,
           ),
         ),
       ],

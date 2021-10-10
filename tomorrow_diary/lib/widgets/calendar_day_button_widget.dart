@@ -100,7 +100,7 @@ class _CalendarDayButtonWidgetState extends State<CalendarDayButtonWidget> {
       padding: const EdgeInsets.all(0),
       shadowColor: Colors.transparent,
       shape: CircleBorder(),
-      primary: TdColor.blue,
+      primary: TdColor.brown,
     );
   }
 

@@ -53,7 +53,7 @@ class _WishWidgetState extends State<WishWidget> {
         decoration: BoxDecoration(
             color: widget.wishListState == WishListState.unchecked
                 ? TdColor.darkGray
-                : TdColor.purple,
+                : TdColor.brown,
             borderRadius:
                 const BorderRadius.all(Radius.circular(TdSize.radiusM))),
         padding: const EdgeInsets.all(13),
