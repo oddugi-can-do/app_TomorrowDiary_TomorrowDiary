@@ -21,7 +21,7 @@ class SubmitButtonWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TdSize.radiusM),
         ),
-        primary: TdColor.blue,
+        primary: TdColor.brown,
       ),
     );
   }

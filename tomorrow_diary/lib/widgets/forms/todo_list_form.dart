@@ -53,7 +53,7 @@ class _TodoListFormState extends State<TodoListForm> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(TdSize.radiusM),
                           ),
-                          primary: TdColor.blue,
+                          primary: TdColor.brown,
                         )),
                     const SizedBox(width: 20),
                     Expanded(
@@ -97,7 +97,7 @@ class _TodoListFormState extends State<TodoListForm> {
           ),
           style: ElevatedButton.styleFrom(
             shape: const CircleBorder(),
-            primary: TdColor.blue,
+            primary: TdColor.brown,
           ),
         ),
       ],

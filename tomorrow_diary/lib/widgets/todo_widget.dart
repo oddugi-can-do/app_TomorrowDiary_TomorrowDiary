@@ -54,14 +54,14 @@ class _TodoWidgetState extends State<TodoWidget> {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: todo.checked ?? false ? TdColor.purple : TdColor.darkGray,
+            color: todo.checked ?? false ? TdColor.brown : TdColor.darkGray,
             borderRadius:
                 const BorderRadius.all(Radius.circular(TdSize.radiusM))),
         padding: const EdgeInsets.all(13),
         child: Row(
           children: [
             todo.timeEnabled ?? false
-                ? const Icon(Icons.circle, size: TdSize.m)
+                ? const Icon(CupertinoIcons.clock, size: TdSize.m)
                 : const Icon(Icons.circle_outlined, size: TdSize.m),
             const SizedBox(width: TdSize.s),
             Column(
