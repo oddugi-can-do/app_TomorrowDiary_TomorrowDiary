@@ -2,6 +2,7 @@
 # 내일 일기(Tomorrow Diary)
 ![Logo](https://github.com/oddugi-can-do/app_TomorrowDiary_TomorrowDiary/blob/dev/Tomorrow_Diary_Banner.png)
 
+[![GitHub license](https://img.shields.io/github/license/osamhack2021/app_TomorrowDiary_TomorrowDiary)](https://github.com/osamhack2021/app_TomorrowDiary_TomorrowDiary/blob/dev/LICENSE)
 
 ## 프로젝트 소개
 >일기를 쓰면 좋다는 사실은 누구나 알고 있다. 
