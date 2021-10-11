@@ -12,11 +12,11 @@ class TimeSelectWidget extends StatefulWidget {
   TimeSelectWidget({Key? key, required this.text, required this.onChanged})
       : isEnabled = true,
         super(key: key);
-  TimeSelectWidget.disable({required this.text}) : isEnabled = false;
+  TimeSelectWidget.disable({required this.text, required this.onChanged})
+      : isEnabled = false;
   String text;
-  String? timeText;
   bool isEnabled;
-  void Function(String) onChanged = (String p1) {};
+  void Function(String) onChanged;
   @override
   State<TimeSelectWidget> createState() => _TimeSelectWidgetState();
 }
@@ -29,12 +29,12 @@ class _TimeSelectWidgetState extends State<TimeSelectWidget> {
   }
 
   void onTimeChanged(TimeOfDay newTime) {
-    _time = newTime;
     setState(() {
+      _time = newTime;
       // widget.timeText =
       //     '${_time.period == DayPeriod.am ? '오전' : '오후'} ${_time.hourOfPeriod}:${_time.minute}';
-      widget.timeText = '${_time.hour}:${_time.minute}';
-      widget.onChanged(widget.timeText ?? '');
+      widget.text = '${_time.hour}:${_time.minute}';
+      widget.onChanged(widget.text);
     });
   }
 
@@ -43,11 +43,14 @@ class _TimeSelectWidgetState extends State<TimeSelectWidget> {
     return ElevatedButton(
       onPressed: widget.isEnabled
           ? () {
-              Navigator.of(context).push(
+              Navigator.of(context)
+                  .push(
                 showPicker(
                   context: context,
                   value: _time,
-                  onChange: onTimeChanged,
+                  onChange: (value) {
+                    _time = value;
+                  },
                   minuteInterval: MinuteInterval.FIVE,
                   disableHour: false,
                   disableMinute: false,
@@ -58,10 +61,21 @@ class _TimeSelectWidgetState extends State<TimeSelectWidget> {
                   okCancelStyle: GoogleFonts.notoSans(
                       color: TdColor.brown, fontWeight: FontWeight.bold),
                 ),
-              );
+              )
+                  .then((value) {
+                if (value == null) {
+                  print('canceled');
+                } else {
+                  print('ok');
+                  setState(() {
+                    widget.text = '${_time.hour}:${_time.minute}';
+                  });
+                  widget.onChanged(widget.text);
+                }
+              });
             }
           : null,
-      child: TextWidget.body(text: widget.timeText ?? widget.text),
+      child: TextWidget.body(text: widget.text),
       style: ElevatedButton.styleFrom(
         shadowColor: Colors.transparent,
         shape: RoundedRectangleBorder(

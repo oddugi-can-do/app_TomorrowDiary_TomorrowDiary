@@ -36,6 +36,7 @@ class _TodoListFormState extends State<TodoListForm> {
               Container(
                 height: 40,
                 child: Row(
+                  key: GlobalKey(),
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -59,13 +60,16 @@ class _TodoListFormState extends State<TodoListForm> {
                     Expanded(
                       child: _todo.timeEnabled ?? false
                           ? TimeSelectWidget(
-                              text: 'start',
+                              text: _todo.start ?? 'start',
                               onChanged: (value) {
                                 setState(() {
                                   _todo.start = value;
                                 });
                               })
-                          : TimeSelectWidget.disable(text: '-'),
+                          : TimeSelectWidget.disable(
+                              text: '-',
+                              onChanged: (value) {},
+                            ),
                     ),
                     const SizedBox(width: 5),
                     const Center(child: TextWidget.body(text: '~')),
@@ -73,13 +77,14 @@ class _TodoListFormState extends State<TodoListForm> {
                     Expanded(
                       child: _todo.timeEnabled ?? false
                           ? TimeSelectWidget(
-                              text: 'end',
+                              text: _todo.end ?? 'end',
                               onChanged: (value) {
                                 setState(() {
                                   _todo.end = value;
                                 });
                               })
-                          : TimeSelectWidget.disable(text: '-'),
+                          : TimeSelectWidget.disable(
+                              text: '-', onChanged: (value) {}),
                     ),
                   ],
                 ),
