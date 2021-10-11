@@ -20,6 +20,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   @override
   void initState() {
     super.initState();
+    Get.put(TodoFormController());
     todoList = d.allData.value.todoList!;
   }
 
@@ -34,55 +35,64 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black87,
-      body: NestedScrollView(
-        controller: ScrollController(),
-        physics: const ScrollPhysics(parent: PageScrollPhysics()),
-        headerSliverBuilder: (BuildContext context, bool isInnerBoxScrolled) {
-          return <Widget>[
-            SliverList(
-              delegate: SliverChildListDelegate([
-                SizedBox(
-                  height: 50,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: TdSize.m),
-                      child: TextWidget.body(
-                          text: 'To-do List : ${c.selectedDate}'),
-                    ),
-                  ),
-                )
-              ]),
-            ),
-          ];
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
         },
-        body: ListView(
-          padding: const EdgeInsets.symmetric(
-              vertical: TdSize.m, horizontal: TdSize.xl),
-          physics: const AlwaysScrollableScrollPhysics(),
-          // 이 physics를 추가 안하면 listview로 화면이 가득 차지 않을 때 버그가 남.
-          controller: PrimaryScrollController.of(context),
-          children: [
-            for (int i = 0; i < todoList.length; ++i)
-              Column(
-                children: [
-                  _smallGap,
-                  TodoWidget(
-                      todo: todoList[i],
-                      onTap: (checked) {
-                        todoList[i].checked = checked;
-                        _onTodoRefreshed(todoList);
-                      },
-                      onLongPressed: (deleted) {
-                        if (deleted == true) {
-                          todoList.removeAt(i);
-                          _onTodoRefreshed(todoList);
-                        }
-                      }),
-                ],
+        behavior: HitTestBehavior.translucent,
+        child: NestedScrollView(
+          controller: ScrollController(),
+          physics: const ScrollPhysics(parent: PageScrollPhysics()),
+          headerSliverBuilder: (BuildContext context, bool isInnerBoxScrolled) {
+            return <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  SizedBox(
+                    height: 50,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: TdSize.m),
+                        child: TextWidget.body(
+                            text: 'To-do List : ${c.selectedDate}'),
+                      ),
+                    ),
+                  )
+                ]),
               ),
-            _smallGap,
-            TodoListForm(hint: '할 일', onSubmitted: _onTodoSubmitted),
-          ],
+            ];
+          },
+          body: ListView(
+            padding: const EdgeInsets.symmetric(
+                vertical: TdSize.m, horizontal: TdSize.xl),
+            physics: const AlwaysScrollableScrollPhysics(),
+            // 이 physics를 추가 안하면 listview로 화면이 가득 차지 않을 때 버그가 남.
+            controller: PrimaryScrollController.of(context),
+            children: [
+              for (int i = 0; i < todoList.length; ++i)
+                Column(
+                  children: [
+                    _smallGap,
+                    TodoWidget(
+                        todo: todoList[i],
+                        onTap: (checked) {
+                          todoList[i].checked = checked;
+                          _onTodoRefreshed(todoList);
+                        },
+                        onLongPressed: (deleted) {
+                          if (deleted == true) {
+                            todoList.removeAt(i);
+                            _onTodoRefreshed(todoList);
+                          }
+                        }),
+                  ],
+                ),
+              _smallGap,
+              TodoListForm(
+                hint: '할 일',
+                onSubmitted: _onTodoSubmitted,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -96,6 +106,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
       todoList.add(value);
       d.allData.value.todoList = todoList;
       d.setPresentData();
+      TodoFormController t = Get.find();
+      t.resetData();
     });
   }
 
