@@ -27,7 +27,7 @@ class SingleLineForm extends StatelessWidget {
         label: Text("$hint"),
         labelStyle: TextStyle(color: Colors.white38),
         //hintStyle:
-            //GoogleFonts.notoSans(color: TdColor.gray, fontSize: TdSize.s),
+        //GoogleFonts.notoSans(color: TdColor.gray, fontSize: TdSize.s),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(TdSize.radiusM),
           borderSide: BorderSide.none,
