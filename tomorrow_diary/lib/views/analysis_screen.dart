@@ -43,7 +43,9 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           // data가 있을 때
-          double daysCount = CalendarUtil.daysCount(widget.selectedYear, widget.selectedMonth) / 1;
+          double daysCount = CalendarUtil.daysCount(
+                  widget.selectedYear, widget.selectedMonth) /
+              1;
           // ---- profile ----
           double totalPercent = 0;
 
@@ -109,6 +111,8 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
           return Scaffold(
             backgroundColor: TdColor.black,
             appBar: AppBar(
+              backgroundColor: TdColor.black,
+              shadowColor: null,
               leading: IconButton(
                   onPressed: () {
                     Navigator.of(context).pop();
