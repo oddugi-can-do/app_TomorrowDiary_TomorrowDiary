@@ -28,16 +28,6 @@ class _TimeSelectWidgetState extends State<TimeSelectWidget> {
     super.initState();
   }
 
-  void onTimeChanged(TimeOfDay newTime) {
-    setState(() {
-      _time = newTime;
-      // widget.timeText =
-      //     '${_time.period == DayPeriod.am ? '오전' : '오후'} ${_time.hourOfPeriod}:${_time.minute}';
-      widget.text = '${_time.hour}:${_time.minute}';
-      widget.onChanged(widget.text);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -67,10 +57,9 @@ class _TimeSelectWidgetState extends State<TimeSelectWidget> {
                   print('canceled');
                 } else {
                   print('ok');
-                  setState(() {
-                    widget.text = '${_time.hour}:${_time.minute}';
-                  });
-                  widget.onChanged(widget.text);
+                  widget.text = '${_time.hour}:${_time.minute}';
+
+                  widget.onChanged('${_time.hour}:${_time.minute}');
                 }
               });
             }
