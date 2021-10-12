@@ -19,10 +19,11 @@
 ## 기능 설명
  - 로그인도 간편하게! O-Auth 기능 (구글, 페이스북)
  - 내일 일기 미리 쓰기
- - 오늘 일기 완성하기
- - To-do List (시간도 설정 가능)
+ - 내일 일기를 기반으로 오늘 일기 완성하기
+ - To-do List (시간 설정 가능)
  - 프로필 (프로필 사진 및 업적 보기)
  - 자신이 쓴 일기 분석 (차트로 표현)
+ - pub.dev에 캘린더 라이브러리 출시! [simple_quick_calendar](https://pub.dev/packages/simple_quick_calendar)
 
 ## 필수 조건 안내 (Prerequisites)
 * Android 5.0 (Lollipop, api level 21) 이상
