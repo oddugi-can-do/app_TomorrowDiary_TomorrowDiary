@@ -46,8 +46,11 @@ class DiaryController extends GetxController {
       tyHappen: '',
     );
     allData.value.todoList ??= <Todo>[];
+    //내일의 일기가 채워져있고, 오늘의 일기가 비워져 있고, 선택한 날짜가 오늘이면 오늘의 일기 자동완성.
     if (!allData.value.tmrDiary!.isEmpty() &&
-        allData.value.tyDiary!.isEmpty()) {
+        allData.value.tyDiary!.isEmpty() &&
+        CalendarUtil.decidePastPresentFutureWithDate(date) ==
+            TimePoint.present) {
       allData.value.tyDiary!.tyHappen = allData.value.tmrDiary!.tmrHappen;
       allData.value.tyDiary!.tyWish = [...allData.value.tmrDiary!.tmrWish!];
       allData.value.tyDiary!.tyEmotion = allData.value.tmrDiary!.tmrEmotion;
