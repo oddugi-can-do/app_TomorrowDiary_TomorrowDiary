@@ -48,7 +48,7 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
                     child: ListTile(
                       // leading: Icon(Icons.emoji_emotions_sharp),
                       title: Text(
-                        "오늘의 감정",
+                        "오늘의 기분",
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),

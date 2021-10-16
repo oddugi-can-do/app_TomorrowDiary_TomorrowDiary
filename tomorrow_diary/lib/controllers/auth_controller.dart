@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -36,10 +37,11 @@ class UserController extends GetxController {
     Get.offAll(AuthScreen());
   }
 
-  Future<bool> login(String email, String password) async {
+  Future<bool> login(
+      String email, String password, BuildContext context) async {
+    _showDialog(context);
     UserModel? principal =
         await _userRepo.login(email: email, password: password);
-
     if (principal.uid != null) {
       this.isLogin.value = true;
       this.principal.value = principal;
@@ -48,28 +50,38 @@ class UserController extends GetxController {
         key: "login",
         value: "id " + email + " " + "password " + password,
       );
+      // Navigator.pop(context);
       Get.offAll(HomeScreen(), binding: HomeScreenBindings());
       return true;
     } else {
+      Navigator.pop(context);
       return false;
     }
   }
 
-  Future<bool> join(String email, String password, String username) async {
+  Future<bool> join(String email, String password, String username,
+      BuildContext context) async {
+    _showDialog(context);
     UserModel principal = await _userRepo.join(email, password, username);
-    print(principal);
     if (principal.uid != null) {
       this.isLogin.value = true;
       this.principal.value = principal;
       this.signMethod.value = SignMethod.email;
+      await storage.write(
+        key: "login",
+        value: "id " + email + " " + "password " + password,
+      );
+      // Navigator.pop(context);
       Get.offAll(HomeScreen(), binding: HomeScreenBindings());
       return true;
     } else {
+      Navigator.pop(context);
       return false;
     }
   }
 
-  Future<void> googleLogin() async {
+  Future<void> googleLogin(BuildContext context) async {
+    _showDialog(context);
     UserModel principal = await _userRepo.googleSiginIn();
     if (principal.uid != null) {
       this.isLogin.value = true;
@@ -77,12 +89,13 @@ class UserController extends GetxController {
       this.signMethod.value = SignMethod.google;
       Get.offAll(HomeScreen(), binding: HomeScreenBindings());
     } else {
+      Navigator.pop(context);
       snackBar(msg: "구글 로그인을 실패하였습니다.");
-      return;
     }
   }
 
-  Future<void> facebookLogin() async {
+  Future<void> facebookLogin(BuildContext context) async {
+    _showDialog(context);
     UserModel? principal = await _userRepo.facebookSiginIn();
     if (principal != null) {
       this.isLogin.value = true;
@@ -90,9 +103,46 @@ class UserController extends GetxController {
       this.signMethod.value = SignMethod.facebook;
       Get.offAll(HomeScreen(), binding: HomeScreenBindings());
     } else {
+      Navigator.pop(context);
       snackBar(msg: "페이스북 로그인을 실패하였습니다.");
       return;
     }
+  }
+
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 100000), () {
+          Navigator.pop(context);
+        });
+
+        return AlertDialog(
+          backgroundColor: TdColor.brown,
+          title: const Text("로그인 중입니다. 잠시만 기다려주십시오",
+              style: TextStyle(color: Colors.white)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          content: SizedBox(
+            height: 200,
+            child: Column(
+              children: [
+                Image.asset('assets/logo.png', height: 100),
+                SizedBox(height: 30),
+                Center(
+                    child: SizedBox(
+                  child: new CircularProgressIndicator(
+                      valueColor: new AlwaysStoppedAnimation(Colors.white),
+                      strokeWidth: 5.0),
+                  height: 25.0,
+                  width: 25.0,
+                )),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 

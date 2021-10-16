@@ -1,7 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tomorrow_diary/bindings/bindings.dart';
 import 'package:tomorrow_diary/controllers/gallery_controller.dart';
+import 'package:tomorrow_diary/views/views.dart';
 
 class AnalysisEmoScreen extends StatefulWidget {
   const AnalysisEmoScreen({Key? key}) : super(key: key);
@@ -14,7 +16,6 @@ class AnalysisEmoScreen extends StatefulWidget {
 }
 
 class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
-  final Color barBackgroundColor = const Color(0xffffffff);
   final Duration animDuration = const Duration(milliseconds: 250);
   GalleryController gc = Get.find();
   int touchedIndex = -1;
@@ -24,9 +25,12 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
-      body: Card(
-        color: Colors.black87,
+      body: Container(
+        decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/tomorrow2.gif'), fit: BoxFit.cover),
+        ),
+        color: Colors.transparent,
         child: Stack(
           children: <Widget>[
             Padding(

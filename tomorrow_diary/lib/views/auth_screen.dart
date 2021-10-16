@@ -24,8 +24,8 @@ class _AuthScreenState extends State<AuthScreen> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _cfPasswordController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
-
   UserController uc = Get.put(UserController());
+
   String? userInfo = "";
 
   @override
@@ -41,7 +41,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
     if (userInfo != null) {
       final user = userInfo!.split(" ");
-      uc.login(user[1], user[3]);
+      uc.login(user[1], user[3],context);
     }
   }
 
@@ -175,11 +175,11 @@ class _AuthScreenState extends State<AuthScreen> {
                   // Social Login
                   SizedBox(height: 30),
                   _socialLoginButton('google', () async {
-                    await uc.googleLogin();
+                    await uc.googleLogin(context);
                   }),
                   SizedBox(height: 5),
                   _socialLoginButton('facebook', () async {
-                    await uc.facebookLogin();
+                    await uc.facebookLogin(context);
                     // Get.to(HomeScreen());
                   })
                 ].reversed.toList(),
@@ -200,10 +200,14 @@ class _AuthScreenState extends State<AuthScreen> {
                   ? uc.join(
                       _emailController.text.trim(),
                       _passwordController.text.trim(),
-                      _usernameController.text.trim())
+                      _usernameController.text.trim(),
+                      context
+                      )
                   : snackBar(msg: "패스워드가 맞지 않습니다.")
               : uc.login(_emailController.text.trim(),
-                  _passwordController.text.trim());
+                  _passwordController.text.trim(),
+                  context
+                  );
         }
       },
       style: ElevatedButton.styleFrom(
@@ -225,4 +229,6 @@ class _AuthScreenState extends State<AuthScreen> {
       ),
     );
   }
+
+ 
 }

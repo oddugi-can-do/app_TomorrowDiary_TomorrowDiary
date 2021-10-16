@@ -39,12 +39,9 @@ class _SplashScreenState extends State<SplashScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: screenHeight * 0.384375),
-                Container(
-                  child: TextWidget.title(text: '내일 일기'),
-                ),
-                Image.asset('assets/logo.png', height: 120),
+                Image.asset('assets/logo.png', height: 200),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
                 CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
