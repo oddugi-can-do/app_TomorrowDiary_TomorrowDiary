@@ -46,6 +46,12 @@ class DiaryController extends GetxController {
       tyHappen: '',
     );
     allData.value.todoList ??= <Todo>[];
+    if (!allData.value.tmrDiary!.isEmpty() &&
+        allData.value.tyDiary!.isEmpty()) {
+      allData.value.tyDiary!.tyHappen = allData.value.tmrDiary!.tmrHappen;
+      allData.value.tyDiary!.tyWish = [...allData.value.tmrDiary!.tmrWish!];
+      allData.value.tyDiary!.tyEmotion = allData.value.tmrDiary!.tmrEmotion;
+    }
     return allData.value;
   }
 
