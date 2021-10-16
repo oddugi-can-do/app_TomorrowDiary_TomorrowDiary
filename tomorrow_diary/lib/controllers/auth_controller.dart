@@ -111,6 +111,7 @@ class UserController extends GetxController {
 
   void _showDialog(BuildContext context) {
     showDialog(
+      barrierDismissible: false, 
       context: context,
       builder: (BuildContext context) {
         Future.delayed(Duration(seconds: 100000), () {
