@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/controllers.dart';
+import 'package:tomorrow_diary/utils/utils.dart';
 import 'package:tomorrow_diary/views/views.dart';
 
 class DrawerSideMenu extends StatefulWidget {
@@ -15,9 +16,15 @@ class DrawerSideMenu extends StatefulWidget {
 }
 
 class _DrawerSideMenuState extends State<DrawerSideMenu> {
+  @override
+  void initState() {
+    Get.put(UserController());
+    Get.put(GalleryController());
+    super.initState();
+  }
+
   UserController uc = Get.find();
   GalleryController gc = Get.find();
-  File? f;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +33,47 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
       child: Container(
         child: ListView(children: [
           _profile(),
+          SizedBox(height: 10),
           Text("${uc.principal.value.username}",
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontSize: 30)),
           SizedBox(height: 30),
+          Obx(
+            () => gc.initImage != true
+                ? Card(
+                    color: Colors.transparent,
+                    child: ListTile(
+                      // leading: Icon(Icons.emoji_emotions_sharp),
+                      title: Text(
+                        "오늘의 감정",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                          "사용자의 개인정보를 위해 사진은 따로 저장을 안합니다. 안심하고 올려주시기 바랍니다.",
+                          style: TextStyle(
+                            color: Colors.white30,
+                          )),
+                      isThreeLine: true,
+                    ),
+                  )
+                : Card(
+                    color: Colors.transparent,
+                    child: ListTile(
+                      title: Text(
+                        getEmoDescript(gc.emotion[0]['Type']),
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text("더 많은 감정을 수치로 알고 싶으면 클릭하세요",
+                          style: TextStyle(color: Colors.white30)),
+                      isThreeLine: true,
+                      onTap: () {
+                        Get.to(AnalysisEmoScreen());
+                      },
+                    ),
+                  ),
+          ),
           Card(
             color: Colors.transparent,
             child: ListTile(
@@ -80,13 +124,30 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
         children: [
           InkWell(
             onTap: () {
-              showModalBottomSheet(context: context, 
-              builder: ((builder) => bottomSheet()),);
+              showModalBottomSheet(
+                context: context,
+                builder: ((builder) => bottomSheet()),
+              );
             },
-            child: Obx( () =>CircleAvatar(
-              radius: 80.0,
-              backgroundImage: gc.initImage.value == false  ?  AssetImage('assets/book.gif') : FileImage(File(gc.image.value.path)) as ImageProvider ,
-            ),),
+            // Android에서 사용
+            child: Obx(
+              () => CircleAvatar(
+                radius: 80.0,
+                backgroundImage: gc.initImage.value == false
+                    ? AssetImage('assets/book.gif')
+                    : FileImage(File(gc.image.value.path)) as ImageProvider,
+              ),
+            ),
+
+            //웹에서 사용
+            //  child: GetBuilder<GalleryController>(
+
+            //    builder:(controller) {  return CircleAvatar(
+            //     radius: 80.0,
+            //     backgroundImage: gc.initImage.value == false  ?  AssetImage('assets/book.gif') : MemoryImage(gc.imageWebBytes!) as ImageProvider,
+            //             );
+            //    }
+            //  ),
           ),
           Positioned(
             left: 70,
@@ -108,18 +169,32 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
       height: 100,
       color: Colors.black87,
       width: MediaQuery.of(context).size.width,
-    
       child: Column(
-        children:[
-          Text("Choose Profile Photo", style : TextStyle(color: Colors.white , fontSize: 16)),
-          SizedBox(height: 20,),
+        children: [
+          Text("Choose Profile Photo",
+              style: TextStyle(color: Colors.white, fontSize: 16)),
+          SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment : CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              IconButton(onPressed: gc.openCamera, icon: Icon(Icons.camera_alt_rounded) , iconSize: 30,),
-              IconButton(onPressed: gc.getGallery , icon: Icon(Icons.image), iconSize: 30,),
-            ],)
+              IconButton(
+                onPressed: gc.openCamera,
+                icon: Icon(Icons.camera_alt_rounded),
+                iconSize: 30,
+              ),
+              //Android
+              IconButton(
+                onPressed: gc.getGallery,
+                icon: Icon(Icons.image),
+                iconSize: 30,
+              ),
+              //Web
+              // IconButton(onPressed: gc.getPictureWeb , icon: Icon(Icons.image), iconSize: 30,),
+            ],
+          )
         ],
       ),
     );

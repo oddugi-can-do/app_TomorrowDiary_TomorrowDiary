@@ -23,7 +23,7 @@ class ShareScreen extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                gc.todayImages.value = imageFile!;
+                // gc.todayImages.value = imageFile!;
                 // final file = await getFileFromNetworkImage(imageFile!);
                 // gc.uploadImage(file, uid);
                 Get.off(() => HomeScreen());

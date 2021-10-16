@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:tomorrow_diary/models/models.dart';
 
 class DataModel {

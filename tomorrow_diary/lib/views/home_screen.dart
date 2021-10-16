@@ -25,13 +25,14 @@ class _HomeScreenState extends State<HomeScreen>
   int selectedMonth = 0;
   MenuStatus _menuStatus = MenuStatus.closed;
   double menuXpos = screenSize!.width;
-  double menuWidth = screenSize!.width / 2;
+  double menuWidth = screenSize!.width * 2 / 3;
   double bodyXpos = 0;
   @override
   void initState() {
     super.initState();
     DiaryController d = Get.find();
     CalendarController c = Get.find();
+    Get.put(GalleryController());
     _animationMenuController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     d.findDataByDate(c.selectedDate);

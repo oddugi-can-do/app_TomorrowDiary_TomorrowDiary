@@ -1,4 +1,5 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tomorrow_diary/bindings/bindings.dart';
@@ -12,10 +13,12 @@ class UserController extends GetxController {
   final RxBool isLogin = false.obs;
   final principal = UserModel().obs;
   final signMethod = SignMethod.email.obs;
+  static final storage = new FlutterSecureStorage();
 
   Future<void> logout() async {
     switch(this.signMethod.value) {
       case SignMethod.email :
+        storage.delete(key: "login");
         await _userRepo.logout();
         break;
       case SignMethod.google:
@@ -40,6 +43,10 @@ class UserController extends GetxController {
       this.isLogin.value = true;
       this.principal.value = principal;
       this.signMethod.value = SignMethod.email;
+      await storage.write(
+            key: "login",
+            value: "id " + email + " " + "password " + password,
+          );
       Get.offAll(HomeScreen(), binding: HomeScreenBindings());
       return true;
     } else {

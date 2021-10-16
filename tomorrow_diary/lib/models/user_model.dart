@@ -1,12 +1,15 @@
+import 'package:tomorrow_diary/models/emotion_model.dart';
+
 class UserModel {
   final String? uid;
   final String? email;
   final String? username;
+  EmotionModel? emotion;
 
   UserModel({
     this.uid,
     this.email,
-    this.username
+    this.username,
   });
 
 
@@ -24,4 +27,6 @@ class UserModel {
         "email": email,
         "username" : username,
       };
+  
+  
 }
