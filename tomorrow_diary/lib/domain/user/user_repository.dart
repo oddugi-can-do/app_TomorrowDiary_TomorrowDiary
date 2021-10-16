@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tomorrow_diary/domain/user/user_provider.dart';
 import 'package:tomorrow_diary/models/models.dart';
@@ -136,6 +137,7 @@ class UserRepo {
     }on FirebaseAuthException catch(e) {
       if(e.code == 'account-exists-with-different-credential'){
         List<String> userSignMethod = await FirebaseAuth.instance.fetchSignInMethodsForEmail(e.email!);
+        Get.back();
         switch(userSignMethod[0]){
           case 'google.com':
           snackBar(msg: "구글 계정이 있습니다. 구글 계정으로 로그인 하십시오");

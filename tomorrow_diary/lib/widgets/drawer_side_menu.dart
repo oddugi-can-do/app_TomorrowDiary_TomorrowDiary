@@ -41,11 +41,14 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
           Obx(
             () => gc.initImage != true
                 ? Card(
+                    shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: TdColor.brown, width: 1)),
                     color: Colors.transparent,
                     child: ListTile(
                       // leading: Icon(Icons.emoji_emotions_sharp),
                       title: Text(
-                        "오늘의 감정",
+                        "오늘의 기분",
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
@@ -58,6 +61,9 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
                     ),
                   )
                 : Card(
+                    shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: TdColor.brown, width: 1)),
                     color: Colors.transparent,
                     child: ListTile(
                       title: Text(
@@ -75,6 +81,9 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
                   ),
           ),
           Card(
+            shape: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: TdColor.brown, width: 1)),
             color: Colors.transparent,
             child: ListTile(
               leading: Icon(
@@ -88,6 +97,10 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
             ),
           ),
           Card(
+            shape: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: TdColor.brown, width: 1)
+                ),
             color: Colors.transparent,
             child: ListTile(
               leading: Icon(
@@ -101,6 +114,9 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
             ),
           ),
           Card(
+            shape: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: TdColor.brown, width: 1)),
             color: Colors.transparent,
             child: ListTile(
               leading: Icon(
@@ -132,10 +148,14 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
             // Android에서 사용
             child: Obx(
               () => CircleAvatar(
-                radius: 80.0,
-                backgroundImage: gc.initImage.value == false
-                    ? AssetImage('assets/book.gif')
-                    : FileImage(File(gc.image.value.path)) as ImageProvider,
+                radius: 82.0,
+                backgroundColor: TdColor.brown,
+                child: CircleAvatar(
+                  radius: 80.0,
+                  backgroundImage: gc.initImage.value == false
+                      ? AssetImage('assets/tomorrow.gif')
+                      : FileImage(File(gc.image.value.path)) as ImageProvider,
+                ),
               ),
             ),
 
@@ -182,13 +202,13 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
             children: [
               IconButton(
                 onPressed: gc.openCamera,
-                icon: Icon(Icons.camera_alt_rounded),
+                icon: Icon(Icons.camera_alt_rounded, color:Colors.white),
                 iconSize: 30,
               ),
               //Android
               IconButton(
                 onPressed: gc.getGallery,
-                icon: Icon(Icons.image),
+                icon: Icon(Icons.image, color: Colors.white),
                 iconSize: 30,
               ),
               //Web

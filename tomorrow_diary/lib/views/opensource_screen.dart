@@ -20,7 +20,7 @@ class OpenSourceScreen extends StatelessWidget {
         shadowColor: null,
         leading: IconButton(
           onPressed: () {
-            Get.off(() => HomeScreen());
+            Get.back();
           },
           icon: const Icon(CupertinoIcons.back),
         ),
@@ -31,14 +31,35 @@ class OpenSourceScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
               vertical: TdSize.xl, horizontal: TdSize.xxl),
           children: [
-            const TextWidget.title(text: '오픈소스 사용 정보'),
+            const TextWidget.title(text: 'OpenSource Information'),
             _largeGap,
             /* sample Library*/
-            TextWidget.header(text: 'sample Library'),
+            TextWidget.header(text: 'Tomorrow Diary Information'),
             _smallGap,
             InkWell(
-              child:
-                  const TextWidget.body(text: 'https://github.com/chongin12'),
+              child: const TextWidget.body(
+                  text:
+                      'Github :https://github.com/osamhack2021/app_TomorrowDiary_TomorrowDiary'),
+              onTap: () async {
+                await launch(
+                  'https://github.com/osamhack2021/app_TomorrowDiary_TomorrowDiary',
+                  forceWebView: false,
+                  forceSafariVC: false,
+                );
+              },
+            ),
+            _smallGap,
+            TextWidget.body(
+                text:
+                    '일기를 쓰면 좋다는 사실은 누구나 알고 있다. 하지만 일기를 쓰는 과정은 항상 귀찮고 지루하다. 불편함을 감수하고 일기를 써보면 어제와 비슷하게 완성된 일기에 회의감을 느끼기 마련이다. 이런 귀찮고 지루한 과정을 줄일 수 있는 방법을 찾다가 문득 이런 생각이 들었다. "항상 오늘 있었던 일만 일기로 써야 할까?", "내일의 계획을 일기로 써보면 어떨까?"'),
+            _largeGap,
+            /* another Library*/
+            const TextWidget.title(text: 'Developer'),
+            _largeGap,
+            InkWell(
+              child: const TextWidget.body(
+                  text:
+                      'TeamLeader : Jeong Jongin\nGithub : https://github.com/chongin12'),
               onTap: () async {
                 await launch(
                   'https://github.com/chongin12',
@@ -48,15 +69,23 @@ class OpenSourceScreen extends StatelessWidget {
               },
             ),
             _smallGap,
-            TextWidget.body(
-              text:
-                  '설-악산 기슭에서 자라난 우리 열-풍을 식혀버린 영천 대회전 눈-보라 몰아치는 만포선에서 피흘린 자욱마다 영광의 승리 나가-자 싸우-자 승리를 위해 우리들은 불사-신 8사-단 용사',
+            InkWell(
+              child: const TextWidget.body(
+                  text:
+                      'TeamMember : Kim BeomJoon\nGithub : https://github.com/sn0wd3er'),
+              onTap: () async {
+                await launch(
+                  'https://github.com/sn0wd3er',
+                  forceWebView: false,
+                  forceSafariVC: false,
+                );
+              },
             ),
-            _largeGap,
-            /* another Library*/
           ],
         ),
       ),
     );
   }
 }
+
+//출처 livingstills.tumblr.com

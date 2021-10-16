@@ -1,11 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tomorrow_diary/bindings/bindings.dart';
+import 'package:tomorrow_diary/controllers/controllers.dart';
 import 'package:tomorrow_diary/utils/utils.dart';
-import 'package:tomorrow_diary/views/home_screen.dart';
-import 'package:tomorrow_diary/widgets/text_widget.dart';
+import 'package:tomorrow_diary/views/views.dart';
+import 'package:tomorrow_diary/widgets/widgets.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,13 +14,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
   @override
   void initState() {
-    Timer(const Duration(milliseconds: 1500), () {
-      Get.to(HomeScreen());
-    });
+    Timer(const Duration(milliseconds: 3000), () {
+        Get.offAll(AuthScreen());
+      });
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +39,12 @@ class _SplashScreenState extends State<SplashScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: screenHeight * 0.384375),
-                Container(
-                  child: TextWidget.title(text: '내일 일기'),
+                Image.asset('assets/logo.png', height: 200),
+                SizedBox(
+                  height: 50,
+                ),
+                CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
                 Expanded(child: SizedBox()),
                 Align(

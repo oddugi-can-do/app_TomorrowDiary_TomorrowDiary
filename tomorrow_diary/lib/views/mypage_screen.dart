@@ -37,7 +37,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
         shadowColor: null,
         leading: IconButton(
           onPressed: () {
-            Get.off(() => HomeScreen());
+            Get.back();
           },
           icon: const Icon(CupertinoIcons.back),
         ),
