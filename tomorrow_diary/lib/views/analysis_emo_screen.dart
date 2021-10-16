@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/gallery_controller.dart';
 
-
 class AnalysisEmoScreen extends StatefulWidget {
-
   const AnalysisEmoScreen({Key? key}) : super(key: key);
 
   @override
@@ -26,7 +24,7 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: Colors.black87,
       body: Card(
         color: Colors.black87,
         child: Stack(
@@ -43,7 +41,8 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
                       Container(
                         alignment: Alignment.topLeft,
                         child: IconButton(
-                          icon: Icon(Icons.arrow_back , color: Colors.white, size: 30),
+                          icon: Icon(Icons.arrow_back,
+                              color: Colors.white, size: 30),
                           onPressed: () {
                             Get.back();
                           },
@@ -51,8 +50,6 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
                       ),
                     ],
                   ),
-                
-                  
                   const SizedBox(
                     height: 4,
                   ),
@@ -74,7 +71,6 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
                 ],
               ),
             ),
-            
           ],
         ),
       ),
@@ -109,49 +105,48 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
       showingTooltipIndicators: showTooltips,
     );
   }
+
   List<BarChartGroupData> showingGroups() => List.generate(8, (i) {
-       double happy = 0.0;
-       double sad = 0.0;
-       double calm = 0.0;
-       double surp = 0.0;
-       double fear = 0.0;
-       double confused = 0.0;
-       double angry = 0.0;
-       double disgusted = 0.0;
-       double none = 0.0;
-       for(var emo in gc.emotion) {
-         switch(emo['Type']) {
-           case 'HAPPY':
-           happy = emo['Confidence'].ceil().toDouble();
-           break;
-           case 'SAD':
-           sad = emo['Confidence'].ceil().toDouble();
-           break;
-           case 'CALM':
-           calm = emo['Confidence'].ceil().toDouble();
-           break;
-           case 'SURPRISED':
-           surp = emo['Confidence'].ceil().toDouble();
-           break;
-           case 'FEAR':
-           fear = emo['Confidence'].ceil().toDouble();
-           break;
-           case 'CONFUSED':
-           confused = emo['Confidence'].ceil().toDouble();
-           break;
-           case 'ANGRY':
-           angry =emo['Confidence'].ceil().toDouble();
-           break;
-           case 'DISGUSTED':
-           disgusted = emo['Confidence'].ceil().toDouble();
-           break;
-           default:
-           none = 0.0;
-
-         }
-       }
-        switch(gc.emotion[0]['Type']) {
-
+        double happy = 0.0;
+        double sad = 0.0;
+        double calm = 0.0;
+        double surp = 0.0;
+        double fear = 0.0;
+        double confused = 0.0;
+        double angry = 0.0;
+        double disgusted = 0.0;
+        double none = 0.0;
+        for (var emo in gc.emotion) {
+          switch (emo['Type']) {
+            case 'HAPPY':
+              happy = emo['Confidence'].ceil().toDouble();
+              break;
+            case 'SAD':
+              sad = emo['Confidence'].ceil().toDouble();
+              break;
+            case 'CALM':
+              calm = emo['Confidence'].ceil().toDouble();
+              break;
+            case 'SURPRISED':
+              surp = emo['Confidence'].ceil().toDouble();
+              break;
+            case 'FEAR':
+              fear = emo['Confidence'].ceil().toDouble();
+              break;
+            case 'CONFUSED':
+              confused = emo['Confidence'].ceil().toDouble();
+              break;
+            case 'ANGRY':
+              angry = emo['Confidence'].ceil().toDouble();
+              break;
+            case 'DISGUSTED':
+              disgusted = emo['Confidence'].ceil().toDouble();
+              break;
+            default:
+              none = 0.0;
+          }
+        }
+        switch (gc.emotion[0]['Type']) {
         }
         switch (i) {
           case 0:
@@ -169,7 +164,7 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
           case 6:
             return makeGroupData(6, angry, isTouched: i == touchedIndex);
           case 7:
-            return makeGroupData(7, disgusted ,isTouched: i == touchedIndex);
+            return makeGroupData(7, disgusted, isTouched: i == touchedIndex);
           default:
             return throw Error();
         }
@@ -206,14 +201,14 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
                   break;
                 case 7:
                   emotion = 'Disgusted';
-                  break; 
+                  break;
                 default:
                   throw Error();
               }
               return BarTooltipItem(
                 emotion + '\n',
                 const TextStyle(
-                  color:  Color(0xffC0C0C0),
+                  color: Color(0xffC0C0C0),
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -247,8 +242,7 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
         topTitles: SideTitles(showTitles: false),
         bottomTitles: SideTitles(
           showTitles: true,
-          getTextStyles: (context, value) => 
-          const TextStyle(
+          getTextStyles: (context, value) => const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
           margin: 16,
           getTitles: (double value) {
@@ -285,8 +279,4 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
       gridData: FlGridData(show: false),
     );
   }
-
- 
-
-
 }

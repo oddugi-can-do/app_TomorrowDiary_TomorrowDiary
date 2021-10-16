@@ -14,15 +14,11 @@ import 'views.dart';
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
-
   @override
   _AuthScreenState createState() => _AuthScreenState();
-
-
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -31,7 +27,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   UserController uc = Get.put(UserController());
   String? userInfo = "";
-  
+
   @override
   void initState() {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -43,11 +39,12 @@ class _AuthScreenState extends State<AuthScreen> {
   _asyncMethod() async {
     userInfo = await UserController.storage.read(key: "login");
 
-    if(userInfo != null) {
+    if (userInfo != null) {
       final user = userInfo!.split(" ");
-      uc.login(user[1] , user[3]);
+      uc.login(user[1], user[3]);
     }
   }
+
   // @override
   // void dispose() {
   //   super.dispose();
@@ -129,6 +126,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       child: AuthFormField(
                         hint: 'Username',
                         controller: _usernameController,
+                        isRegister: isRegister,
                       ),
                     ),
                   ),
@@ -153,6 +151,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       child: AuthFormField(
                         hint: 'Confirm Password',
                         controller: _cfPasswordController,
+                        isRegister: isRegister,
                       ),
                     ),
                   ),
@@ -194,7 +193,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   ElevatedButton _submitButton() {
     return ElevatedButton(
-      onPressed: () async{
+      onPressed: () async {
         if (_formKey.currentState!.validate()) {
           isRegister
               ? (_cfPasswordController.text == _passwordController.text)
@@ -205,12 +204,6 @@ class _AuthScreenState extends State<AuthScreen> {
                   : snackBar(msg: "패스워드가 맞지 않습니다.")
               : uc.login(_emailController.text.trim(),
                   _passwordController.text.trim());
-
-          // await storage.write(
-          //   key: "login",
-          //   value: "id " + _emailController.text.toString() + " " + "password " + _passwordController.text.toString(),
-          // );
-
         }
       },
       style: ElevatedButton.styleFrom(

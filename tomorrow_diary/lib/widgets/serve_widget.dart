@@ -26,6 +26,7 @@ class ServeWidget extends StatelessWidget {
             height: height,
             child: Container(
               decoration: BoxDecoration(
+                border : Border.all(color: TdColor.brown , width: 1),
                 color: Colors.black87,
                 borderRadius: BorderRadius.circular(TdSize.radiusM),
               ),

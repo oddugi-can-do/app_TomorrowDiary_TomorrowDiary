@@ -4,7 +4,8 @@ class AuthFormField extends StatelessWidget {
   final String? hint;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validation;
-  const AuthFormField({this.hint, this.controller, this.validation});
+  final bool isRegister;
+  const AuthFormField({this.hint, this.controller, this.validation, this.isRegister = true});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,8 @@ class AuthFormField extends StatelessWidget {
     return TextFormField(
       obscureText: hint!.contains("Password") ? true : false,
       controller: controller,
-      cursorColor: Colors.white,
+      cursorColor: this.isRegister == true? Colors.white : Colors.transparent,
+      cursorWidth: this.isRegister == true? 2.0 : 0.0,
       style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         filled: true,
@@ -25,7 +27,7 @@ class AuthFormField extends StatelessWidget {
         border: _border,
         enabledBorder: _border,
         focusedBorder: _border,
-        errorBorder: hint != "Confirm Password" 
+        errorBorder: hint != "Confirm Password"
             ? _border
             : OutlineInputBorder(borderSide: BorderSide.none),
       ),

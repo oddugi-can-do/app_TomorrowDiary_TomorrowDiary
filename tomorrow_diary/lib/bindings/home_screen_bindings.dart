@@ -6,6 +6,8 @@ class HomeScreenBindings extends Bindings {
   void dependencies() {
     Get.put(DiaryController());
     Get.put(CalendarController());
+    Get.put(AchievementController());
+    Get.put(UserController());
     // Get.lazyPut<CalendarController>(() => CalendarController(), fenix: false);
   }
 }
