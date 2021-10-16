@@ -9,6 +9,6 @@ class AppBinding extends Bindings {
     await Get.putAsync(() => FirebaseService().init());
     Get.put(() => UserController());
     Get.put(AchievementController());
-    Get.put(GalleryController());
+    Get.put(() => GalleryController());
   }
 }

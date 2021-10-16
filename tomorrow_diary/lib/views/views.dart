@@ -9,3 +9,4 @@ export 'gallery_screen.dart';
 export 'share_screen.dart';
 export 'analysis_screen.dart';
 export 'splash_screen.dart';
+export 'analysis_emo_screen.dart';
