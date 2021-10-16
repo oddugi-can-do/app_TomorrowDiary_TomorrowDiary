@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen>
               color: TdColor.brown,
               onPressed: () {
                 setState(() {
-                  ModalUtil.barModalWithTyDiaryScreen(context);
+                  ModalUtil.barModalWithTyDiaryScreen(context, timePoint);
                 });
               },
             ),
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen>
               color: TdColor.lightGray,
               onPressed: () {
                 setState(() {
-                  ModalUtil.barModalWithTyDiaryScreen(context);
+                  ModalUtil.barModalWithTyDiaryScreen(context, timePoint);
                 });
               },
             ),
@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen>
               color: TdColor.brown,
               onPressed: () {
                 setState(() {
-                  ModalUtil.barModalWithTyDiaryScreen(context);
+                  ModalUtil.barModalWithTyDiaryScreen(context, timePoint);
                 });
               },
             ),
@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen>
               color: TdColor.brown,
               onPressed: () {
                 setState(() {
-                  ModalUtil.barModalWithTmrDiaryScreen(context);
+                  ModalUtil.barModalWithTmrDiaryScreen(context, timePoint);
                 });
               },
             ),
@@ -221,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen>
               color: TdColor.lightGray,
               onPressed: () {
                 setState(() {
-                  ModalUtil.barModalWithTmrDiaryScreen(context);
+                  ModalUtil.barModalWithTmrDiaryScreen(context, timePoint);
                 });
               },
             ),
@@ -234,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen>
               color: TdColor.brown,
               onPressed: () {
                 setState(() {
-                  ModalUtil.barModalWithTmrDiaryScreen(context);
+                  ModalUtil.barModalWithTmrDiaryScreen(context, timePoint);
                 });
               },
             ),

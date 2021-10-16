@@ -7,7 +7,9 @@ import 'package:tomorrow_diary/widgets/widgets.dart';
 class TyDiaryScreen extends StatefulWidget {
   static const pageId = '/write/tydiary';
 
-  const TyDiaryScreen({Key? key}) : super(key: key);
+  final bool isEditable;
+
+  const TyDiaryScreen({Key? key, required this.isEditable}) : super(key: key);
 
   @override
   State<TyDiaryScreen> createState() => _TyDiaryScreenState();
@@ -19,8 +21,10 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
 
   @override
   void dispose() {
-    d.setPresentData();
-    c.selectDay(c.selectedDay);
+    if (widget.isEditable) {
+      d.setPresentData();
+      c.selectDay(c.selectedDay);
+    }
     super.dispose();
   }
 
@@ -128,10 +132,12 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
               ),
               _largeGap,
               // ---작성 완료 버튼---
-              SubmitButtonWidget(
-                text: '작성 완료',
-                onSubmitted: _onTyDiarySubmitted,
-              ),
+              widget.isEditable
+                  ? SubmitButtonWidget(
+                      text: '작성 완료',
+                      onSubmitted: _onTyDiarySubmitted,
+                    )
+                  : Container(),
             ],
           ),
         ),
