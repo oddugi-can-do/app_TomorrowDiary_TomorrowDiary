@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:830530008181:android:9ffc54c0807a4a08f3343c",
+        "mobilesdk_app_id": "1:830530008181:android:41e96d8aeff456edf3343c",
         "android_client_info": {
-          "package_name": "com.android.application"
+          "package_name": "com.TDiary.tomorrow_diary"
         }
       },
       "oauth_client": [
         {
-          "client_id": "830530008181-fv4k2bb61s5i539s92l0ah1ij00p204r.apps.googleusercontent.com",
+          "client_id": "830530008181-k516lordekau3u56dtmvqn9igmhi2b56.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.android.application",
-            "certificate_hash": "c2a1ee8e785b9b9ec67b4a646751ec2e59cc010b"
+            "package_name": "com.TDiary.tomorrow_diary",
+            "certificate_hash": "064ddef878cc37b563483b57cf8ed4f26de0032c"
           }
         },
         {
@@ -46,7 +46,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:830530008181:android:8d80f854469476f6f3343c",
         "android_client_info": {
-          "package_name": "com.TDiary.tomorrow_diary"
+          "package_name": "com.example.tomorrow_diary"
         }
       },
       "oauth_client": [
@@ -54,7 +54,7 @@
           "client_id": "830530008181-3osiiaf06bqlnp9v9k4f3a5bpopvbppm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.TDiary.tomorrow_diary",
+            "package_name": "com.example.tomorrow_diary",
             "certificate_hash": "c2a1ee8e785b9b9ec67b4a646751ec2e59cc010b"
           }
         },

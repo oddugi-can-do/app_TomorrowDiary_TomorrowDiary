@@ -24,7 +24,7 @@ class ModalUtil {
       expand: true,
       builder: (context) => Ink(
         color: TdColor.deepGray,
-        child: TmrDiaryScreen(isEditable: timePoint == TimePoint.present),
+        child: TmrDiaryScreen(isEditable: timePoint == TimePoint.tomorrow),
       ),
     );
   }
