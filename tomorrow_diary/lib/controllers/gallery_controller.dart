@@ -96,7 +96,7 @@ class GalleryController extends GetxController {
 
   Future<String> getRekogData(Uint8List bytes) async{
     String base64Image = changeToBytes(bytes);
-    http.Response res = await httpPost(base64Image);
+    http.Response res = await httpPostImg(base64Image);
     final body = res.body;
     return body;
   }

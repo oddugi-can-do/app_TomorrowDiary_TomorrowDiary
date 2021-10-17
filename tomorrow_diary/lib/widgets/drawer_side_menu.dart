@@ -25,6 +25,7 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
 
   UserController uc = Get.find();
   GalleryController gc = Get.find();
+  DiaryController dc = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +43,8 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
               style: TextStyle(color: Colors.white, fontSize: 30)),
           SizedBox(height: 30),
           Obx(
-            () => gc.initImage != true
-                ? Card(
+            () => gc.initImage != true ? 
+                Card(
                     shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: TdColor.brown, width: 1)),
@@ -70,7 +71,7 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
                     color: Colors.transparent,
                     child: ListTile(
                       title: Text(
-                        getEmoDescript(gc.emotion[0]['Type']),
+                        getEmoDescript(gc.emotion[0][TYPE]),
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
@@ -83,6 +84,32 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
                     ),
                   ),
           ),
+          uc.principal.value.isAdmin == true ?  Card(
+                    shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: TdColor.brown, width: 1)),
+                    color: Colors.transparent,
+                    child: ListTile(
+                      title: Obx( () => Text(
+                        //Ty 일기 넣으면됨
+                        getEmoDescript(dc.tyEmotion.value),
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),),
+                      subtitle: Text("오늘의 일기를 기반으로 오늘의 기분을 나타냅니다. 기분을 보고 싶으면 오늘 일기를 작성한 뒤 클릭하세요",
+                          style: TextStyle(color: Colors.white30)),
+                      isThreeLine: true,
+                      onTap: () {
+                        String? text = dc.allData.value.tyDiary!.tyHappen;
+                        if(text == null ) {
+                          snackBar(msg: "오늘의 일기를 작성해주세요");
+                          return;
+                        }else{
+                          dc.getTextEmotion(dc.allData.value.tyDiary!.tyHappen);
+                        }
+                      },
+                    ),
+                  ) : SizedBox(height:0),
           Card(
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),

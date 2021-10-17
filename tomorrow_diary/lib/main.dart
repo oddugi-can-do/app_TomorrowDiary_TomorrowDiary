@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/bindings/bindings.dart';
+import 'package:tomorrow_diary/test.dart';
 import 'views/views.dart';
 import 'package:flutter/services.dart';
 
@@ -19,6 +20,7 @@ class MyDiaryApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: AppBinding(),
+      // home: SplashScreen(),
       home: SplashScreen(),
     );
 

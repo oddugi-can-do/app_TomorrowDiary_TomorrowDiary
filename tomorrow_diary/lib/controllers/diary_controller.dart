@@ -1,16 +1,20 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/domain/diary/diary_repository.dart';
 import 'package:tomorrow_diary/models/models.dart';
 import 'package:tomorrow_diary/utils/calendar_util.dart';
 import 'package:tomorrow_diary/utils/date_converter.dart';
+import 'package:tomorrow_diary/utils/utils.dart';
 import 'controllers.dart';
 
 class DiaryController extends GetxController {
   final DiaryRepository _diaryRepository = DiaryRepository();
   final allData = DataModel().obs;
   final analysisData = <DataModel>[].obs;
+  final tyEmotion = "".obs;
+
 
   @override
   void onInit() {
@@ -80,4 +84,24 @@ class DiaryController extends GetxController {
   Future<List<DataModel>> getAnalyzedData() async {
     return analysisData;
   }
+
+  Future<void> getTextEmotion(String? text) async {
+    if(text == null) {
+      return;
+    }
+    final res = await httpPostText(text);
+    num max = 0.0;
+    String emotion = "";
+    Map<String,dynamic> resData = jsonDecode(res.body);
+
+    resData.forEach((key, value) {
+      if(value > max) {
+        max = value;
+        emotion = key;
+      }
+      });
+    tyEmotion.value = emotion;
+  }
+
+
 }

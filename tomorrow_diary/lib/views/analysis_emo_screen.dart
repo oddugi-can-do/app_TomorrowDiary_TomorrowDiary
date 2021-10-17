@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tomorrow_diary/controllers/gallery_controller.dart';
+import 'package:tomorrow_diary/utils/utils.dart';
 
 class AnalysisEmoScreen extends StatefulWidget {
   const AnalysisEmoScreen({Key? key}) : super(key: key);
@@ -122,36 +123,36 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
         double disgusted = 0.0;
         double none = 0.0;
         for (var emo in gc.emotion) {
-          switch (emo['Type']) {
-            case 'HAPPY':
-              happy = emo['Confidence'].ceil().toDouble();
+          switch (emo[TYPE]) {
+            case HAPPY:
+              happy = emo[CONFIDENCE].ceil().toDouble();
               break;
-            case 'SAD':
-              sad = emo['Confidence'].ceil().toDouble();
+            case SAD:
+              sad = emo[CONFIDENCE].ceil().toDouble();
               break;
-            case 'CALM':
-              calm = emo['Confidence'].ceil().toDouble();
+            case CALM:
+              calm = emo[CONFIDENCE].ceil().toDouble();
               break;
-            case 'SURPRISED':
-              surp = emo['Confidence'].ceil().toDouble();
+            case SURPRISED:
+              surp = emo[CONFIDENCE].ceil().toDouble();
               break;
-            case 'FEAR':
-              fear = emo['Confidence'].ceil().toDouble();
+            case FEAR:
+              fear = emo[CONFIDENCE].ceil().toDouble();
               break;
-            case 'CONFUSED':
-              confused = emo['Confidence'].ceil().toDouble();
+            case CONFUSED:
+              confused = emo[CONFIDENCE].ceil().toDouble();
               break;
-            case 'ANGRY':
-              angry = emo['Confidence'].ceil().toDouble();
+            case ANGRY:
+              angry = emo[CONFIDENCE].ceil().toDouble();
               break;
-            case 'DISGUSTED':
-              disgusted = emo['Confidence'].ceil().toDouble();
+            case DISGUSTED:
+              disgusted = emo[CONFIDENCE].ceil().toDouble();
               break;
             default:
               none = 0.0;
           }
         }
-        switch (gc.emotion[0]['Type']) {
+        switch (gc.emotion[0][TYPE]) {
         }
         switch (i) {
           case 0:

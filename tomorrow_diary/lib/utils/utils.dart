@@ -8,3 +8,4 @@ export 'snackbar_util.dart';
 export 'screen_size.dart';
 export 'emotion_data.dart';
 export 'connect_aws.dart';
+export 'aws_type.dart';
