@@ -43,8 +43,11 @@
 apk 파일을 받고 설치한다.
  
 ## 팀 정보 (Team Information)
-- Jeong Chongin (chongin12@naver.com), Github Id: chongin12
-- Kim Bumjoon (sn0wd3er@gmail.com), Github Id: sn0wd3er
+| |이름|Github|Email|
+|--|--|--|--|
+|![](https://user-images.githubusercontent.com/19565940/137630591-4a3e6e48-9b3a-4583-a1fe-c6fb9732937d.png =100x100)|정종인|![GitHub](https://img.shields.io/badge/github-chongin12-A37F4B?style=social&logo=github)|![Email](https://img.shields.io/badge/email-chongin12%40gmail.com-A37F4B?style=social&logo=gmail)|
+|![](https://user-images.githubusercontent.com/19565940/137630807-5e292abd-375b-4da6-9099-a8d88ba87f7e.png =100x100)|김범준|![GitHubs](https://img.shields.io/badge/github-sn0wd3er-A37F4B?style=social&logo=github)|![Email](https://img.shields.io/badge/email-joon951019%40gmail.com-A37F4B?style=social&logo=gmail)
+
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
  * [MIT](https://github.com/osamhack2021/app_TomorrowDiary_TomorrowDiary/blob/dev/LICENSE)
