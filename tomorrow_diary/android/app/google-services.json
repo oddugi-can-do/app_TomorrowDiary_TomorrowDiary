@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "830530008181-k516lordekau3u56dtmvqn9igmhi2b56.apps.googleusercontent.com",
+          "client_id": "830530008181-t8j97h4a5m0bgl5eofjk65jq446ho9pi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.TDiary.tomorrow_diary",
-            "certificate_hash": "064ddef878cc37b563483b57cf8ed4f26de0032c"
+            "certificate_hash": "f7a2589cb9eaadff6837fad47269e78da9485bd3"
           }
         },
         {

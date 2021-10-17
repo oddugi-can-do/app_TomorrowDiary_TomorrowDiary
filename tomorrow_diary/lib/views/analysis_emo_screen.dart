@@ -1,9 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tomorrow_diary/bindings/bindings.dart';
 import 'package:tomorrow_diary/controllers/gallery_controller.dart';
-import 'package:tomorrow_diary/views/views.dart';
 
 class AnalysisEmoScreen extends StatefulWidget {
   const AnalysisEmoScreen({Key? key}) : super(key: key);
@@ -25,57 +23,59 @@ class AnalysisEmoScreenState extends State<AnalysisEmoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/tomorrow2.gif'), fit: BoxFit.cover),
-        ),
-        color: Colors.transparent,
-        child: Stack(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Row(
-                    children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: IconButton(
-                          icon: Icon(Icons.arrow_back,
-                              color: Colors.white, size: 30),
-                          onPressed: () {
-                            Get.back();
-                          },
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/tomorrow2.gif'), fit: BoxFit.cover),
+          ),
+          color: Colors.transparent,
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_back,
+                                color: Colors.white, size: 30),
+                            onPressed: () {
+                              Get.back();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    const SizedBox(
+                      height: 38,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: BarChart(
+                          mainBarData(),
+                          swapAnimationDuration: animDuration,
                         ),
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  const SizedBox(
-                    height: 38,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: BarChart(
-                        mainBarData(),
-                        swapAnimationDuration: animDuration,
-                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                ],
+                    const SizedBox(
+                      height: 12,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

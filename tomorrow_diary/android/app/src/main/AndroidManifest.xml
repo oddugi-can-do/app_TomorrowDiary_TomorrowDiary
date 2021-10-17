@@ -17,6 +17,8 @@
          </intent-filter> 
         </activity>
 
+
+ 
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

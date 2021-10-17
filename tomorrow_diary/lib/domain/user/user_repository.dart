@@ -109,6 +109,7 @@ class UserRepo {
    await _userProvider.sendUserDataFb(principal,user.user!.uid);
     return principal;
     }
+    Get.back();
     return UserModel();
   }
 
