@@ -90,7 +90,7 @@ class UserRepo {
 
 // 구글과 페이스북 설정을 해야하는데 설정에 문제가 있어 못하고 있음
 
-  Future<UserModel> googleSiginIn() async {
+  Future<UserModel?> googleSiginIn() async {
     //구글에 로그인
     final GoogleSignInAccount? googleAuth = await GoogleSignIn().signIn();
     if(googleAuth != null ){
@@ -105,12 +105,27 @@ class UserRepo {
     //UserCredential
     final user =
         await  signInCredential(googleAuthCredential);
-    UserModel principal =  UserModel(email: user!.user!.email,username:user.user!.displayName, uid: user.user!.uid );
-   await _userProvider.sendUserDataFb(principal,user.user!.uid);
-    return principal;
+    if (user != null) {
+      QuerySnapshot querySnapshot =
+          await _userProvider.getUserDataFb(user.user!.uid);
+
+      List<QueryDocumentSnapshot> docs = querySnapshot.docs;
+
+      if (docs.length > 0) {
+        UserModel principal = UserModel.fromJson(
+            querySnapshot.docs.first.data() as Map<String, dynamic>);
+        return principal;
+        }
+      else{
+        UserModel principal =  UserModel(email: user.user!.email,username:user.user!.displayName, uid: user.user!.uid );
+        await _userProvider.sendUserDataFb(principal,user.user!.uid);
+        return principal;
+        }
+      }
+    }else{
+      Get.back();
+      return null;
     }
-    Get.back();
-    return UserModel();
   }
 
   Future<UserModel?> facebookSiginIn() async {
@@ -119,11 +134,28 @@ class UserRepo {
     if(accessToken.status == LoginStatus.success ) {
       final credential = FacebookAuthProvider.credential(accessToken.accessToken!.token);
       final user = await  signInCredential(credential);
+       if (user != null) {
+      QuerySnapshot querySnapshot =
+          await _userProvider.getUserDataFb(user.user!.uid);
+
+      List<QueryDocumentSnapshot> docs = querySnapshot.docs;
+
+      if (docs.length > 0) {
+        UserModel principal = UserModel.fromJson(
+            querySnapshot.docs.first.data() as Map<String, dynamic>);
+        return principal;
+        }
+      else{
+        UserModel principal =  UserModel(email: user.user!.email,username:user.user!.displayName, uid: user.user!.uid );
+        await _userProvider.sendUserDataFb(principal,user.user!.uid);
+        return principal;
+        }
+      }
       UserModel principal = UserModel(email: user!.user!.email,username:user.user!.displayName, uid: user.user!.uid );
       await _userProvider.sendUserDataFb(principal,user.user!.uid);
       return principal;
     }else{
-      snackBar(msg: "페이스북 로그인 실패");
+      Get.back();
       return null;
     }
     
@@ -155,7 +187,5 @@ class UserRepo {
       }
     }
     return null;
-
-
   }
 }

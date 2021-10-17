@@ -82,8 +82,8 @@ class UserController extends GetxController {
 
   Future<void> googleLogin(BuildContext context) async {
     _showDialog(context);
-    UserModel principal = await _userRepo.googleSiginIn();
-    if (principal.uid != null) {
+    UserModel? principal = await _userRepo.googleSiginIn();
+    if (principal!.uid != null) {
       this.isLogin.value = true;
       this.principal.value = principal;
       this.signMethod.value = SignMethod.google;

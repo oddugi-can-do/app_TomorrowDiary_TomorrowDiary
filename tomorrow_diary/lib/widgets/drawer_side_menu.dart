@@ -32,7 +32,10 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
       width: widget.menuWidth,
       child: Container(
         child: ListView(children: [
-          _profile(),
+          uc.principal.value.isAdmin == true ? _profile() : Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text("권한 없는 사용자라 오늘의 기분 기능을 사용할 수 없습니다. 권한이 허용되면 다시 로그인을 해주세요" , style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+          ),
           SizedBox(height: 10),
           Text("${uc.principal.value.username}",
               textAlign: TextAlign.center,
@@ -53,7 +56,7 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
-                          "사용자의 개인정보를 위해 사진은 따로 저장을 안합니다. 안심하고 올려주시기 바랍니다.",
+                          "사용자의 개인정보를 위해 사진은 따로 저장을 안합니다. 안심하고 올려주시기 바랍니다.", 
                           style: TextStyle(
                             color: Colors.white30,
                           )),

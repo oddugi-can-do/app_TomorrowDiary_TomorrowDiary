@@ -1,5 +1,6 @@
-import 'package:http/http.dart' as http; //웹 땜시
+import 'package:http/http.dart' as http; 
 
+//기능 사용할려면 aws 추가해야함 
 const aws = '';
 Future<http.Response> httpPost(String bytes) {
   return http.post(

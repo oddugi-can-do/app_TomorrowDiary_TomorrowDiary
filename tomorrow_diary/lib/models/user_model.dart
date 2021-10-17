@@ -4,12 +4,13 @@ class UserModel {
   final String? uid;
   final String? email;
   final String? username;
-  EmotionModel? emotion;
+  final bool? isAdmin;
 
   UserModel({
     this.uid,
     this.email,
     this.username,
+    this.isAdmin = false,
   });
 
 
@@ -19,13 +20,15 @@ class UserModel {
   UserModel.fromJson(Map<String, dynamic> json)
       : uid = json["uid"],
         email = json["email"],
-        username = json['username'];
+        username = json['username'],
+        isAdmin = json['isAdmin'];
 
   /*데이터를 보내기위해 데이터를 가공*/
   Map<String, dynamic> toJson() => {
         "uid": uid,
         "email": email,
         "username" : username,
+        "isAdmin" : isAdmin,
       };
   
   
