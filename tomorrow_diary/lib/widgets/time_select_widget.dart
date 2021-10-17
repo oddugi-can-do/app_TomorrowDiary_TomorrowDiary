@@ -57,9 +57,10 @@ class _TimeSelectWidgetState extends State<TimeSelectWidget> {
                   print('canceled');
                 } else {
                   print('ok');
-                  widget.text = '${_time.hour}:${_time.minute}';
-
-                  widget.onChanged('${_time.hour}:${_time.minute}');
+                  widget.text =
+                      '${_time.hour.toString().padLeft(2, '0')}:${_time.minute.toString().padLeft(2, '0')}';
+                  widget.onChanged(
+                      '${_time.hour.toString().padLeft(2, '0')}:${_time.minute.toString().padLeft(2, '0')}');
                 }
               });
             }
