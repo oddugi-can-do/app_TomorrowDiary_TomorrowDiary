@@ -1,4 +1,5 @@
 
+  
 # 내일 일기(Tomorrow Diary)
 ![Logo](https://github.com/oddugi-can-do/app_TomorrowDiary_TomorrowDiary/blob/dev/Tomorrow_Diary_Banner.png)
 
@@ -31,10 +32,33 @@
 
 ## 기술 스택 (Technique Used) 
 ### Server(back-end)
- -  Firebase (Firestore)
+|![](https://user-images.githubusercontent.com/19565940/137632337-335e5035-bd24-4693-a477-c0b12c0beece.png)|
+|--|
+|Cloud Server|
+
+|![](https://user-images.githubusercontent.com/19565940/137632438-12bc5072-282e-4093-b258-b34ff7d6d829.png)|![](https://user-images.githubusercontent.com/19565940/137632465-672e9c58-cda3-4f96-8e30-30d14cbd306a.png) ![](https://user-images.githubusercontent.com/19565940/137632913-fc7f985f-0c96-4f8c-a36d-058bd82f7c29.png) ![](https://user-images.githubusercontent.com/19565940/137632956-e92171bc-4101-4c98-9f6f-d6b280389d5a.png)|![](https://user-images.githubusercontent.com/19565940/137632515-94825aa9-4d48-41cc-b1a8-e9a364799826.png)|
+|--|--|--|
+|Authentication|OAuth : Google, Facebook|Store Data in Firestore|
+
  
 ### Front-end
- -  Flutter
+|![](https://user-images.githubusercontent.com/19565940/137632558-ed3660ac-bc5b-4efd-aa69-9bd074b1daf7.png)|
+|--|
+|Framework|
+
+|![](https://user-images.githubusercontent.com/19565940/137632602-01a7fc0f-00af-49af-bc96-8aee25b83a9d.png)|![](https://user-images.githubusercontent.com/19565940/137632657-bf613560-c27e-4dcf-b229-024230185e3b.png)|
+|--|--|
+|Libraries from pub.dev|with Dart language|
+
+### AI
+|![](https://user-images.githubusercontent.com/19565940/137632726-608932b9-ab48-4c7d-8d19-f5834e0e3d32.png)|
+|--|
+|Cloud Service Provider|
+
+|![](https://user-images.githubusercontent.com/19565940/137632752-28c9e94b-7fc8-4b59-b8fb-2a03aaec585e.png)|![](https://user-images.githubusercontent.com/19565940/137632808-a9fef145-4b53-4302-a1ad-764957586153.png)|
+|--|--|
+|SaaS : Amazon rekognition|SaaS : Amazon Comprehend|
+
 
 ## 설치 안내 (Installation Process)
 [apk 파일 주소](https://github.com/osamhack2021/app_TomorrowDiary_TomorrowDiary/blob/dev/tomorrow_diary/Tomorrow_Diary.apk)
