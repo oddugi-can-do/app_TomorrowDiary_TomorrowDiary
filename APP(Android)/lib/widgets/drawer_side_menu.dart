@@ -33,38 +33,18 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
       width: widget.menuWidth,
       child: Container(
         child: ListView(children: [
-          uc.principal.value.isAdmin == true ? _profile() : Padding(
+          Obx( () => uc.principal.value.isAdmin == true ? _profile() : Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text("권한 없는 사용자라 오늘의 기분 기능을 사용할 수 없습니다. 권한이 허용되면 다시 로그인을 해주세요" , style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
-          ),
+          )),
           SizedBox(height: 10),
           Text("${uc.principal.value.username}",
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontSize: 30)),
           SizedBox(height: 30),
           Obx(
-            () => gc.initImage != true && uc.principal.value.isAdmin !=true ? 
-                Card(
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: TdColor.brown, width: 1)),
-                    color: Colors.transparent,
-                    child: ListTile(
-                      // leading: Icon(Icons.emoji_emotions_sharp),
-                      title: Text(
-                        getEmoDescript(gc.emotion[0][TYPE]),
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(
-                          "사용자의 개인정보를 위해 사진은 따로 저장을 안합니다. 안심하고 올려주시기 바랍니다.", 
-                          style: TextStyle(
-                            color: Colors.white30,
-                          )),
-                      isThreeLine: true,
-                    ),
-                  )
-                : Card(
+            () => uc.principal.value.isAdmin ==true ? 
+                 Card(
                     shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: TdColor.brown, width: 1)),
@@ -75,32 +55,33 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text("더 많은 감정을 수치로 알고 싶으면 클릭하세요",
+                      subtitle: Text("더 많은 감정을 그래프로 알고 싶으면 클릭하세요",
                           style: TextStyle(color: Colors.white30)),
                       isThreeLine: true,
                       onTap: () {
                         Get.to(AnalysisEmoScreen());
                       },
                     ),
-                  ),
+                  ): SizedBox(height:0)
           ),
-          uc.principal.value.isAdmin == true ?  Card(
+          Obx(() =>uc.principal.value.isAdmin == true ? 
+                  Card(
                     shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: TdColor.brown, width: 1)),
                     color: Colors.transparent,
                     child: ListTile(
-                      title: Obx( () => Text(
+                      title :Text(
                         //Ty 일기 넣으면됨
                         getEmoDescript(dc.tyEmotion.value),
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
-                      ),),
+                      ),
                       subtitle: Text("오늘의 일기를 기반으로 오늘의 기분을 나타냅니다. 기분을 보고 싶으면 오늘 일기를 작성해주세요.",
                           style: TextStyle(color: Colors.white30)),
                       isThreeLine: true,
-                    ),
-                  ) : 
+                    ),):SizedBox(height:0)
+                  ),
           Card(
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),

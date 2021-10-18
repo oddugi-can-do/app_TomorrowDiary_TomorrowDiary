@@ -106,7 +106,6 @@ class DiaryController extends GetxController {
 
   bool compareTyDiary(String? todayDiary) {
     if(todayDiary == '' || todayDiary == null || beforeTyDiary == todayDiary) {
-      tyEmotion.value = "";
       return false;
     }
   return true;
