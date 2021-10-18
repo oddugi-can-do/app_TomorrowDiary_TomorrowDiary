@@ -55,7 +55,7 @@ Emotion getEmotion (String type) {
 
 String getEmoDescript(String? type) {
   if(type == '' || type == null) {
-    return "데이터가 없습니다. 사진 또는 오늘의 일기를 쓰십시오";
+    return "오늘의 사진을 AI를 통해 표정을 분석하여 오늘의 기분을 나타내줍니다.";
   }
   Emotion emo = getEmotion(type);
   String text= "";

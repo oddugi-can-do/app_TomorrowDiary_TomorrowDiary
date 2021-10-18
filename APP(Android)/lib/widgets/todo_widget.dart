@@ -67,7 +67,7 @@ class _TodoWidgetState extends State<TodoWidget> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextWidget.header(text: todo.todo ?? ''),
+                TextWidget.todoHeader(text: todo.todo ?? ''),
                 if (todo.timeEnabled ?? false)
                   TextWidget.body(
                     text: '${todo.start ?? ''} ~ ${todo.end ?? ''}',

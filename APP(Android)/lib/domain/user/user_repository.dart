@@ -188,4 +188,17 @@ class UserRepo {
     }
     return null;
   }
+
+  Future<UserModel> checkPermission(String uid)  async {
+
+      QuerySnapshot querySnapshot =
+          await _userProvider.getUserDataFb(uid);
+
+      List<QueryDocumentSnapshot> docs = querySnapshot.docs;
+
+        UserModel principal = UserModel.fromJson(
+            querySnapshot.docs.first.data() as Map<String, dynamic>);
+        return principal;
+  }
+  
 }

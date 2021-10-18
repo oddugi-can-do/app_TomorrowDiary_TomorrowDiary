@@ -14,7 +14,7 @@ class DiaryController extends GetxController {
   final allData = DataModel().obs;
   final analysisData = <DataModel>[].obs;
   final tyEmotion = "".obs;
-
+  final beforeTyDiary = "".obs;
 
   @override
   void onInit() {
@@ -104,5 +104,12 @@ class DiaryController extends GetxController {
     tyEmotion.value = emotion;
   }
 
+  bool compareTyDiary(String? todayDiary) {
+    if(todayDiary == '' || todayDiary == null || beforeTyDiary == todayDiary) {
+      tyEmotion.value = "";
+      return false;
+    }
+  return true;
+  }
 
 }

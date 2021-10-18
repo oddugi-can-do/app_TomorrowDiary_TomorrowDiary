@@ -109,6 +109,12 @@ class UserController extends GetxController {
     }
   }
 
+  Future<void> checkPermit(String uid) async{
+    UserModel principal =await  _userRepo.checkPermission(uid);
+    this.principal.value.isAdmin = principal.isAdmin;
+  }
+
+
   void _showDialog(BuildContext context) {
     showDialog(
       barrierDismissible: false, 

@@ -4,7 +4,7 @@ class UserModel {
   final String? uid;
   final String? email;
   final String? username;
-  final bool? isAdmin;
+  bool? isAdmin;
 
   UserModel({
     this.uid,

@@ -26,7 +26,7 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
   UserController uc = Get.find();
   GalleryController gc = Get.find();
   DiaryController dc = Get.find();
-  String beforeTyDiaryData = '';
+  
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -43,7 +43,7 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
               style: TextStyle(color: Colors.white, fontSize: 30)),
           SizedBox(height: 30),
           Obx(
-            () => gc.initImage != true ? 
+            () => gc.initImage != true && uc.principal.value.isAdmin !=true ? 
                 Card(
                     shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -52,7 +52,7 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
                     child: ListTile(
                       // leading: Icon(Icons.emoji_emotions_sharp),
                       title: Text(
-                        "오늘의 기분",
+                        getEmoDescript(gc.emotion[0][TYPE]),
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
@@ -96,26 +96,11 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),),
-                      subtitle: Text("오늘의 일기를 기반으로 오늘의 기분을 나타냅니다. 기분을 보고 싶으면 오늘 일기를 작성한 뒤 클릭하세요",
+                      subtitle: Text("오늘의 일기를 기반으로 오늘의 기분을 나타냅니다. 기분을 보고 싶으면 오늘 일기를 작성해주세요.",
                           style: TextStyle(color: Colors.white30)),
                       isThreeLine: true,
-                      onTap: () {
-                        
-                        String? text = dc.allData.value.tyDiary!.tyHappen;
-                        
-                        if(text == null || text== '' || text == beforeTyDiaryData ) {
-                          dc.tyEmotion.value = '';
-                          snackBar(msg: "오늘의 일기를 작성해주세요");
-                          return;
-                        }else{
-                          setState(() {
-                            beforeTyDiaryData = text;
-                          });
-                          dc.getTextEmotion(dc.allData.value.tyDiary!.tyHappen);
-                        }
-                      },
                     ),
-                  ) : SizedBox(height:0),
+                  ) : 
           Card(
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -176,10 +161,18 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
         children: [
           InkWell(
             onTap: () {
-              showModalBottomSheet(
+              uc.checkPermit(uc.principal.value.uid!);
+              bool isAdmin = uc.principal.value.isAdmin!;
+              if(isAdmin) {
+                showModalBottomSheet(
                 context: context,
                 builder: ((builder) => bottomSheet()),
               );
+              }
+              else{
+                gc.emotion.value[0][TYPE]='';
+                snackBar(msg: "권한이 없습니다.");
+              }
             },
             // Android에서 사용
             child: Obx(

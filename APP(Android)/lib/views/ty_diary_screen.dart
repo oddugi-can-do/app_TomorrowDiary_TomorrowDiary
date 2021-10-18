@@ -18,7 +18,8 @@ class TyDiaryScreen extends StatefulWidget {
 class _TyDiaryScreenState extends State<TyDiaryScreen> {
   DiaryController d = Get.find();
   CalendarController c = Get.find();
-
+  UserController u =Get.find();
+  GalleryController g = Get.find();
   @override
   void dispose() {
     if (widget.isEditable) {
@@ -165,5 +166,17 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
 
   void _onTyDiarySubmitted() {
     d.setPresentData();
+
+    u.checkPermit(u.principal.value.uid!);
+    bool isAdmin = u.principal.value.isAdmin!;
+    if(isAdmin){
+      bool isSameText = d.compareTyDiary(d.allData.value.tyDiary!.tyHappen);
+     if(isSameText){
+      d.getTextEmotion(d.allData.value.tyDiary!.tyHappen);
+    }
+   }else{
+     g.emotion.value[0][TYPE]='';
+   }
+
   }
 }

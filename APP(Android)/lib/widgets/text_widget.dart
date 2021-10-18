@@ -22,6 +22,11 @@ class TextWidget extends StatelessWidget {
     this.fontSize = TdSize.l,
     this.color = TdColor.white,
   }) : textCategory = TextCategory.header;
+  const TextWidget.todoHeader({
+    required this.text,
+    this.fontSize = TdSize.m,
+    this.color = TdColor.white,
+  }) : textCategory = TextCategory.header;
   const TextWidget.body({
     required this.text,
     this.fontSize = TdSize.m,
