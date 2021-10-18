@@ -16,6 +16,26 @@
 
 내일 일기는 **오늘의 내가 내일의 일기를 미리 쓰고, 내일의 내가 마무리 하는 방식의 새로운 일기 패러다임** 을 제시한다.
 
+## 부가 설명
+군대를 오고나서 소나기를 통해 처음으로 일기를 쓰기 시작했습니다. 일기를 계속 써보니 표출하지 못했던 감정들을 일기에 쓰고나니 한결 가벼운 마음도 생기면서 스트레스도 해소되는 느낌을 갖게 되었습니다. 무엇보다 오늘 하루를 되돌아보는 시간이 정말 좋게 느껴졌습니다.
+
+군대에서나 현대사회에서 스트레스는 만병의 근원입니다. 일기는 스트레스를 해소해주는 심리 치료효과를 가지고 있습니다. 군대는 단체생활이라 자신의 감정표현을 쉽게 밖으로 표출하지를 못합니다. 일기는 이런 감정을 표출해주는 매개체가 되어주어 우울증이나 심리적인 부분에서 좋은 효과를 보입니다. 
+
+스몰빅이라는 책이 있습니다. 너무 큰 목표를 이룰려면 큰 목표를 잊고 그 목표에 다가기 위한 계획을 세워서 하나씩 완료해나가면 결국 큰 목표는 이루어지게 된다라는 의미를 담고 있는 책입니다. 이 책을 보니 내일의 계획을 일기형식으로 쉽고 간편하게 또한 재밋게 일기를 작성하여 목표에 대한 계획을 하면서 일기를 작성하여 두개의 장점을 다 가질 수 있지 않을까?? 라는 생각이 들었습니다. 
+
+이번 해커톤을 통해 아이디어를 생각하면서 내일에 대한 계획을 짜는 것을 일기형태로 만들어보면 어떨까 하여 프로젝트를 시작하게 됐습니다. 내일에 관해 계획을 세우면서 일기를 쓰고 다음날이 되면 어제 썼던 일기를 보면서 하루를 되돌아보며 수정하여 오늘의 일기까지 작성하는 것이 이 프로젝트의 핵심입니다. 
+
+## 기대 효과 및 전망
+- 스트레스 해소 
+- 자신의 목표에 쉽고 재밌게 도달할 수 있다
+- 우울증 감소
+- 계획을 잘 지켰는지, 오늘 나의 생활을 어땠는지 돌아볼 수 있다
+- 일기를 안 썼던 사람이 목표를 세우고 일기를 쓰는 습관을 들일 수 있다
+- 내일대한 일들을 미리 생각하여 좋은 방향으로 하루를 보낼 수 있게 해준다
+- 부정적인 생각 등 안좋은 감정을 표출해줄 수 있는 매개체로 좀더 감정을 제어를 잘 할 수 있게 도와준다
+- 군대에서 자살의 빈도가 줄어든다
+- 군대에서 자신에게 유익한 시간을 보낼 수 있게 해준다
+
 
 ## 기능 설명
  - 로그인도 간편하게! O-Auth 기능 (구글, 페이스북)
@@ -77,3 +97,30 @@ apk 파일을 받고 설치한다.
  * [MIT](https://github.com/osamhack2021/app_TomorrowDiary_TomorrowDiary/blob/dev/LICENSE)
 
 This project is licensed under the terms of the MIT license.
+
+
+### 사용된 오픈소스 패키지
+|사용한 오픈소스 패키지 이름| 용도  |
+|:--:|:--:|
+| get: 4.3.8 | State Manager, Navigator |
+| firebase_core: ^1.6.0 | Firebase |
+| firebase_auth: ^3.1.1| Firebase Auth |
+| cloud_firestore: ^2.5.3 | Firestore |
+| animated_text_kit: ^4.2.1 | Text Animation |
+| google_fonts: ^2.1.0 | Google Fonts : Noto Sans |
+| modal_bottom_sheet: ^2.0.0 | Bottom Bar Modal Sheet |
+| day_night_time_picker: ^1.0.3+1 | Time Picker in Todo-List |
+| flutter_signin_button: ^2.0.0 | OAuth Button(Google, Facebook) |
+|google_sign_in: ^5.1.1 |OAuth : Google |
+|url_launcher: ^6.0.12 | Hyperlink |
+|local_image_provider: ^4.0.1 | Image Provider |
+|image_picker: ^0.8.4+2 | Image Picker |
+|pie_chart: ^5.0.1 | Pie Chart in Analysis page |
+|path_provider: ^2.0.5 | File converting |
+|path: ^1.8.0 | File converting  |
+|flutter_facebook_auth: ^3.5.2 | OAuth: Facebook |
+|flutter_secure_storage: ^4.2.1 | Auto Sign-in |
+|fl_chart: ^0.40.2| Chart in Today Emotion page |
+|cupertino_icons: ^1.0.3 | Cupertino Icons |
+
+
