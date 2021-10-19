@@ -2,10 +2,10 @@ import 'package:http/http.dart' as http;
 
 //기능 사용할려면 aws 추가해야함 
 
-const awsImageEmotion = 'https://vnq0k7mhr0.execute-api.ap-northeast-2.amazonaws.com/tomorrow/cWphd25zcmhrd2hkZGxzZGxhbHds';
+const awsImageEmotion = '';
 
 
-const awsTextEmotion = 'https://vnq0k7mhr0.execute-api.ap-northeast-2.amazonaws.com/tomorrow/cWphd25zcmhrd2hkZGxzeHBydG14bQ';
+const awsTextEmotion = '';
 
 Future<http.Response> httpPostImg(String bytes) {
   return http.post(
