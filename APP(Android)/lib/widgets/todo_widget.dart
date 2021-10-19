@@ -64,15 +64,17 @@ class _TodoWidgetState extends State<TodoWidget> {
                 ? const Icon(CupertinoIcons.clock, size: TdSize.m)
                 : const Icon(Icons.circle_outlined, size: TdSize.m),
             const SizedBox(width: TdSize.s),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextWidget.todoHeader(text: todo.todo ?? ''),
-                if (todo.timeEnabled ?? false)
-                  TextWidget.body(
-                    text: '${todo.start ?? ''} ~ ${todo.end ?? ''}',
-                  ),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextWidget.todoHeader(text: todo.todo ?? ''),
+                  if (todo.timeEnabled ?? false)
+                    TextWidget.body(
+                      text: '${todo.start ?? ''} ~ ${todo.end ?? ''}',
+                    )
+                ],
+              ),
             )
           ],
         ),
