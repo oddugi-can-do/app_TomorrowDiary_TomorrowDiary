@@ -63,7 +63,14 @@ class _WishWidgetState extends State<WishWidget> {
                 ? const Icon(Icons.circle_outlined, size: TdSize.m)
                 : const Icon(Icons.circle, size: TdSize.m),
             const SizedBox(width: TdSize.xs),
-            TextWidget.body(text: widget.text),
+            Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextWidget.body(text: widget.text),
+                ],
+              ),
+            ),
           ],
         ),
       ),

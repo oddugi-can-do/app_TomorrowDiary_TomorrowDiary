@@ -19,7 +19,6 @@ class MyDiaryApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: AppBinding(),
-      // home: SplashScreen(),
       home: SplashScreen(),
     );
 
