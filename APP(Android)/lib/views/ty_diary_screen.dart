@@ -169,7 +169,7 @@ class _TyDiaryScreenState extends State<TyDiaryScreen> {
 
     u.checkPermit(u.principal.value.uid!);
     bool isAdmin = u.principal.value.isAdmin!;
-    if(isAdmin){
+    if(isAdmin || d.allData.value.tyDiary!.tyHappen!.isEmpty){
       bool isSameText = d.compareTyDiary(d.allData.value.tyDiary!.tyHappen);
      if(isSameText){
       d.getTextEmotion(d.allData.value.tyDiary!.tyHappen);
