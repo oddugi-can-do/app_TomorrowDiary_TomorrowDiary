@@ -43,7 +43,7 @@ class _DrawerSideMenuState extends State<DrawerSideMenu> {
               style: TextStyle(color: Colors.white, fontSize: 30)),
           SizedBox(height: 30),
           Obx(
-            () => uc.principal.value.isAdmin ==true ? 
+            () => uc.principal.value.isAdmin ==true && gc.initImage.value == true? 
                  Card(
                     shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
